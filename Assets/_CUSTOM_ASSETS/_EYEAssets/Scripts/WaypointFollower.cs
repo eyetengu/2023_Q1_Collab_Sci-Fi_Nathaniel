@@ -32,7 +32,7 @@ public class WaypointFollower : MonoBehaviour
         _currentWaypoint = _waypoints[0];
     }
 
-    void Update()
+    void FixedUpdate()
     {
         _step = _speed * _speedMultiplier * Time.deltaTime;
 

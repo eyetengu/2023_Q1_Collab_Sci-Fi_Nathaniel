@@ -10,13 +10,17 @@ public class Sweepo_Behavior : MonoBehaviour
     [SerializeField] float _wheelSpeed = 25f;
     [SerializeField] GameObject _strobe;
 
+    [SerializeField] private GameObject _dustFX;
+
+
     private void Start()
     {
         _strobe.SetActive(false);
 
         StartCoroutine(StrobeTimer());
     }
-    void Update()
+
+    void FixedUpdate()
     {
         foreach(var brush in _brushes) 
         {
@@ -31,7 +35,6 @@ public class Sweepo_Behavior : MonoBehaviour
     void Work_Strobe()
     {
         StartCoroutine(StrobeTimer());
-
     }
 
     IEnumerator StrobeTimer()
@@ -41,5 +44,14 @@ public class Sweepo_Behavior : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         _strobe.SetActive(false);
         Work_Strobe();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.tag == "Litter")
+        {
+            other.gameObject.SetActive(false);
+            _dustFX.SetActive(true);
+        }
     }
 }

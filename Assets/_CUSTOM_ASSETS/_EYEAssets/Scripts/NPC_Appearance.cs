@@ -156,8 +156,7 @@ public class NPC_Appearance : MonoBehaviour
                 style.gameObject.SetActive(false);
             }
 
-            if(_hats != null)
-                _hats[Random.Range(0, _hats.Length - 1)].SetActive(true);
+            _hats[Random.Range(0, _hats.Length - 1)].SetActive(true);
         }
     }
 
