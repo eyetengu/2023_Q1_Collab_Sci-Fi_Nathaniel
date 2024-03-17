@@ -70,3 +70,6 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+/Assets/PolygonSciFiSpace/URP_ExtractMe.unitypackage.meta
+/Assets/PolygonSciFiCity/URP_ExtractMe.unitypackage.meta
+/Assets/Polygon Arsenal/Upgrades/Polygon Arsenal 2019.4 URP.unitypackage.meta
