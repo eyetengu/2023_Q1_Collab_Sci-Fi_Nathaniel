@@ -2174,6 +2174,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3892132918133078022, guid: d09e1e94ad6d8d14daea58addfcf55c4,
+        type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892132918133078022, guid: d09e1e94ad6d8d14daea58addfcf55c4,
+        type: 3}
+      propertyPath: amplitude
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892132918133078022, guid: d09e1e94ad6d8d14daea58addfcf55c4,
+        type: 3}
+      propertyPath: frequency
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6300253416736692165, guid: d09e1e94ad6d8d14daea58addfcf55c4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2187,12 +2202,12 @@ PrefabInstance:
     - target: {fileID: 6300253416736692165, guid: d09e1e94ad6d8d14daea58addfcf55c4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.257888
+      value: 60.50789
       objectReference: {fileID: 0}
     - target: {fileID: 6300253416736692165, guid: d09e1e94ad6d8d14daea58addfcf55c4,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6300253416736692165, guid: d09e1e94ad6d8d14daea58addfcf55c4,
         type: 3}
@@ -2202,7 +2217,7 @@ PrefabInstance:
     - target: {fileID: 6300253416736692165, guid: d09e1e94ad6d8d14daea58addfcf55c4,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6300253416736692165, guid: d09e1e94ad6d8d14daea58addfcf55c4,
         type: 3}
@@ -2217,7 +2232,7 @@ PrefabInstance:
     - target: {fileID: 6300253416736692165, guid: d09e1e94ad6d8d14daea58addfcf55c4,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 6300253416736692165, guid: d09e1e94ad6d8d14daea58addfcf55c4,
         type: 3}
