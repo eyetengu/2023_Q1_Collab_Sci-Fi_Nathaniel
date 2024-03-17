@@ -8,19 +8,38 @@ public class ShipPlayerController : MonoBehaviour
 {
     public float verticalMoveSpeed;
     public float smoothingWeight;
-    public InputAction inputAction;
     Vector3 moveDirection = Vector3.zero;
+    Vector2 inputDirection = Vector2.zero;
     Rigidbody rb;
     private Camera _camera;
     public float forwardForce;
+    [SerializeField]
+    private GameObject _lazerGameObj;
+    private ShipPlayerAction _playerAction;
+    private InputAction _moveAction;
+    public void Awake()
+    {
+        _playerAction = new ShipPlayerAction();
+    }
+
     private void OnEnable()
     {
-        inputAction.Enable();
+        _moveAction = _playerAction.Player.Move;
+        _moveAction.Enable();
+        _playerAction.Player.Fire.performed += Fire_performed;
+        _playerAction.Player.Fire.Enable();
+    }
+
+    private void Fire_performed(InputAction.CallbackContext context)
+    {
+        Instantiate(_lazerGameObj, transform.position, Quaternion.identity);
     }
 
     private void OnDisable()
     {
-        inputAction.Disable();
+        _moveAction.Disable();
+        _playerAction.Player.Fire.performed -= Fire_performed;
+        _playerAction.Player.Fire.Disable();
     }
     // Start is called before the first frame update
     void Start()
@@ -32,7 +51,7 @@ public class ShipPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var inputDirection = inputAction.ReadValue<Vector2>();
+        inputDirection = _moveAction.ReadValue<Vector2>();
         moveDirection = new Vector3(0, inputDirection.y * verticalMoveSpeed, forwardForce);
         Vector3 screenCoordinate = _camera.WorldToScreenPoint(transform.position);
         bool belowCamera = screenCoordinate.y < 0;
@@ -44,12 +63,11 @@ public class ShipPlayerController : MonoBehaviour
         }
         if (belowCamera)
         {
-            Debug.Log(1 * verticalMoveSpeed * Time.deltaTime);
-            moveDirection = new Vector3(moveDirection.x, 1 * verticalMoveSpeed *smoothingWeight * Time.deltaTime, moveDirection.z);
+            moveDirection = new Vector3(moveDirection.x, 1 * verticalMoveSpeed * smoothingWeight * Time.deltaTime, moveDirection.z);
         };
         if (aboveCamera)
         {
-            moveDirection = new Vector3(moveDirection.x, -1 * verticalMoveSpeed* smoothingWeight * Time.deltaTime, moveDirection.z);
+            moveDirection = new Vector3(moveDirection.x, -1 * verticalMoveSpeed * smoothingWeight * Time.deltaTime, moveDirection.z);
         };
     }
 
@@ -57,4 +75,5 @@ public class ShipPlayerController : MonoBehaviour
     {
         rb.velocity = moveDirection;
     }
+
 }

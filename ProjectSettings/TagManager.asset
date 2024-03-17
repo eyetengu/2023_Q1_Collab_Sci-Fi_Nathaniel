@@ -4,8 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Waypoint_Char
-  - Litter
+  - Visuals
   layers:
   - Default
   - TransparentFX

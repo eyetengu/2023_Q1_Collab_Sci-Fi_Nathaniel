@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class CameraTrigger : MonoBehaviour
 {
-    public GameObject cinemachineVirtualCamera;
-    private CinemachineVirtualCamera virtualCamera;
+    public GameObject CMVirtualCameraNext;
+    public GameObject CMVirtualCameraPrevious;
+    private CinemachineVirtualCamera virtualCameraNext;
+    private CinemachineVirtualCamera virtualCameraPrevious;
     void Awake()
     {
-        virtualCamera = cinemachineVirtualCamera.GetComponent<CinemachineVirtualCamera>();
-        if (virtualCamera == null) Debug.LogError("A component cinemachineVirtualCamera is missing\n");
+        virtualCameraNext = CMVirtualCameraNext.GetComponent<CinemachineVirtualCamera>();
+        if (virtualCameraNext == null) Debug.LogError("A component cinemachineVirtualCamera is missing\n");
+        virtualCameraPrevious = CMVirtualCameraPrevious.GetComponent<CinemachineVirtualCamera>();
+        if (virtualCameraPrevious == null) Debug.LogError("A component cinemachineVirtualCamera is missing\n");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -18,7 +22,8 @@ public class CameraTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
             Debug.Log("Player triggered camera change");
-            virtualCamera.Priority = 1;
+            virtualCameraNext.Priority = 3;
+            virtualCameraPrevious.Priority = 1;
         }
     }
 }
