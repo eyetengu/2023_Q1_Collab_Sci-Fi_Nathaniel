@@ -32,7 +32,7 @@ public class ShipPlayerController : MonoBehaviour
 
     private void Fire_performed(InputAction.CallbackContext context)
     {
-        Instantiate(_lazerGameObj, transform.position, Quaternion.identity);
+        Instantiate(_lazerGameObj, transform.position, Quaternion.identity, transform.parent);
     }
 
     private void OnDisable()
