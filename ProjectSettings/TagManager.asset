@@ -4,6 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Waypoint_Char
+  - Litter
+  - Enemy
+  - LocationStation
+  - Endpoint
+  - TriggerCube
   - Visuals
   - Projectile
   layers:
