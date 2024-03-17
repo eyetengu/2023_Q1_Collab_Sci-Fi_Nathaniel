@@ -391,6 +391,160 @@ public partial class @EYEInputControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""SpaceFlight"",
+            ""id"": ""5f69af09-f165-4115-a5c5-aade8b05fb0d"",
+            ""actions"": [
+                {
+                    ""name"": ""Thrusters"",
+                    ""type"": ""Button"",
+                    ""id"": ""15b74f87-485e-49a4-b893-d8ac045366cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pitch"",
+                    ""type"": ""Button"",
+                    ""id"": ""4a8114d6-96fd-4bf3-800a-20f8fad8bfe1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""962670cc-4450-42b2-b683-9a1c5fadce74"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Yaw"",
+                    ""type"": ""Button"",
+                    ""id"": ""12af788d-8c07-42da-a01d-0f29066d1b79"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""48b82dbe-8de6-4b76-8eb1-15ab25784ee8"",
+                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Thrusters"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""XBOX"",
+                    ""id"": ""a73b3d8d-ef0e-47d5-b998-a440e63c3749"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""c0d344e9-403f-4028-b34e-58543fc4ae5b"",
+                    ""path"": ""<XInputController>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""775c5f86-8e8b-49a5-84a9-7631bc5da664"",
+                    ""path"": ""<XInputController>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""XBOX"",
+                    ""id"": ""dbd45184-8b8d-4966-8e67-dd5f4deeb25d"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""082b9f0d-831f-4f92-b888-4f4e240142c3"",
+                    ""path"": ""<XInputController>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""ad2cdf6b-f528-461b-b0f9-4711e2f8f4d8"",
+                    ""path"": ""<XInputController>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""c245ad9c-9e24-42dd-abc7-d75bd5ab8765"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Yaw"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""b59e066d-6662-4569-9f81-e560f4e237b6"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Yaw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""4b22bb7a-0aaf-413f-a896-9136286c8dab"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Yaw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -404,6 +558,12 @@ public partial class @EYEInputControls: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_MovePlayer = m_Player.FindAction("MovePlayer", throwIfNotFound: true);
         m_Player_RotatePlayer = m_Player.FindAction("RotatePlayer", throwIfNotFound: true);
+        // SpaceFlight
+        m_SpaceFlight = asset.FindActionMap("SpaceFlight", throwIfNotFound: true);
+        m_SpaceFlight_Thrusters = m_SpaceFlight.FindAction("Thrusters", throwIfNotFound: true);
+        m_SpaceFlight_Pitch = m_SpaceFlight.FindAction("Pitch", throwIfNotFound: true);
+        m_SpaceFlight_Roll = m_SpaceFlight.FindAction("Roll", throwIfNotFound: true);
+        m_SpaceFlight_Yaw = m_SpaceFlight.FindAction("Yaw", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -577,6 +737,76 @@ public partial class @EYEInputControls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // SpaceFlight
+    private readonly InputActionMap m_SpaceFlight;
+    private List<ISpaceFlightActions> m_SpaceFlightActionsCallbackInterfaces = new List<ISpaceFlightActions>();
+    private readonly InputAction m_SpaceFlight_Thrusters;
+    private readonly InputAction m_SpaceFlight_Pitch;
+    private readonly InputAction m_SpaceFlight_Roll;
+    private readonly InputAction m_SpaceFlight_Yaw;
+    public struct SpaceFlightActions
+    {
+        private @EYEInputControls m_Wrapper;
+        public SpaceFlightActions(@EYEInputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Thrusters => m_Wrapper.m_SpaceFlight_Thrusters;
+        public InputAction @Pitch => m_Wrapper.m_SpaceFlight_Pitch;
+        public InputAction @Roll => m_Wrapper.m_SpaceFlight_Roll;
+        public InputAction @Yaw => m_Wrapper.m_SpaceFlight_Yaw;
+        public InputActionMap Get() { return m_Wrapper.m_SpaceFlight; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SpaceFlightActions set) { return set.Get(); }
+        public void AddCallbacks(ISpaceFlightActions instance)
+        {
+            if (instance == null || m_Wrapper.m_SpaceFlightActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_SpaceFlightActionsCallbackInterfaces.Add(instance);
+            @Thrusters.started += instance.OnThrusters;
+            @Thrusters.performed += instance.OnThrusters;
+            @Thrusters.canceled += instance.OnThrusters;
+            @Pitch.started += instance.OnPitch;
+            @Pitch.performed += instance.OnPitch;
+            @Pitch.canceled += instance.OnPitch;
+            @Roll.started += instance.OnRoll;
+            @Roll.performed += instance.OnRoll;
+            @Roll.canceled += instance.OnRoll;
+            @Yaw.started += instance.OnYaw;
+            @Yaw.performed += instance.OnYaw;
+            @Yaw.canceled += instance.OnYaw;
+        }
+
+        private void UnregisterCallbacks(ISpaceFlightActions instance)
+        {
+            @Thrusters.started -= instance.OnThrusters;
+            @Thrusters.performed -= instance.OnThrusters;
+            @Thrusters.canceled -= instance.OnThrusters;
+            @Pitch.started -= instance.OnPitch;
+            @Pitch.performed -= instance.OnPitch;
+            @Pitch.canceled -= instance.OnPitch;
+            @Roll.started -= instance.OnRoll;
+            @Roll.performed -= instance.OnRoll;
+            @Roll.canceled -= instance.OnRoll;
+            @Yaw.started -= instance.OnYaw;
+            @Yaw.performed -= instance.OnYaw;
+            @Yaw.canceled -= instance.OnYaw;
+        }
+
+        public void RemoveCallbacks(ISpaceFlightActions instance)
+        {
+            if (m_Wrapper.m_SpaceFlightActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ISpaceFlightActions instance)
+        {
+            foreach (var item in m_Wrapper.m_SpaceFlightActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_SpaceFlightActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public SpaceFlightActions @SpaceFlight => new SpaceFlightActions(this);
     public interface IFlyingCarActions
     {
         void OnElevation(InputAction.CallbackContext context);
@@ -587,5 +817,12 @@ public partial class @EYEInputControls: IInputActionCollection2, IDisposable
     {
         void OnMovePlayer(InputAction.CallbackContext context);
         void OnRotatePlayer(InputAction.CallbackContext context);
+    }
+    public interface ISpaceFlightActions
+    {
+        void OnThrusters(InputAction.CallbackContext context);
+        void OnPitch(InputAction.CallbackContext context);
+        void OnRoll(InputAction.CallbackContext context);
+        void OnYaw(InputAction.CallbackContext context);
     }
 }

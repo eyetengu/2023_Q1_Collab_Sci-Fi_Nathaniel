@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Waypoint_Char
   - Litter
+  - Enemy
+  - LocationStation
+  - Endpoint
+  - TriggerCube
   layers:
   - Default
   - TransparentFX
