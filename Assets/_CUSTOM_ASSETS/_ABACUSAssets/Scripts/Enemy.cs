@@ -11,5 +11,9 @@ public class Enemy : MonoBehaviour
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
+        if (other.gameObject.tag == "Player")
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
