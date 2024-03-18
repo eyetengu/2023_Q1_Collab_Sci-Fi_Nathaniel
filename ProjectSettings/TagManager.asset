@@ -10,6 +10,8 @@ TagManager:
   - LocationStation
   - Endpoint
   - TriggerCube
+  - Visuals
+  - Projectile
   layers:
   - Default
   - TransparentFX
