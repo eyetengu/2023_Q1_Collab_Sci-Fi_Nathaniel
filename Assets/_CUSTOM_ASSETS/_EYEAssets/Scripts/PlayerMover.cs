@@ -64,7 +64,7 @@ public class PlayerMover : MonoBehaviour
         _playerAnimator.MovePlayer(moveDir);
     }
 
-    void RotatePlayer(float rotateValue)
+    public void RotatePlayer(float rotateValue)
     {
         transform.Rotate(0, rotateValue * _rotationStep, 0);
 
