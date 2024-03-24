@@ -12,6 +12,10 @@ TagManager:
   - TriggerCube
   - Visuals
   - Projectile
+  - Gas
+  - Crystal
+  - Ore
+  - Base
   layers:
   - Default
   - TransparentFX
