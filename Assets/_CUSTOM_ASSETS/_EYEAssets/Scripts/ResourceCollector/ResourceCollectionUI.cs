@@ -10,6 +10,7 @@ public class ResourceCollectionUI : MonoBehaviour
     [SerializeField] private TMP_Text _oreText;
     [SerializeField] private TMP_Text _cargoText;
 
+    [SerializeField] private TMP_Text _cameraText;
 
 
     void Start()
@@ -40,5 +41,10 @@ public class ResourceCollectionUI : MonoBehaviour
     public void UpdateCargoCount(int amount)
     {
         _cargoText.text = amount.ToString();
+    }
+
+    public void UpdateCameraText(string cameraName)
+    {
+        _cameraText.text = cameraName;
     }
 }

@@ -16,6 +16,7 @@ TagManager:
   - Crystal
   - Ore
   - Base
+  - Floor
   layers:
   - Default
   - TransparentFX

@@ -59,7 +59,7 @@ public class PlayerMover : MonoBehaviour
     public void MovePlayer(Vector2 moveDir)
     {
         var direction = new Vector3(moveDir.x, 0, moveDir.y);
-        transform.Translate (direction);
+        transform.Translate (direction * _step);
 
         _playerAnimator.MovePlayer(moveDir);
     }
@@ -81,8 +81,9 @@ public class PlayerMover : MonoBehaviour
         _playerAnimator.CrouchPlayer();
     }
 
-    void RotateCamera(float mouseY)
+    public void RotateCamera(float mouseY)
     {
+        Debug.Log("Rotating Camera");
         _cameraPlatform.transform.Rotate(-mouseY, 0, 0);
     }
 }

@@ -13,9 +13,7 @@ public class PlayerInputBehavior : MonoBehaviour
         _inputs = new EYEInputControls();
         _inputs.FlyingCar.Enable();
 
-        _flyingMovement = GetComponent<FlyingVehicleBehavior>();
-
-        
+        _flyingMovement = GetComponent<FlyingVehicleBehavior>();        
     }
 
     void Update()
@@ -30,8 +28,6 @@ public class PlayerInputBehavior : MonoBehaviour
                 SwitchTo_SkyCarControl();
         }
 
-
-
         var vehicleMovement = _inputs.FlyingCar.Movement.ReadValue<Vector2>();
         var vehicleRotation = _inputs.FlyingCar.Rotation.ReadValue<Vector2>();
 
@@ -45,9 +41,7 @@ public class PlayerInputBehavior : MonoBehaviour
 
         _flyingMovement.MoveFlyingVehicle(forwardMovement);
 
-        _flyingMovement.RotateFlyingVehicle(rotate_Pitch, rotate_roll, -rotate_Yaw);
-        
- 
+        _flyingMovement.RotateFlyingVehicle(rotate_Pitch, rotate_roll, -rotate_Yaw);        
     }
 
     void SwitchTo_CharacterControl()

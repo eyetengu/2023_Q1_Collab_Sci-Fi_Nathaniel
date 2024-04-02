@@ -5,13 +5,16 @@ using UnityEngine;
 public class PlayerInput_V2 : MonoBehaviour
 {
     PlayerInside_Controller _playerController;
-    MysticMover _playerMover;
+    //MysticMover _playerMover;
+    //Player_CharacterController _playerMover;
+    PlayerMover _playerMover;
 
-    
+
     void Start()
     {
-        _playerMover = GetComponent<MysticMover>();
-
+        //_playerMover = GetComponent<MysticMover>();
+        //_playerMover = GetComponent<Player_CharacterController>();
+        _playerMover = GetComponent<PlayerMover>();
         _playerController= new PlayerInside_Controller();
         _playerController.Player.Enable();
     }
@@ -25,6 +28,6 @@ public class PlayerInput_V2 : MonoBehaviour
         var cameraRotValue = _playerController.Player.TurnPlayer.ReadValue<float>();
 
         _playerMover.MovePlayer(movement);
-        _playerMover.RotatePlayer(turnRate);
+        _playerMover.RotatePlayer(turnRate);        
     }
 }
