@@ -10,10 +10,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float _remainingMissionTime = -1;
     [SerializeField] private bool _levelCompleted;
     private bool _stopTimerCalled;
+    private float _maxMissionTime;
 
     public MissionType MissionType { get { return _missionType; } }
     public DifficultyLevel DifficultyLevel { get { return _difficultyLevel; } }
     public float RemainingMissionTime { get { return _remainingMissionTime; } }
+    public float MaxMissionTime {  get { return _maxMissionTime; } }
 
     public void SetMission(MissionType missionType)
     {
@@ -32,15 +34,15 @@ public class LevelManager : MonoBehaviour
         switch (_difficultyLevel)
         {
             case DifficultyLevel.Easy:
-                _remainingMissionTime = Time.time + 600.0f;
+                _remainingMissionTime = _maxMissionTime = Time.time + 600.0f;
                 StartCoroutine(CountDownTimer());
                 break;
             case DifficultyLevel.Medium:
-                _remainingMissionTime = Time.time + 300.0f;
+                _remainingMissionTime = _maxMissionTime = Time.time + 300.0f;
                 StartCoroutine(CountDownTimer());
                 break;
             case DifficultyLevel.Hard:
-                _remainingMissionTime = Time.time + 300.0f;
+                _remainingMissionTime = _maxMissionTime = Time.time + 150.0f;
                 StartCoroutine(CountDownTimer());
                 break;
             case DifficultyLevel.Free:
