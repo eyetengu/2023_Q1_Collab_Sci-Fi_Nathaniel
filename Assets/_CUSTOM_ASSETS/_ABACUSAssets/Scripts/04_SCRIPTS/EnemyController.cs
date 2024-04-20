@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class EnemyController : MonoBehaviour
 {
-    public float playerDetectionRadius = 10f;
+    public float playerDetectionRadius = 25f;
     public Transform player;
     NavMeshAgent navMeshAgent;
 
@@ -18,19 +18,20 @@ public class EnemyController : MonoBehaviour
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distanceToPlayer <= playerDetectionRadius)
-        {
-            // Move towards the player using NavMesh
-            navMeshAgent.SetDestination(player.position);
-        }
-        else
+        if (distanceToPlayer > playerDetectionRadius)
         {
             // Find the closest enemySpawner and move around it
             Transform closestSpawner = FindClosestSpawner();
-            if (closestSpawner != null)
+            if (closestSpawner == null)
             {
-                navMeshAgent.SetDestination(RandomNavmeshLocation(closestSpawner.position, 10f));
+                return;
             }
+            navMeshAgent.SetDestination(RandomNavmeshLocation(closestSpawner.position, 10f));
+        }
+        else
+        {
+            // Move towards the player using NavMesh
+            navMeshAgent.SetDestination(player.position);
         }
     }
 
