@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 

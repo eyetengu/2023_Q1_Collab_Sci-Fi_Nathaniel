@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1401042017737353263}
   - component: {fileID: 2634663648317975624}
   - component: {fileID: 4755497800407345441}
+  - component: {fileID: 999403685282210467}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: Enemy
@@ -68,8 +69,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8267843d3dcd7489c81e12a6208a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDetectionRadius: 20
+  playerDetectionRadius: 35
   player: {fileID: 0}
+--- !u!65 &999403685282210467
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2273303708110775334}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3609300441573383829
 GameObject:
   m_ObjectHideFlags: 0
