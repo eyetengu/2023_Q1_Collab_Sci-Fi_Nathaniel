@@ -17,6 +17,7 @@ TagManager:
   - Ore
   - Base
   - Floor
+  - EnemySpawner
   layers:
   - Default
   - TransparentFX
