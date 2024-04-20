@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab; // Reference to the enemy prefab to spawn
     public float minSpawnDelay = 10f; // Minimum delay before spawning
     public float maxSpawnDelay = 60f; // Maximum delay before spawning
-
+    private bool isPlayerExist = true;
     void Start()
     {
         // Start the spawning coroutine
@@ -15,8 +16,9 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnEnemies()
     {
-        while (true)
+        while (isPlayerExist)
         {
+            CheckForPlayer();
             // Generate a random delay between minSpawnDelay and maxSpawnDelay
             float spawnDelay = Random.Range(minSpawnDelay, maxSpawnDelay);
             yield return new WaitForSeconds(spawnDelay);
@@ -24,11 +26,24 @@ public class EnemySpawner : MonoBehaviour
             // Generate a random number of enemies to spawn between 1 and 3
             int numEnemies = Random.Range(1, 4);
 
-            // Spawn the enemies
-            for (int i = 0; i < numEnemies; i++)
+            if (isPlayerExist)
             {
-                SpawnEnemy();
+                // Spawn the enemies
+                for (int i = 0; i < numEnemies; i++)
+                {
+
+                    SpawnEnemy();
+                }
             }
+        }
+    }
+
+    private void CheckForPlayer()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            isPlayerExist = false;
         }
     }
 

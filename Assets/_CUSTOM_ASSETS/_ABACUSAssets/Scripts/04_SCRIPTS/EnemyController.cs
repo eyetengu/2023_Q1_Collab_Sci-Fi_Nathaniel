@@ -1,40 +1,47 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections.Generic;
 
 public class EnemyController : MonoBehaviour
 {
     public float playerDetectionRadius = 25f;
     public Transform player;
+    public int Damage = 1;
     NavMeshAgent navMeshAgent;
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        var playerTag = GameObject.FindGameObjectWithTag("Player");
+        if (playerTag != null)
+        {
+            player = playerTag.transform;
+        }
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        if (player != null)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distanceToPlayer > playerDetectionRadius)
-        {
-            // Find the closest enemySpawner and move around it
-            Transform closestSpawner = FindClosestSpawner();
-            if (closestSpawner == null)
+            if (distanceToPlayer > playerDetectionRadius)
             {
-                return;
+                // Find the closest enemySpawner and move around it
+                Transform closestSpawner = FindClosestSpawner();
+                if (closestSpawner == null)
+                {
+                    return;
+                }
+                navMeshAgent.SetDestination(RandomNavmeshLocation(closestSpawner.position, 10f));
             }
-            navMeshAgent.SetDestination(RandomNavmeshLocation(closestSpawner.position, 10f));
-        }
-        else
-        {
-            // Move towards the player using NavMesh
-            navMeshAgent.SetDestination(player.position);
+            else
+            {
+                // Move towards the player using NavMesh
+                navMeshAgent.SetDestination(player.position);
+            }
         }
     }
-   
+
     // Function to find the closest enemySpawner
     Transform FindClosestSpawner()
     {
@@ -67,8 +74,31 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "PlayerAttack")
+        {
+            bool isPlayerRunning;
+            BasicCarController basicCarController = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<BasicCarController>();
+            if (basicCarController == null)
+            {
+                isPlayerRunning = false;
+            }
+            else
+            {
+                isPlayerRunning = basicCarController.isMoving;
+            }
+            if (isPlayerRunning)
+            {
+                Destroy(this.gameObject);
+            }
+        }
         if (other.gameObject.tag == "Player")
         {
+            var playerHealth = other.GetComponent<HealthComponent>();
+            if (playerHealth == null)
+            {
+                return;
+            }
+            playerHealth.Damage(Damage);
             Destroy(this.gameObject);
         }
     }

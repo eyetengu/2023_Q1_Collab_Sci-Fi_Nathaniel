@@ -18,6 +18,7 @@ TagManager:
   - Base
   - Floor
   - EnemySpawner
+  - PlayerAttack
   layers:
   - Default
   - TransparentFX

@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine;
-using TMPro;
-
 public class TimeUI : MonoBehaviour
 {
     [SerializeField] private LevelManager levelManager;

@@ -15,6 +15,10 @@ public class FollowPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (target == null)
+        {
+            return;
+        }
         Vector3 desiredPosition = target.position + offset + Vector3.up * heightOffset; // Calculate desired camera position
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed); // Smoothly move the camera
         transform.position = smoothedPosition; // Update camera position to the smoothed position

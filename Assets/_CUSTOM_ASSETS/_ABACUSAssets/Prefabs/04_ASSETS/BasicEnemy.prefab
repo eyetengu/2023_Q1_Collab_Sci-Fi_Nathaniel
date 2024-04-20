@@ -71,6 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDetectionRadius: 35
   player: {fileID: 0}
+  Damage: 1
 --- !u!65 &999403685282210467
 BoxCollider:
   m_ObjectHideFlags: 0
