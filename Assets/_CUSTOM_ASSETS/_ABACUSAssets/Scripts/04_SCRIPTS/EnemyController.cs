@@ -34,7 +34,7 @@ public class EnemyController : MonoBehaviour
             navMeshAgent.SetDestination(player.position);
         }
     }
-
+   
     // Function to find the closest enemySpawner
     Transform FindClosestSpawner()
     {
@@ -63,5 +63,13 @@ public class EnemyController : MonoBehaviour
         NavMeshHit hit;
         NavMesh.SamplePosition(randomDirection, out hit, radius, NavMesh.AllAreas);
         return hit.position;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
