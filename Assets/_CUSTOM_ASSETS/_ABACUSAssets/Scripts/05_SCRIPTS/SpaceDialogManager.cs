@@ -9,12 +9,16 @@ public class SpaceDialogManager : MonoBehaviour
     private string[] lines;
     private int index;
     [SerializeField] private float textSpeed;
-    private TMP_Text displayText;
+    [SerializeField] private TextMeshProUGUI displayText;
     // Start is called before the first frame update
     void Start()
     {
         index = 0;
-        displayText = GetComponent<TMP_Text>();
+        
+        if (displayText == null)
+        {
+            Debug.LogError($"Missing Text Component for {nameof(displayText)}");
+        }
         displayText.text = string.Empty;
     }
 
@@ -60,7 +64,7 @@ public class SpaceDialogManager : MonoBehaviour
         }
         else
         {
-            gameObject.GetPp.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }
