@@ -60,7 +60,7 @@ public class SpaceDialogManager : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
+            gameObject.GetPp.SetActive(false);
         }
     }
 }
