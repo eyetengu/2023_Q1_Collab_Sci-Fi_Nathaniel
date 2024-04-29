@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/ABACUS_Scenes/06_SUBSCENE_EXPERIMENT/06_01_MAIN.unity
+    guid: cb893e3ab8b8c564aafc566f96af5437
+  - enabled: 1
+    path: Assets/Scenes/ABACUS_Scenes/06_SUBSCENE_EXPERIMENT/06_02_SUBSCENE_1.unity
+    guid: 31622f405c982e145a53df374f22b238
+  - enabled: 1
+    path: Assets/Scenes/ABACUS_Scenes/06_SUBSCENE_EXPERIMENT/06_03_SUBSCENE_2.unity
+    guid: 2862d007f55773c45b63f27ebb2b0fee
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4acbb5cc72f01cd43aa69f8deb4419a4,
       type: 2}
