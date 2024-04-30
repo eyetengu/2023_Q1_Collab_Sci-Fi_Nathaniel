@@ -16,7 +16,7 @@ public class MainSceneManager : MonoBehaviour
     void Update()
     {
         var scenes = SceneManager.sceneCount;
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Period))
         {
             for (int i = 0; i < scenes; i++)
             {
