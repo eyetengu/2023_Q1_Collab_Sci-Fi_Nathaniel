@@ -12,14 +12,17 @@ public class CarController3D : MonoBehaviour
     public float normalFactor = 0.9f;
     public float boostMultiplier = 2f;
     public float boostDuration = 2f;
-
+    public bool isDrifting { get { return _isDrifting; } }
+    public bool isBoosting {  get { return _isBoosting; } }
+    public float CurrentSpeed { get { return _currentSpeed; } }
     // Private variables
     private Rigidbody rb;
     private float speedInput;
     private float turnInput;
-    private bool isDrifting;
-    private bool isBoosting;
+    private bool _isDrifting;
+    private bool _isBoosting;
     private float boostEndTime;
+    private float _currentSpeed;
 
     void Start()
     {
@@ -33,27 +36,27 @@ public class CarController3D : MonoBehaviour
         speedInput = Input.GetAxis("Vertical") * acceleration;
         turnInput = Input.GetAxis("Horizontal");
 
+        _currentSpeed = rb.velocity.magnitude;
         // Check if the car is drifting
-        isDrifting = Mathf.Abs(turnInput) > 0.5f && rb.velocity.magnitude > 5f;
+        _isDrifting = Mathf.Abs(turnInput) > 0.5f && _currentSpeed > 5f;
 
         // Check for boost input
         if (Input.GetKeyDown(KeyCode.Space) && !isBoosting)
         {
-            isBoosting = true;
+            _isBoosting = true;
             boostEndTime = Time.time + boostDuration;
         }
 
         // Disable boost when duration ends
         if (isBoosting && Time.time > boostEndTime)
         {
-            isBoosting = false;
+            _isBoosting = false;
         }
     }
 
     void FixedUpdate()
     {
         // Apply forward force
-        float currentAcceleration = isBoosting ? acceleration * boostMultiplier : acceleration;
         float currentMaxSpeed = isBoosting ? maxSpeed * boostMultiplier : maxSpeed;
 
         if (speedInput != 0)

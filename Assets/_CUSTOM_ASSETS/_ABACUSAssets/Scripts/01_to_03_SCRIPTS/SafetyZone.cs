@@ -16,7 +16,6 @@ public class SafetyZone : MonoBehaviour
     {
         var percentProgressed = levelManager.MaxMissionTime - levelManager.RemainingMissionTime;
         var percentage = percentProgressed / levelManager.MaxMissionTime;
-        Debug.Log(percentage);
         var scaleFactor = 1 - percentage;
         transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
     }

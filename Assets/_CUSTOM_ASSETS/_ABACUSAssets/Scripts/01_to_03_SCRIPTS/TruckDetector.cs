@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TruckDetector : MonoBehaviour
 {
+    public bool IsActiveDrill { get { return _isActiveDrill; } }
     private Animator mAnimator;
+    private bool _isActiveDrill;
 
     private void Start()
     {
@@ -14,6 +16,7 @@ public class TruckDetector : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            _isActiveDrill = true;
             mAnimator.SetBool("boolProcessing", true);
         }
     }
@@ -22,6 +25,7 @@ public class TruckDetector : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            _isActiveDrill = false;
             mAnimator.SetBool("boolProcessing", false);
         }
 

@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,42 +23,71 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (player != null)
+        if (player == null)
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            return;
+        }
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-            if (distanceToPlayer > playerDetectionRadius)
+        if (distanceToPlayer > playerDetectionRadius)
+        {
+            List<Transform> list = new List<Transform>();
+            Transform closestGasDrill = FindClosestTaggedObject(Tags.Gas.ToString());
+            if (closestGasDrill != null && closestGasDrill.GetComponent<TruckDetector>().IsActiveDrill)
             {
-                // Find the closest enemySpawner and move around it
-                Transform closestSpawner = FindClosestSpawner();
-                if (closestSpawner == null)
-                {
-                    return;
-                }
+            list.Add(closestGasDrill);
+            }
+            Transform closestOreDrill = FindClosestTaggedObject(Tags.Ore.ToString());
+            if (closestOreDrill != null && closestOreDrill.GetComponent<TruckDetector>().IsActiveDrill)
+            {
+                list.Add(closestOreDrill);
+            }
+            Transform closestCrystalDrill = FindClosestTaggedObject(Tags.Crystal.ToString());
+            if (closestCrystalDrill != null && closestCrystalDrill.GetComponent<TruckDetector>().IsActiveDrill)
+            {
+                list.Add(closestCrystalDrill);
+            }
+            Transform closestSpawner;
+            if (list.Count > 0)
+            {
+                SortTransformsByDistance(list, transform);
+                closestSpawner = list.FirstOrDefault();
+            }
+            else
+            {
+                closestSpawner = FindClosestTaggedObject(Tags.EnemySpawner.ToString());
+            }
+            if (closestSpawner != null)
+            {
                 navMeshAgent.SetDestination(RandomNavmeshLocation(closestSpawner.position, 10f));
             }
             else
             {
-                // Move towards the player using NavMesh
+                //Just keep attacking player
                 navMeshAgent.SetDestination(player.position);
             }
+        }
+        else
+        {
+            // Move towards the player using NavMesh
+            navMeshAgent.SetDestination(player.position);
         }
     }
 
     // Function to find the closest enemySpawner
-    Transform FindClosestSpawner()
+    Transform FindClosestTaggedObject(string tagName)
     {
-        GameObject[] spawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+        GameObject[] taggedObjects = GameObject.FindGameObjectsWithTag(tagName);
         Transform closestSpawner = null;
         float closestDistance = Mathf.Infinity;
 
-        foreach (GameObject spawner in spawners)
+        foreach (GameObject taggedObj in taggedObjects)
         {
-            float distance = Vector3.Distance(transform.position, spawner.transform.position);
+            float distance = Vector3.Distance(transform.position, taggedObj.transform.position);
             if (distance < closestDistance)
             {
                 closestDistance = distance;
-                closestSpawner = spawner.transform;
+                closestSpawner = taggedObj.transform;
             }
         }
 
@@ -76,17 +108,17 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.tag == "PlayerAttack")
         {
-            bool isPlayerRunning;
-            BasicCarController basicCarController = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<BasicCarController>();
+            bool isPlayerAttacking;
+            CarController3D basicCarController = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<CarController3D>();
             if (basicCarController == null)
             {
-                isPlayerRunning = false;
+                isPlayerAttacking = false;
             }
             else
             {
-                isPlayerRunning = basicCarController.isMoving;
+                isPlayerAttacking = (basicCarController.isDrifting || basicCarController.isBoosting || basicCarController.CurrentSpeed > 20f);
             }
-            if (isPlayerRunning)
+            if (isPlayerAttacking)
             {
                 Destroy(this.gameObject);
             }
@@ -101,5 +133,24 @@ public class EnemyController : MonoBehaviour
             playerHealth.Damage(Damage);
             Destroy(this.gameObject);
         }
+
+    }
+    void SortTransformsByDistance(List<Transform> transforms, Transform reference)
+    {
+        transforms.Sort((a, b) =>
+        {
+            float distanceA = Vector3.Distance(a.position, reference.position);
+            float distanceB = Vector3.Distance(b.position, reference.position);
+            return distanceA.CompareTo(distanceB);
+        });
+    }
+
+    public enum Tags
+    {
+        None,
+        EnemySpawner,
+        Ore,
+        Gas,
+        Crystal
     }
 }
