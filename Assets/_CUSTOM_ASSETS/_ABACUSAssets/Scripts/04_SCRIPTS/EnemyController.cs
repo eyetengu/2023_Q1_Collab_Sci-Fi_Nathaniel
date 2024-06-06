@@ -33,17 +33,17 @@ public class EnemyController : MonoBehaviour
         {
             List<Transform> list = new List<Transform>();
             Transform closestGasDrill = FindClosestTaggedObject(Tags.Gas.ToString());
-            if (closestGasDrill != null && closestGasDrill.GetComponent<TruckDetector>().IsActiveDrill)
+            if (closestGasDrill != null && closestGasDrill.GetComponent<ResourceController>().IsActiveDrill)
             {
             list.Add(closestGasDrill);
             }
             Transform closestOreDrill = FindClosestTaggedObject(Tags.Ore.ToString());
-            if (closestOreDrill != null && closestOreDrill.GetComponent<TruckDetector>().IsActiveDrill)
+            if (closestOreDrill != null && closestOreDrill.GetComponent<ResourceController>().IsActiveDrill)
             {
                 list.Add(closestOreDrill);
             }
             Transform closestCrystalDrill = FindClosestTaggedObject(Tags.Crystal.ToString());
-            if (closestCrystalDrill != null && closestCrystalDrill.GetComponent<TruckDetector>().IsActiveDrill)
+            if (closestCrystalDrill != null && closestCrystalDrill.GetComponent<ResourceController>().IsActiveDrill)
             {
                 list.Add(closestCrystalDrill);
             }
@@ -106,6 +106,14 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        switch (other.gameObject.tag)
+        {
+            case "PlayerAttack":
+                break;
+            default:
+                DoDamage(other);
+                break;
+        }
         if (other.gameObject.tag == "PlayerAttack")
         {
             bool isPlayerAttacking;
@@ -123,18 +131,26 @@ public class EnemyController : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-        if (other.gameObject.tag == "Player")
+
+    }
+
+    private void DoDamage(Collider other)
+    {
+        if (other.gameObject.tag == Tags.Player.ToString() 
+            || other.gameObject.tag == Tags.Crystal.ToString() 
+            || other.gameObject.tag == Tags.Gas.ToString()
+            || other.gameObject.tag == Tags.Ore.ToString())
         {
-            var playerHealth = other.GetComponent<HealthComponent>();
-            if (playerHealth == null)
+            var targetHealth = other.GetComponent<HealthComponent>();
+            if (targetHealth == null)
             {
                 return;
             }
-            playerHealth.Damage(Damage);
+            targetHealth.Damage(Damage);
             Destroy(this.gameObject);
         }
-
     }
+
     void SortTransformsByDistance(List<Transform> transforms, Transform reference)
     {
         transforms.Sort((a, b) =>
@@ -151,6 +167,8 @@ public class EnemyController : MonoBehaviour
         EnemySpawner,
         Ore,
         Gas,
-        Crystal
+        Crystal,
+        PlayerAttack,
+        Player
     }
 }

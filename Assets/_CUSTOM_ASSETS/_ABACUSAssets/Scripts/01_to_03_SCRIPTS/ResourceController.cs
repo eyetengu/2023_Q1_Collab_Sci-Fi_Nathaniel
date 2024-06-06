@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TruckDetector : MonoBehaviour
+public class ResourceController : MonoBehaviour
 {
     public bool IsActiveDrill { get { return _isActiveDrill; } }
     private Animator mAnimator;
@@ -23,11 +23,11 @@ public class TruckDetector : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            _isActiveDrill = false;
-            mAnimator.SetBool("boolProcessing", false);
-        }
+        //if (other.gameObject.tag == "Player")
+        //{
+        //    _isActiveDrill = false;
+        //    mAnimator.SetBool("boolProcessing", false);
+        //}
 
     }
 }
