@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ABACUS_Scenes/06_SUBSCENE_EXPERIMENT/06_03_SUBSCENE_2.unity
     guid: 2862d007f55773c45b63f27ebb2b0fee
+  - enabled: 1
+    path: Assets/Scenes/ABACUS_Scenes/01_to_03_SCENES/02_ABACUS_GALAXYMINER_VISUAL.unity
+    guid: 9285e083e95fc9149b9682be2610f328
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4acbb5cc72f01cd43aa69f8deb4419a4,
       type: 2}
