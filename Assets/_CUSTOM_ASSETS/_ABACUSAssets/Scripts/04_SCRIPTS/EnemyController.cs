@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -35,7 +36,7 @@ public class EnemyController : MonoBehaviour
             Transform closestGasDrill = FindClosestTaggedObject(Tags.Gas.ToString());
             if (closestGasDrill != null && closestGasDrill.GetComponent<ResourceController>().IsActiveDrill)
             {
-            list.Add(closestGasDrill);
+                list.Add(closestGasDrill);
             }
             Transform closestOreDrill = FindClosestTaggedObject(Tags.Ore.ToString());
             if (closestOreDrill != null && closestOreDrill.GetComponent<ResourceController>().IsActiveDrill)
@@ -97,7 +98,7 @@ public class EnemyController : MonoBehaviour
     // Function to find a random point within a given radius on the NavMesh
     Vector3 RandomNavmeshLocation(Vector3 origin, float radius)
     {
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * radius;
         randomDirection += origin;
         NavMeshHit hit;
         NavMesh.SamplePosition(randomDirection, out hit, radius, NavMesh.AllAreas);
@@ -106,49 +107,53 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        switch (other.gameObject.tag)
+        var isValidTag = Tags.TryParse(typeof(Tags), other.gameObject.tag, out object result);
+        if (isValidTag)
         {
-            case "PlayerAttack":
-                break;
-            default:
-                DoDamage(other);
-                break;
+            switch (result)
+            {
+                case Tags.PlayerAttack:
+                    CheckIfHit(other);
+                    break;
+                case Tags.None:
+                case Tags.Player:
+                case Tags.Ore:
+                case Tags.Gas:
+                case Tags.Crystal:
+                default:
+                    DoDamage(other);
+                    break;
+            }
         }
-        if (other.gameObject.tag == "PlayerAttack")
+    }
+
+    private void CheckIfHit(Collider other)
+    {
+        bool isPlayerAttacking;
+        CarController3D basicCarController = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<CarController3D>();
+        if (basicCarController == null)
         {
-            bool isPlayerAttacking;
-            CarController3D basicCarController = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<CarController3D>();
-            if (basicCarController == null)
-            {
-                isPlayerAttacking = false;
-            }
-            else
-            {
-                isPlayerAttacking = (basicCarController.isDrifting || basicCarController.isBoosting || basicCarController.CurrentSpeed > 20f);
-            }
-            if (isPlayerAttacking)
-            {
-                Destroy(this.gameObject);
-            }
+            isPlayerAttacking = false;
+        }
+        else
+        {
+            isPlayerAttacking = (basicCarController.isDrifting || basicCarController.isBoosting || basicCarController.CurrentSpeed > 20f);
+        }
+        if (isPlayerAttacking)
+        {
+            Destroy(this.gameObject);
         }
 
     }
 
     private void DoDamage(Collider other)
     {
-        if (other.gameObject.tag == Tags.Player.ToString() 
-            || other.gameObject.tag == Tags.Crystal.ToString() 
-            || other.gameObject.tag == Tags.Gas.ToString()
-            || other.gameObject.tag == Tags.Ore.ToString())
+        var targetHealth = other.GetComponent<HealthComponent>();
+        if (targetHealth == null)
         {
-            var targetHealth = other.GetComponent<HealthComponent>();
-            if (targetHealth == null)
-            {
-                return;
-            }
-            targetHealth.Damage(Damage);
-            Destroy(this.gameObject);
+            return;
         }
+        targetHealth.Damage(Damage);
     }
 
     void SortTransformsByDistance(List<Transform> transforms, Transform reference)
