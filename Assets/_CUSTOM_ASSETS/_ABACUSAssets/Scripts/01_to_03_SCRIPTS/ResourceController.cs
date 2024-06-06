@@ -12,6 +12,14 @@ public class ResourceController : MonoBehaviour
     {
         mAnimator = GetComponent<Animator>();
     }
+
+    private void FixedUpdate()
+    {
+        if (_isActiveDrill)
+        {
+            //Add resource to total
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -28,6 +36,5 @@ public class ResourceController : MonoBehaviour
         //    _isActiveDrill = false;
         //    mAnimator.SetBool("boolProcessing", false);
         //}
-
     }
 }

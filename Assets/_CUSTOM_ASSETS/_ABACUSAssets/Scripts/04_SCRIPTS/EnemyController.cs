@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        var playerTag = GameObject.FindGameObjectWithTag("Player");
+        var playerTag = GameObject.FindGameObjectWithTag(Tags.Player.ToString());
         if (playerTag != null)
         {
             player = playerTag.transform;
@@ -107,7 +107,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var isValidTag = Tags.TryParse(typeof(Tags), other.gameObject.tag, out object result);
+        var isValidTag = Enum.TryParse(typeof(Tags), other.gameObject.tag, out object result);
         if (isValidTag)
         {
             switch (result)
@@ -130,7 +130,7 @@ public class EnemyController : MonoBehaviour
     private void CheckIfHit(Collider other)
     {
         bool isPlayerAttacking;
-        CarController3D basicCarController = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<CarController3D>();
+        CarController3D basicCarController = GameObject.FindGameObjectWithTag(Tags.Player.ToString()).gameObject.GetComponent<CarController3D>();
         if (basicCarController == null)
         {
             isPlayerAttacking = false;
