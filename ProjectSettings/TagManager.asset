@@ -17,6 +17,10 @@ TagManager:
   - Ore
   - Base
   - Floor
+  - Collectable
+  - Obstacle
+  - Target_Enemy
+  - Projectile_Enemy
   layers:
   - Default
   - TransparentFX
@@ -25,8 +29,8 @@ TagManager:
   - Water
   - UI
   - Drone
-  - 
-  - 
+  - PlayerShip
+  - Radar
   - 
   - 
   - 

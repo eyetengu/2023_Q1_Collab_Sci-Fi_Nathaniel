@@ -6,8 +6,29 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/bootUp.unity
+    guid: c726cdbaa1676dd4086af9d20c72afa9
+  - enabled: 1
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/title.unity
+    guid: 61a174a6e7439364a9fd6cf6067cd715
+  - enabled: 1
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/shop.unity
+    guid: db7e072200ee4c649a7de0ff7f7bdb5f
+  - enabled: 1
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/testLevel.unity
+    guid: 705da3146559e714d8250daaf95fd1d4
+  - enabled: 1
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/level1.unity
+    guid: 57e2d079d11952b4f999e3e955018506
+  - enabled: 1
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/level2.unity
+    guid: 9effecf10fbb36f45b1f8ea5f372ad1a
+  - enabled: 1
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/level3.unity
+    guid: 30497a8f321a38e4a89eed301bef4e1b
+  - enabled: 1
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/gameOver.unity
+    guid: 827e2a059abfaf040ab8ac1d0ab7ff34
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4acbb5cc72f01cd43aa69f8deb4419a4,
       type: 2}

@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Market_Behavior : MonoBehaviour
 {
+    ResourceMarket_UI _uiManager;
+    
     [SerializeField] int _numberOfGoods;
     [SerializeField] int _maxNumberOfGoods = 100;
+    [SerializeField] int _cargoFree;
+    
     float _goods_Buy_Cost;
     float _goods_Sell_Cost;
     float _goods_Regular_Cost = 100;
-    [SerializeField] int _cargoFree;
-
-    ResourceMarket_UI _uiManager;
+    
+    [SerializeField] private float _marketSpread = 0.2f;
 
     [SerializeField] bool _canAdjust;
 
@@ -54,8 +57,8 @@ public class Market_Behavior : MonoBehaviour
     {
         _cargoFree = _maxNumberOfGoods - _numberOfGoods;
 
-        _goods_Sell_Cost = _cargoFree * 1.0f * _goods_Regular_Cost;
-        _goods_Buy_Cost = _cargoFree * 0.9f * _goods_Regular_Cost;
+        _goods_Sell_Cost = _cargoFree * (1 + (_marketSpread/2)) * _goods_Regular_Cost;
+        _goods_Buy_Cost = _cargoFree * (1- (_marketSpread/2)) * _goods_Regular_Cost;
     }
 
     private void UpdateCargoUI()

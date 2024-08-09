@@ -3,7 +3,7 @@
 	Properties
 	{
 		_MainTex ("Albedo (Emissive)", 2D) = "white" {}
-		_Wings ("Wings", 2D) = "white" {}
+		_Wings ("Wins", 2D) = "white" {}
 		_EmissiveAmount ("_EmissiveAmount", Float) =2.0
 	}
 	SubShader
