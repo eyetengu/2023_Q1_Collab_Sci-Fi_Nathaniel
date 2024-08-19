@@ -6,29 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/bootUp.unity
-    guid: c726cdbaa1676dd4086af9d20c72afa9
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/Scenes/THE_CENTRAL_CORE_SCENE_INDEX.unity
+    guid: dc863c35a8cb0f0469a950be1a875b2f
   - enabled: 1
-    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/title.unity
-    guid: 61a174a6e7439364a9fd6cf6067cd715
+    path: Assets/Scenes/EYE_Scenes/2024_MAY_3D_SpaceShooter.unity
+    guid: b5118c08b4cd26e48ad19947286caed5
   - enabled: 1
-    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/shop.unity
-    guid: db7e072200ee4c649a7de0ff7f7bdb5f
+    path: Assets/Scenes/z1_ResourceCollection.unity
+    guid: afbd6a3abd81fe240b9d888e7c44b2f8
   - enabled: 1
-    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/testLevel.unity
-    guid: 705da3146559e714d8250daaf95fd1d4
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/PROJECTS/FoosBallEncounter/Scenes/Sci_Fi_Foosball.unity
+    guid: f246c5915466642439fcd2aafacd36f8
   - enabled: 1
-    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/level1.unity
-    guid: 57e2d079d11952b4f999e3e955018506
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/PROJECTS/_AsteroidDodge/Scene/Asteroid_Dodge.unity
+    guid: e7e103c39e673804e8a584280fa3ac00
   - enabled: 1
-    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/level2.unity
-    guid: 9effecf10fbb36f45b1f8ea5f372ad1a
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/PROJECTS/SpaceJauntAlpha/SpaceJauntAlpha.unity
+    guid: 392392f6f03629046901309804abb622
   - enabled: 1
-    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/level3.unity
-    guid: 30497a8f321a38e4a89eed301bef4e1b
-  - enabled: 1
-    path: Assets/_CUSTOM_ASSETS/_EYEAssets/EYE/3D_SpaceShooter/Scenes/gameOver.unity
-    guid: 827e2a059abfaf040ab8ac1d0ab7ff34
+    path: Assets/Scenes/03-StarshipLife.unity
+    guid: 48a0e34c3f9e7e944a4f9dc028ae798c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4acbb5cc72f01cd43aa69f8deb4419a4,
       type: 2}

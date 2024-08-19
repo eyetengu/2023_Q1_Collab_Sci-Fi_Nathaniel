@@ -20,7 +20,7 @@ public class Player_PRYController : MonoBehaviour
     float _yawValue;
     bool _isSpeeding;
     [SerializeField] UIManager _uiManager;
-
+    
 
     void Start()
     {

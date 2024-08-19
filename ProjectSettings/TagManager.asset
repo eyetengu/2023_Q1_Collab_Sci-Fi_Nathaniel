@@ -21,6 +21,8 @@ TagManager:
   - Obstacle
   - Target_Enemy
   - Projectile_Enemy
+  - Ball
+  - FoosPlayer
   layers:
   - Default
   - TransparentFX
