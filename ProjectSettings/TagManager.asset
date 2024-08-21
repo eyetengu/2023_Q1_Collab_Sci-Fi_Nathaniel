@@ -17,6 +17,12 @@ TagManager:
   - Ore
   - Base
   - Floor
+  - Collectable
+  - Obstacle
+  - Target_Enemy
+  - Projectile_Enemy
+  - Ball
+  - FoosPlayer
   - EnemySpawner
   - PlayerAttack
   layers:
@@ -27,8 +33,8 @@ TagManager:
   - Water
   - UI
   - Drone
-  - 
-  - 
+  - PlayerShip
+  - Radar
   - 
   - 
   - 

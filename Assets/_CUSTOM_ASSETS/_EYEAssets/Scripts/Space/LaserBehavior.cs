@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserBehavior : MonoBehaviour
+public class LaserBehavior : MonoBehaviour, IActorTemplate
 {
     [SerializeField] private float _speed;
     private float _step;
@@ -24,5 +24,25 @@ public class LaserBehavior : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         gameObject.SetActive(false);
+    }
+
+    public int SendDamage()
+    {
+        return 0;
+    }
+
+    public void TakeDamage(int incomingDamage)
+    {
+
+    }
+
+    public void Die()
+    {
+
+    }
+
+    public void ActorStats(SOActorModel actorModel)
+    {
+
     }
 }

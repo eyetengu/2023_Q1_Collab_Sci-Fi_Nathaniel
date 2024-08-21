@@ -6,6 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/Scenes/THE_CENTRAL_CORE_SCENE_INDEX.unity
+    guid: dc863c35a8cb0f0469a950be1a875b2f
+  - enabled: 1
+    path: Assets/Scenes/EYE_Scenes/2024_MAY_3D_SpaceShooter.unity
+    guid: b5118c08b4cd26e48ad19947286caed5
+  - enabled: 1
+    path: Assets/Scenes/z1_ResourceCollection.unity
+    guid: afbd6a3abd81fe240b9d888e7c44b2f8
+  - enabled: 1
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/PROJECTS/FoosBallEncounter/Scenes/Sci_Fi_Foosball.unity
+    guid: f246c5915466642439fcd2aafacd36f8
+  - enabled: 1
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/PROJECTS/_AsteroidDodge/Scene/Asteroid_Dodge.unity
+    guid: e7e103c39e673804e8a584280fa3ac00
+  - enabled: 1
+    path: Assets/_CUSTOM_ASSETS/_EYEAssets/PROJECTS/SpaceJauntAlpha/SpaceJauntAlpha.unity
+    guid: 392392f6f03629046901309804abb622
+  - enabled: 1
+    path: Assets/Scenes/03-StarshipLife.unity
+    guid: 48a0e34c3f9e7e944a4f9dc028ae798c
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1

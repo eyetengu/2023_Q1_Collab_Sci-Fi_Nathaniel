@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: bf38e9f95ae40744985d49a4bef5dcc9
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Mouth Breather BB
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a859dbcbdd700bc458812e46ff88bd91, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
