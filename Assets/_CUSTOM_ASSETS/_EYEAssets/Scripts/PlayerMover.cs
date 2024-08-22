@@ -15,12 +15,17 @@ public class PlayerMover : MonoBehaviour
     float _rotateCamVal;
     [SerializeField] Transform _cameraPlatform;
     private PlayerAnimator _playerAnimator;
+    CapsuleCollider _collider;
+    [SerializeField] float _jumpDelay = 0.5f;
+    bool _canJump;
+
 
 
     void Start()
     {
         //_agent = GetComponent<NavMeshAgent>();
         _playerAnimator= GetComponent<PlayerAnimator>();
+        _collider = GetComponent<CapsuleCollider>();
     }
 
     void FixedUpdate()
@@ -33,16 +38,19 @@ public class PlayerMover : MonoBehaviour
 
         float horizontalCamera = Input.GetAxis("Mouse X");
         float verticalCamera = Input.GetAxis("Mouse Y");
-        
-        if(Input.GetKeyDown(KeyCode.Space) && verticalInput > 0)
-        {
-            PlayerJump();
-        }
 
-        if(Input.GetKeyDown(KeyCode.C))
-        {
+        if (Input.GetKey(KeyCode.LeftShift))
+            _speedMultiplier = 2.0f;
+        else
+            _speedMultiplier = 1.0f;
+
+        if(Input.GetKeyDown(KeyCode.Space) && verticalInput > 0 && _canJump)        
+            PlayerJump();
+
+        if (Input.GetKey(KeyCode.C))
             PlayerCrouch();
-        }
+        else
+            PlayerStandUp();
 
         //Movement
         Vector2 moveDir = new Vector2(horizontalMovement, verticalInput);
@@ -79,11 +87,29 @@ public class PlayerMover : MonoBehaviour
     void PlayerCrouch()
     {
         _playerAnimator.CrouchPlayer();
+        _collider.radius = 0.5f;
+    }
+
+    void PlayerStandUp()
+    {_playerAnimator.PlayerIdle();
+        _collider.radius = 1.0f;
     }
 
     public void RotateCamera(float mouseY)
     {
         Debug.Log("Rotating Camera");
         _cameraPlatform.transform.Rotate(-mouseY, 0, 0);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
+    }
+
+    IEnumerator JumpTimer()
+    {
+        yield return new WaitForSeconds(_jumpDelay);
+        _collider.radius = 1.0f;
+        _canJump = true;
     }
 }

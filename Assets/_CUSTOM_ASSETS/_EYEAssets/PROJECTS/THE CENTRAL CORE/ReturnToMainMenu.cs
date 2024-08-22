@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class ReturnToMainMenu : MonoBehaviour
 {
     bool _isSwitchingScenes;
+    [SerializeField] int _countdownReturn = 2;
+
 
 
 //BUILT-IN FUNCTIONS
@@ -35,7 +37,7 @@ public class ReturnToMainMenu : MonoBehaviour
 //COROUTINES
     IEnumerator SceneLoadTimer()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < _countdownReturn; i++)
         {
             yield return new WaitForSeconds(.3f);
             Debug.Log(".");
