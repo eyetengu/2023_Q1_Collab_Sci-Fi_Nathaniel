@@ -6,11 +6,13 @@ public class PlayerAnimator : MonoBehaviour
 {
     private Animator _animator;
     private bool _isCrouched;
-
+    AudioSource _audioSource;
+    [SerializeField] AudioClip _footstepAudio;
 
     void Start()
     {
-        _animator = GetComponentInChildren<Animator>();    
+        _animator = GetComponentInChildren<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
     
     public void MovePlayer(Vector2 value)
@@ -29,7 +31,8 @@ public class PlayerAnimator : MonoBehaviour
 
     public void PlayerIdle()
     {
-        _animator.SetFloat("Speed", 0.0f);
+        //_animator.SetFloat("Speed", 0.0f);
+        _animator.SetBool("Walking", false);
     }
 
     public void RotatePlayer(float value)
@@ -39,7 +42,11 @@ public class PlayerAnimator : MonoBehaviour
 
     public void WalkPlayer()
     {
-        _animator.SetFloat("Speed", .23f);
+        //_animator.SetFloat("Speed", .23f);
+
+        //Starship Walker method
+        _animator.SetBool("Walking", true);
+        //_audioSource.PlayOneShot(_footstepAudio);
     }
 
     public void RunPlayer()
@@ -51,7 +58,8 @@ public class PlayerAnimator : MonoBehaviour
     {
         _isCrouched = !_isCrouched;
 
-        _animator.SetBool("Crouch", _isCrouched);
+        _animator.SetBool("Crouched", _isCrouched);
+
     }
 
     public void JumpPlayer()

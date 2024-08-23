@@ -16,6 +16,13 @@ public class RotatingArmature : MonoBehaviour
     [SerializeField] private bool _isSwitching;
     bool _isReadyToSwitch;
 
+    [SerializeField] float _rotationDuration;
+
+
+    private void Start()
+    {
+        _isReadyToSwitch = true;
+    }
 
     void Update()
     {
@@ -49,7 +56,7 @@ public class RotatingArmature : MonoBehaviour
 
     IEnumerator RotationTimer()
     {
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(_rotationDuration);
         _speedMultiplier *= -1;
         SwitchTheYield();
     }

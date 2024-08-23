@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 
-[RequireComponent(typeof(Animator))]
+//[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(PlayerAnimator))]

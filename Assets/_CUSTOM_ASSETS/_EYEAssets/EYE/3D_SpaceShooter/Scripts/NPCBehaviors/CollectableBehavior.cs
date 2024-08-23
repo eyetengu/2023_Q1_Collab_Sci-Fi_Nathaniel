@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class CollectableBehavior : MonoBehaviour
 {
@@ -48,7 +49,11 @@ public class CollectableBehavior : MonoBehaviour
             if (_isCollected == false)
             {
                 _isCollected = true;
-                //_audioManager.PickupAudio();
+                ICanCollect _collector = other.GetComponent<ICanCollect>();
+                _collector.PassItemInfo(Health);
+                if(_audioManager != null)
+                    _audioManager.PickupAudio();
+
                 gameObject.SetActive(false);
             }
         }

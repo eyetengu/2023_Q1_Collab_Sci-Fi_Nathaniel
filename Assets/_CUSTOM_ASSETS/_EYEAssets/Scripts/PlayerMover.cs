@@ -19,13 +19,15 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] float _jumpDelay = 0.5f;
     bool _canJump;
 
-
+    AudioSource _audioSource;
+    [SerializeField] AudioClip _footstepAudio;
 
     void Start()
     {
         //_agent = GetComponent<NavMeshAgent>();
         _playerAnimator= GetComponent<PlayerAnimator>();
         _collider = GetComponent<CapsuleCollider>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -52,6 +54,13 @@ public class PlayerMover : MonoBehaviour
         else
             PlayerStandUp();
 
+        if (horizontalMovement != 0 || verticalInput != 0)
+        {
+            if (!_audioSource.isPlaying)
+                _audioSource.PlayOneShot(_footstepAudio);
+            _playerAnimator.WalkPlayer();
+        }
+
         //Movement
         Vector2 moveDir = new Vector2(horizontalMovement, verticalInput);
         Vector3 newMoveDir = new Vector3(-moveDir.x, 0, -moveDir.y);
@@ -60,7 +69,7 @@ public class PlayerMover : MonoBehaviour
         //Rotations
         _rotateValue = horizontalCamera;
         RotatePlayer(_rotateValue * _rotationStep);
-        _rotateCamVal = verticalCamera;
+        _rotateCamVal = verticalCamera; 
         RotateCamera(_rotateCamVal * _rotationStep);
     }
 
@@ -87,12 +96,12 @@ public class PlayerMover : MonoBehaviour
     void PlayerCrouch()
     {
         _playerAnimator.CrouchPlayer();
-        _collider.radius = 0.5f;
+        _collider.height = 0.5f;
     }
 
     void PlayerStandUp()
     {_playerAnimator.PlayerIdle();
-        _collider.radius = 1.0f;
+        _collider.height = 1.0f;
     }
 
     public void RotateCamera(float mouseY)
@@ -103,13 +112,13 @@ public class PlayerMover : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
+        //Debug.Log(collision.gameObject.name);
     }
 
     IEnumerator JumpTimer()
     {
         yield return new WaitForSeconds(_jumpDelay);
-        _collider.radius = 1.0f;
+        _collider.height = 1.0f;
         _canJump = true;
     }
 }
