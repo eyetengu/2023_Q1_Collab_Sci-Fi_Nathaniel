@@ -15,9 +15,10 @@ public class HolographicMine : MonoBehaviour
     void Start()
     {
         StartCoroutine(ReverseTimer());
+        Debug.Log(_reticles.Length);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         _step = _speed * _speedMultiplier * Time.deltaTime;
@@ -51,7 +52,9 @@ public class HolographicMine : MonoBehaviour
 
     void ReticleBehavior()
     {
-        _reticles[0].Rotate(0, 0, _step);
+        Debug.Log(_reticles.Length);
+
+        _reticles[0].Rotate(0, 0, _step);   
         _reticles[2].Rotate(0, 0, _step);
 
         _reticles[1].Rotate(0, 0, -_step);

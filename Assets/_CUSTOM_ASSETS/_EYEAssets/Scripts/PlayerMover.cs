@@ -15,12 +15,19 @@ public class PlayerMover : MonoBehaviour
     float _rotateCamVal;
     [SerializeField] Transform _cameraPlatform;
     private PlayerAnimator _playerAnimator;
+    CapsuleCollider _collider;
+    [SerializeField] float _jumpDelay = 0.5f;
+    bool _canJump;
 
+    AudioSource _audioSource;
+    [SerializeField] AudioClip _footstepAudio;
 
     void Start()
     {
         //_agent = GetComponent<NavMeshAgent>();
         _playerAnimator= GetComponent<PlayerAnimator>();
+        _collider = GetComponent<CapsuleCollider>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -33,15 +40,25 @@ public class PlayerMover : MonoBehaviour
 
         float horizontalCamera = Input.GetAxis("Mouse X");
         float verticalCamera = Input.GetAxis("Mouse Y");
-        
-        if(Input.GetKeyDown(KeyCode.Space) && verticalInput > 0)
-        {
-            PlayerJump();
-        }
 
-        if(Input.GetKeyDown(KeyCode.C))
-        {
+        if (Input.GetKey(KeyCode.LeftShift))
+            _speedMultiplier = 2.0f;
+        else
+            _speedMultiplier = 1.0f;
+
+        if(Input.GetKeyDown(KeyCode.Space) && verticalInput > 0 && _canJump)        
+            PlayerJump();
+
+        if (Input.GetKey(KeyCode.C))
             PlayerCrouch();
+        else
+            PlayerStandUp();
+
+        if (horizontalMovement != 0 || verticalInput != 0)
+        {
+            if (!_audioSource.isPlaying)
+                _audioSource.PlayOneShot(_footstepAudio);
+            _playerAnimator.WalkPlayer();
         }
 
         //Movement
@@ -52,7 +69,7 @@ public class PlayerMover : MonoBehaviour
         //Rotations
         _rotateValue = horizontalCamera;
         RotatePlayer(_rotateValue * _rotationStep);
-        _rotateCamVal = verticalCamera;
+        _rotateCamVal = verticalCamera; 
         RotateCamera(_rotateCamVal * _rotationStep);
     }
 
@@ -79,11 +96,29 @@ public class PlayerMover : MonoBehaviour
     void PlayerCrouch()
     {
         _playerAnimator.CrouchPlayer();
+        _collider.height = 0.5f;
+    }
+
+    void PlayerStandUp()
+    {_playerAnimator.PlayerIdle();
+        _collider.height = 1.0f;
     }
 
     public void RotateCamera(float mouseY)
     {
         Debug.Log("Rotating Camera");
         _cameraPlatform.transform.Rotate(-mouseY, 0, 0);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //Debug.Log(collision.gameObject.name);
+    }
+
+    IEnumerator JumpTimer()
+    {
+        yield return new WaitForSeconds(_jumpDelay);
+        _collider.height = 1.0f;
+        _canJump = true;
     }
 }

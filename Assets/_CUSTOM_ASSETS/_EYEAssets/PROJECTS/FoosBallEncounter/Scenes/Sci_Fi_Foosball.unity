@@ -358,6 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d37797dfec2084cb179b6bc2d9fb71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _countdownReturn: 2
 --- !u!1 &119396370 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1398320186731392, guid: c38312671b1287f438871de666ae8f72,
@@ -1656,12 +1657,12 @@ GameObject:
   - component: {fileID: 472316583}
   - component: {fileID: 472316582}
   m_Layer: 5
-  m_Name: Text_Title
+  m_Name: Text_Producer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &472316581
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2325,8 +2326,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 472316581}
   - {fileID: 949593395}
+  - {fileID: 472316581}
   m_Father: {fileID: 1527854812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3130,7 +3131,7 @@ GameObject:
   - component: {fileID: 949593397}
   - component: {fileID: 949593396}
   m_Layer: 5
-  m_Name: Text_Producer
+  m_Name: Text_GameName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4662,7 +4663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1527854812
 RectTransform:
   m_ObjectHideFlags: 0

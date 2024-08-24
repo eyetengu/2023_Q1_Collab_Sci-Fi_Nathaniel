@@ -12,6 +12,9 @@ public class CentralCore_Scene_Manager : MonoBehaviour
     //03- Intergalactic Foosball
     //04- Asteroid Dodge
     //05- Space Jaunt Alpha
+    //06- Starship Walkthrough
+    //07- 2.5D Space SideScroller
+
 
     private void Update()
     {

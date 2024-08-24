@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPC_Appearance : MonoBehaviour
 {
     [Header("Character Selection")]
+    [SerializeField] private bool _isMale;
     [SerializeField] private GameObject[] _maleCharacterSelection;
     [SerializeField] private GameObject[] _femaleCharacterSelection;
 
@@ -14,7 +15,6 @@ public class NPC_Appearance : MonoBehaviour
     private int _materialID;
 
     [Header("Gender Specific")]
-    [SerializeField] private bool _isMale;
     [SerializeField] private GameObject[] _beards;
     [SerializeField] private GameObject _beardTransform;
 
@@ -78,6 +78,7 @@ public class NPC_Appearance : MonoBehaviour
 
     void RandomizeEverything()
     {
+        Debug.Log("Randomizing Everything");
         if(_character)
             ChooseRandomCharacter();
         if(_outfitChoice)
