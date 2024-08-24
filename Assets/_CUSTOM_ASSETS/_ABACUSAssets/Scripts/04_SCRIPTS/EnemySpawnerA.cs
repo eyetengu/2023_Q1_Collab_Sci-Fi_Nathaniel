@@ -2,7 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawnerA : MonoBehaviour
 {
     public GameObject enemyPrefab; // Reference to the enemy prefab to spawn
     public float minSpawnDelay = 10f; // Minimum delay before spawning
