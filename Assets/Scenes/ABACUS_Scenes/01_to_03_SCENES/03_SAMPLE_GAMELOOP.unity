@@ -219,6 +219,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 6623145173963923239, guid: 5eff41b61f0ad82498dfb3b4cba88104,
+        type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 7574327763507389789, guid: 67ae9937b0e3ffb4eae531d9ce39df4e,
+        type: 3}
     - target: {fileID: 9217379767219732586, guid: 5eff41b61f0ad82498dfb3b4cba88104,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -392,7 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AgentTypeID: -1372625422
+  m_AgentTypeID: 0
   m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
@@ -621,6 +627,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6623145173963923239, guid: 5eff41b61f0ad82498dfb3b4cba88104,
+        type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 7574327763507389789, guid: 67ae9937b0e3ffb4eae531d9ce39df4e,
+        type: 3}
     - target: {fileID: 9217379767219732586, guid: 5eff41b61f0ad82498dfb3b4cba88104,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -810,7 +822,7 @@ PrefabInstance:
     - target: {fileID: 4527398945906694342, guid: 901ae2f235f39754b821c69cadb7bbd3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4527398945906694342, guid: 901ae2f235f39754b821c69cadb7bbd3,
         type: 3}
@@ -851,11 +863,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4651715908990406430, guid: 901ae2f235f39754b821c69cadb7bbd3,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8733549176703141966, guid: 901ae2f235f39754b821c69cadb7bbd3,
         type: 3}
@@ -1101,7 +1108,7 @@ MonoBehaviour:
 
     W/A/S/D
 
-    Ram into bugs at full speed to kill!'
+    Ram or drift into bugs to kill!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1532,6 +1539,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6623145173963923239, guid: 5eff41b61f0ad82498dfb3b4cba88104,
+        type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 7574327763507389789, guid: 67ae9937b0e3ffb4eae531d9ce39df4e,
+        type: 3}
     - target: {fileID: 9217379767219732586, guid: 5eff41b61f0ad82498dfb3b4cba88104,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1868,6 +1881,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6623145173963923239, guid: 5eff41b61f0ad82498dfb3b4cba88104,
+        type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 7574327763507389789, guid: 67ae9937b0e3ffb4eae531d9ce39df4e,
+        type: 3}
     - target: {fileID: 9217379767219732586, guid: 5eff41b61f0ad82498dfb3b4cba88104,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2068,6 +2087,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6623145173963923239, guid: 5eff41b61f0ad82498dfb3b4cba88104,
+        type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 7574327763507389789, guid: 67ae9937b0e3ffb4eae531d9ce39df4e,
+        type: 3}
     - target: {fileID: 9217379767219732586, guid: 5eff41b61f0ad82498dfb3b4cba88104,
         type: 3}
       propertyPath: m_LocalPosition.x
