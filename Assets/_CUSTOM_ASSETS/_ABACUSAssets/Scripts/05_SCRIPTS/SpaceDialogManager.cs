@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class SpaceDialogManager : MonoBehaviour
 {
@@ -65,6 +66,7 @@ public class SpaceDialogManager : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+            SceneManager.LoadScene(0);
         }
     }
 }
