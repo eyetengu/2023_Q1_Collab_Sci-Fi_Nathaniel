@@ -23,6 +23,8 @@ TagManager:
   - Projectile_Enemy
   - Ball
   - FoosPlayer
+  - EnemySpawner
+  - PlayerAttack
   layers:
   - Default
   - TransparentFX
