@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Boundry : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float _bumpOffset;
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision other)
     {
-        
+        if (other != null && other.gameObject == RSPlayer.Instance.gameObject)
+        {
+            var otherPosition = other.transform.position;
+            other.transform.position = new Vector3(otherPosition.x, otherPosition.y + _bumpOffset, otherPosition.z);
+        }
+
     }
 }

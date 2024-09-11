@@ -25,7 +25,7 @@ public class ReturnToMainMenu : MonoBehaviour
 
 
 //CORE FUNCTIONS
-    void ReturnToOriginalMenu()
+    public void ReturnToOriginalMenu()
     {        
         _isSwitchingScenes = true;
         Debug.Log("Returning To Main Menu");

@@ -8,12 +8,14 @@ public class RSPlayerCameraFollow : MonoBehaviour
 {
     // Start is called before the first frame update
     private const float SMOOTHING_WEIGHT = 0.125f;
+    [SerializeField] private float _distanceFromPlayerX;
 
     // Update is called once per frame
     void Update()
     {
-        var playerTransform = RSPlayer.Instance.transform;
-        var targetPosition = new Vector3(playerTransform.position.x, transform.position.y, transform.position.z);
-        transform.position = Vector3.Lerp(transform.position, targetPosition, SMOOTHING_WEIGHT);
+        if (RSPlayer.Instance != null) {
+            var playerTransform = RSPlayer.Instance.transform;
+            var targetPosition = new Vector3(playerTransform.position.x + _distanceFromPlayerX, transform.position.y, transform.position.z);
+            transform.position = targetPosition; }
     }
 }
