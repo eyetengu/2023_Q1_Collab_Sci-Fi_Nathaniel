@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 namespace EYE_Assets 
 {
@@ -11,10 +10,10 @@ namespace EYE_Assets
         public delegate void ResetBallPosition();
         public static event ResetBallPosition resetBall;
 
-
         [SerializeField] TMP_Text _playerMessage;
         [SerializeField] TMP_Text _score_01;
         [SerializeField] TMP_Text _score_02;
+
 
         public void UpdatePlayerMessage(string message)
         {
@@ -32,6 +31,5 @@ namespace EYE_Assets
             _score_01.text = $"TEAM RED\n {scoreRed}";
             resetBall();
         }
-
     }
 }

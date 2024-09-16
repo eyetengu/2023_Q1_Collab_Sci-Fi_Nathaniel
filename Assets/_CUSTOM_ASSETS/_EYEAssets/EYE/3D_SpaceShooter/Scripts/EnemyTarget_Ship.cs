@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class EnemyTarget_Ship : MonoBehaviour
 {
+    [Header("VFX")]
     [SerializeField] private GameObject[] _ricochets;
     [SerializeField] private GameObject[] _fires;
+
+    [Header("HEALTH")]
     [SerializeField] private int health = 10;
     private GameObject _currentRicochet;
 
@@ -66,9 +69,7 @@ public class EnemyTarget_Ship : MonoBehaviour
 
     void ExtinguishAllFires()
     {
-        foreach(var fire in _fires)
-        {
-            fire.SetActive(false);
-        }
+        foreach(var fire in _fires)        
+            fire.SetActive(false);        
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,6 +21,7 @@ public class PlayerMover : MonoBehaviour
 
     AudioSource _audioSource;
     [SerializeField] AudioClip _footstepAudio;
+
 
     void Start()
     {
@@ -56,9 +57,12 @@ public class PlayerMover : MonoBehaviour
 
         if (horizontalMovement != 0 || verticalInput != 0)
         {
-            if (!_audioSource.isPlaying)
-                _audioSource.PlayOneShot(_footstepAudio);
-            _playerAnimator.WalkPlayer();
+            if (_audioSource != null)
+            {
+                if (!_audioSource.isPlaying)
+                    _audioSource.PlayOneShot(_footstepAudio);
+            }
+                _playerAnimator.WalkPlayer();
         }
 
         //Movement
@@ -101,7 +105,7 @@ public class PlayerMover : MonoBehaviour
 
     void PlayerStandUp()
     {_playerAnimator.PlayerIdle();
-        _collider.height = 1.0f;
+        _collider.height = 1.8f;
     }
 
     public void RotateCamera(float mouseY)

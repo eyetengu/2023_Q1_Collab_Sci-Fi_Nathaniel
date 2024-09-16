@@ -6,116 +6,172 @@ public class WaveManager : MonoBehaviour
 {
     UIManager _uiManager;
     NewSpawnManager _spawnManager;
-    [SerializeField] private AudioManager_3DSpace _audioManager;
-    [SerializeField] private GameManager _gameManager;
-    [SerializeField] private List<Wave> _waves = new List<Wave>();
+    private AudioManager_3DSpace _audioManager;
+    private GameManager _gameManager;
+
+    //[SerializeField] private List<Wave> _waves = new List<Wave>();
+    [SerializeField] int _maxWavesToWin = 3;
 
     [SerializeField] int _waveID;
     bool _isGameOver;
     Wave _currentWave;
 
+    bool _gamePaused = true;
+    bool _gameReady;
+    bool _wavesCreated;
+    bool _readyForNextWave;
+    bool _enemySpawning;
 
+    bool _showRandomLevel;
+
+    [SerializeField]
+    string[] _waveLabel = new string[] { "For space is dark and full of stars",
+                                        "HODOR!", "Geronimo!", "To Infinity And Beyond"};
+
+
+//BUILT-IN FUNCTIONS
     private void OnEnable()
     {
-        //GameManager.gameOver += GameOverSequence_WaveMgr;
+        Event_Manager.gameReady += SetGameReady;
+        Event_Manager.pauseGame += PauseGame;
+        Event_Manager.unPauseGame += UnpauseGame;
+    }
+
+    private void OnDisable()
+    {
+        Event_Manager.gameReady -= SetGameReady;
+        Event_Manager.pauseGame -= PauseGame;
+        Event_Manager.unPauseGame -= UnpauseGame;
     }
 
     private void Start()
     {
         _gameManager = GameObject.FindObjectOfType<GameManager>();
         _uiManager = GameObject.FindObjectOfType<UIManager>();        
-        _spawnManager = GameObject.FindObjectOfType<NewSpawnManager>();
+        _spawnManager = GetComponent<NewSpawnManager>();
         _audioManager = GameObject.FindObjectOfType<AudioManager_3DSpace>();
 
-        CreateWaves();
-        StartCoroutine(FirstWaveTimer());
+        _readyForNextWave = true;
     }
      
     private void Update()
     {
-       
-
-    }
-    
-    //CORE FUNCTIONS
-    void CreateWaves()
-    {
-        for (int i = 0; i < 4; i++)
+        if (_gamePaused == false && _gameReady && _isGameOver == false)
         {
-            var newWave = new Wave(i.ToString(), i * 2);
-            _waves.Add(newWave);
+            if (_enemySpawning == false)
+            {
+                _enemySpawning = true;
+
+                if (_readyForNextWave)
+                    StartCoroutine(FirstWaveTimer());
+
+                //Debug.Log("Wave Manager Enabled");
+            }
         }
     }
-    
+
+    IEnumerator FirstWaveTimer()
+    {
+        Debug.Log("STARTING WAVE: " + _waveID);
+        _readyForNextWave = true;
+        yield return new WaitForSeconds(2);
+        _spawnManager.SpawnNextGroup(_waveID);
+        DisplayWaveInfo();
+    }
+
     public void AdvanceToNextWave()
     {
         if (_isGameOver == false)
         {
             _waveID++;
             
-            if (_waveID > _waves.Count - 1)
-            {
-                PlayerWins();
-            }
+            Debug.Log($"Advancing To Next Wave: {_waveID} /{_maxWavesToWin} To Win!");
 
-            if (_waveID <= _waves.Count - 1)
+            if (_waveID > _maxWavesToWin)
+                PlayerWins();
+
+            else if (_waveID < _maxWavesToWin)
             {
-                _currentWave = _waves[_waveID];
+                //_currentWave = _waves[_waveID];
+                Debug.Log("WaveTimer In Effect");
                 DisplayWaveInfo();
 
-                StartCoroutine(EnemyWaveDelay());
+                //StartCoroutine(EnemyWaveDelay());
+                StartCoroutine(FirstWaveTimer());
             }
         }
     }
+
+
+//BOOL CONDITIONS
+    void SetGameReady()
+    {
+        _gameReady = true;
+    }
+
+    void PauseGame()
+    {
+        _gamePaused = true;
+    }
     
-    void DisplayWaveInfo()
+    void UnpauseGame()
     {
-        if (_waveID <= _waves.Count - 1) 
-            _currentWave = _waves[_waveID];
-
-        var message = $"Wave: {_currentWave.waveName}\nEnemy Count: {_currentWave.maxEnemyCount}";
-        _uiManager.DisplayGameStateMessage(message);    
+        _gamePaused = false;
     }
+    
 
-    IEnumerator EnemyWaveDelay()
-    {
-        yield return new WaitForSeconds(1);
-        _spawnManager.SendInTheTroops(true, _currentWave.maxEnemyCount);
-    }
-
-    //GAME CONDITIONS
-    void GameOverSequence_WaveMgr(int value)
-    {        
-        switch(value)
-        {
-            case 0:
-                PlayerWins();
-                break;
-                case 1:
-                PlayerLoses();
-                break; 
-        }
-    }
-
+//GAME OVER CONDITIONS
     void PlayerWins() 
     {
         _isGameOver = true;
-        _gameManager.Died = true;
+        //_gameManager.Died = true;
+        Event_Manager.Instance.Decree_GameWon();
+        Debug.Log("Player Wins Message");
+
     }
 
     public void PlayerLoses() 
     { 
         _isGameOver = true; 
         _uiManager.DisplayGameOverPanel();
-        _audioManager.PlayGameOver();
+        Event_Manager.Instance.Decree_GameLost();
     }
 
-   IEnumerator FirstWaveTimer()
+
+//CORE FUNCTIONS
+    void DisplayWaveInfo()
     {
-        yield return new WaitForSeconds(2);
-        AdvanceToNextWave();
+        //if (_waveID < _maxWavesToWin) 
+            //_currentWave = _waves[_waveID];
+
+        var message = $"Wave: {_waveID}\n{_waveLabel[_waveID]}";
+
+        _uiManager.DisplayGameStateMessage(message);    
     }
+
+    IEnumerator EnemyWaveDelay()
+    {
+        yield return new WaitForSeconds(1);
+        _spawnManager.SpawnNextGroup(_waveID);
+    }
+
+
+//GAME CONDITIONS
+    void GameOverSequence_WaveMgr(int value)
+    {
+        Event_Manager.Instance.Decree_GameOver();
+        switch (value)
+        {
+            case 0:
+                PlayerWins();
+                break;
+            case 1:
+                PlayerLoses();
+                break; 
+        }
+    }  
 }
+
 
 [System.Serializable]
 public class Wave

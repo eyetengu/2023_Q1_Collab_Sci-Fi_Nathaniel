@@ -25,11 +25,26 @@ public class AudioManager_3DSpace : MonoBehaviour
     [SerializeField] AudioClip[] _tooBad;
 
 
+//BUILT-IN FUNCTIONS
+    private void OnEnable()
+    {
+        Event_Manager.win += PlayWinSound;
+        Event_Manager.lose += PlayLoseSound;
+    }
+
+    private void OnDisable()
+    {
+        Event_Manager.win -= PlayWinSound;
+        Event_Manager.lose -= PlayLoseSound;
+    }
+
     private void Start()
     {
         _ambient.PlayOneShot(_ambientClip);
     }
 
+
+//SPECIFIC AUDIO SOUNDS
     public void PickupAudio()
     {
         _general.PlayOneShot(_pickup_01);
@@ -45,20 +60,22 @@ public class AudioManager_3DSpace : MonoBehaviour
         _general.PlayOneShot(_projectileShoot);
     }
 
-    public void PlayFanfare()
+    public void PlayBulletMetalRicochet()
+    {
+        _general.PlayOneShot(_bulletMetalRicochet);
+    }
+
+
+//GAME CONDITION SOUNDS
+    public void PlayWinSound()
     {
         var randomFanfare = _fanfare[Random.Range(0, _fanfare.Length-1)];        
         _general.PlayOneShot(randomFanfare);
     }
 
-    public void PlayGameOver()
+    public void PlayLoseSound()
     {
         var randomGameOver = _tooBad[Random.Range(0, _tooBad.Length-1)];
         _music.PlayOneShot(_tooBad[0]);
-    }
-
-    public void PlayBulletMetalRicochet()
-    {
-        _general.PlayOneShot(_bulletMetalRicochet);
     }
 }

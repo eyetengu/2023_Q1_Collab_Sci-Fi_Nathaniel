@@ -49,8 +49,12 @@ public class CollectableBehavior : MonoBehaviour
             if (_isCollected == false)
             {
                 _isCollected = true;
+                
                 ICanCollect _collector = other.GetComponent<ICanCollect>();
-                _collector.PassItemInfo(Health);
+                
+                if(_collector != null)
+                    _collector.PassItemInfo(Health);
+                
                 if(_audioManager != null)
                     _audioManager.PickupAudio();
 

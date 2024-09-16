@@ -8,13 +8,13 @@ public class ReturnToMainMenu : MonoBehaviour
 {
     bool _isSwitchingScenes;
     [SerializeField] int _countdownReturn = 2;
-
+    [SerializeField] bool _returnToBase;
 
 
 //BUILT-IN FUNCTIONS
     void Start()
     {
-        
+        DontDestroyOnLoad(this.gameObject);
     }
 
     void Update()
@@ -33,6 +33,10 @@ public class ReturnToMainMenu : MonoBehaviour
         StartCoroutine(SceneLoadTimer());        
     }
 
+    public void GoToSelectedScene(int sceneId)
+    {
+        SceneManager.LoadScene(sceneId);
+    }
 
 //COROUTINES
     IEnumerator SceneLoadTimer()
@@ -42,6 +46,11 @@ public class ReturnToMainMenu : MonoBehaviour
             yield return new WaitForSeconds(.3f);
             Debug.Log(".");
         }
-        SceneManager.LoadScene(0);
+
+        if (_returnToBase)
+            SceneManager.LoadScene(0);
+        else if(_returnToBase == false)
+            SceneManager.LoadScene(0);
+
     }
 }

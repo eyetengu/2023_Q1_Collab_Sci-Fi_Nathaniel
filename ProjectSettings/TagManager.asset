@@ -3,26 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Waypoint_Char
-  - Litter
-  - Enemy
-  - LocationStation
-  - Endpoint
-  - TriggerCube
-  - Visuals
-  - Projectile
-  - Gas
-  - Crystal
-  - Ore
-  - Base
-  - Floor
-  - Collectable
-  - Obstacle
-  - Target_Enemy
-  - Projectile_Enemy
-  - Ball
-  - FoosPlayer
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -30,9 +11,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Drone
-  - PlayerShip
-  - Radar
+  - 
+  - 
+  - 
   - 
   - 
   - 

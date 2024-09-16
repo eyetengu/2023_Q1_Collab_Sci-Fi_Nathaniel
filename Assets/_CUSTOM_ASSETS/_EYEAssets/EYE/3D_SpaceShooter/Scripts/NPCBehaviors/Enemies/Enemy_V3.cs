@@ -4,42 +4,42 @@ using UnityEngine;
 using System.Linq;
 using Unity.VisualScripting;
 
-public class Enemy_V3 : MonoBehaviour, IDamageable
+public class Enemy_V3 : MonoBehaviour
 {
     AudioManager_3DSpace _audioManager;
 
-    List<Transform> _convoyTargets= new List<Transform>();
-    Transform _currentTarget;
+    [Header("TRANSFORMS")]
+    [SerializeField] List<Transform> _convoyTargets= new List<Transform>();
+    [SerializeField] private Transform _homeBase;
+    [SerializeField] Transform _currentTarget;
+
+    [Header("STATES")]
+    public EnemyStates _currentState;
     public enum EnemyStates {   DetermineTargets,
                                 SelectTarget,
                                 EngageTarget,
                                 DisengageTarget,
-                                ReturnToBase    }
-    public EnemyStates _currentState;
+                                ReturnToBase            }
 
-    float _step;
+    [Header("SPEED VALUES")]
     [SerializeField] float _speed = 3.0f;
-    float _speedMultiplier = 1f;
+
+    [Header("DISTANCE & RANGE")]
     [SerializeField] float _firingRange = 5.0f;
     [SerializeField] float _disengageDistance = 3.0f;
 
-
-    float _fireRate = 0.5f;
-    float _canFire = 1.0f;
-    [SerializeField] private GameObject _laserPrefab;
-    [SerializeField] private Transform _homeBase;
-    [SerializeField] private Transform _gunBarrel;
-
-    [SerializeField] private GameObject _bulletFX;
-    [SerializeField] private GameObject _fireFX;
-    [SerializeField] private GameObject _explosionFX;
+    [Header("SCORING")]
     [SerializeField] private int _score = 1;
+
+    float _step;
+    float _speedMultiplier = 1f;
+    
 
     void Start()
     {
         _audioManager = GameObject.FindObjectOfType<AudioManager_3DSpace>();
         _homeBase = GameObject.Find("Bandit_Main").GetComponent<Transform>();
-        Health = 5;
+        _currentState = EnemyStates.DetermineTargets;   
     }
 
     void Update()
@@ -71,7 +71,7 @@ public class Enemy_V3 : MonoBehaviour, IDamageable
         }
     }
 
-    //CORE FUNCTIONS
+//CORE FUNCTIONS
     void FindSuitableTargets()
     {
         _convoyTargets.Clear();
@@ -95,10 +95,10 @@ public class Enemy_V3 : MonoBehaviour, IDamageable
     void DistanceChecker()
     {
         var distance = Vector3.Distance(transform.position, _currentTarget.position);
-        if(distance < _firingRange && _currentState == EnemyStates.EngageTarget)
-        {
-            FireAtWill();
-        }
+        //if(distance < _firingRange && _currentState == EnemyStates.EngageTarget)
+        //{
+            //FireAtWill();
+        //}
 
         if(distance < _disengageDistance && _currentState == EnemyStates.EngageTarget)
         {
@@ -115,14 +115,7 @@ public class Enemy_V3 : MonoBehaviour, IDamageable
         transform.rotation= Quaternion.LookRotation(newDirection);
     }
 
-    void FireAtWill()
-    {
-        if(Time.time > _canFire)
-        {
-            _canFire = Time.time + _fireRate;
-            Instantiate(_laserPrefab, _gunBarrel.position, _gunBarrel.rotation);
-        }
-    }
+    
 
     void DisengageTarget()
     {
@@ -145,51 +138,6 @@ public class Enemy_V3 : MonoBehaviour, IDamageable
         var targetDirection = _homeBase.position - transform.position;
         var newDirection = Vector3.RotateTowards(transform.forward, targetDirection, _step, 0.0f);
         transform.rotation= Quaternion.LookRotation(newDirection);
-    }
-
-    //HEALTH
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Projectile")
-        {
-            Damage(1);
-            _bulletFX.SetActive(true);
-            StartCoroutine(BulletFXTimer());
-            _audioManager.PlayBulletMetalRicochet();
-
-            if(Health <= 0)
-            {
-                _fireFX.SetActive(false);
-                _bulletFX.SetActive(false);
-                _explosionFX.SetActive(true);
-
-                StartCoroutine(DisableCraftTimer());
-                GameManager.Instance.GetComponent<ScoreManager>().SetScore(_score);
-            }
-            if(Health <= 3)
-            {
-                _fireFX.SetActive(true);
-            }
-        }
-    }
-    
-    IEnumerator DisableCraftTimer()
-    {
-        yield return new WaitForSeconds(1.0f);
-        this.gameObject.SetActive(false);
-    }
-
-    IEnumerator BulletFXTimer()
-    {
-        yield return new WaitForSeconds(.15f);
-        _bulletFX.SetActive(false);
-    }
-
-    public int Health { get; set; }
-
-    public void Damage(int damageAmount)
-    {
-        Health -= damageAmount;
     }
 
 }
