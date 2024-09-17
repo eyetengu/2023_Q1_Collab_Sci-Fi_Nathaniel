@@ -303,6 +303,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b317b6a8dfd91e845a7731a6fa18327f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletGameObj: {fileID: 7052183846742630725, guid: 9430280e3d6badf4a8d73532b6b8da0d,
+    type: 3}
+  _bigBulletGameObj: {fileID: 7052183846742630725, guid: 13d12bcab4150cc44873c9136a114f61,
+    type: 3}
+  _bombGameObject: {fileID: 3927964373973165728, guid: fbfdee8b69aaa52418d9e537ff8c8656,
+    type: 3}
 --- !u!65 &4676310727320053073
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -60,6 +60,11 @@ public class RSStaticEnemy : MonoBehaviour, IRSEnemy
     {
         if(RSGameManager.Instance != null)
         {
+            var itemDropComponent = GetComponent<RSPowerupDropper>();
+            if (itemDropComponent != null)
+            {
+                itemDropComponent.DropPowerUp();
+            }
             RSGameManager.Instance.AddScore(1000);
             RSGameManager.Instance.ObjectiveCompleted();
         }

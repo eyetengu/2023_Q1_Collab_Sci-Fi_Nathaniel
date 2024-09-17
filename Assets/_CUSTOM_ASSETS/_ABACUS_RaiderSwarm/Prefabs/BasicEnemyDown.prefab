@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5265652213220188238}
   - component: {fileID: 8782654876590528832}
   - component: {fileID: -4964062392371593614}
+  - component: {fileID: 972045527669994438}
   m_Layer: 0
   m_Name: BasicEnemyDown
   m_TagString: Untagged
@@ -49,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4219ec4ee9d4f1d43af0b12e72483bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 10
+  _health: 0
   MaxHealth: 10
 --- !u!65 &-342494239474488773
 BoxCollider:
@@ -126,6 +127,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba92e530e6d0a648a4a6a7c3d5a496c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &972045527669994438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24867843325498930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e683b09633ae9439dacbfbe7a69ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUps:
+  - prefab: {fileID: 4116984650998502195, guid: 89c2e95dde25fff4e8232c1a9dbc628e,
+      type: 3}
+    dropChance: 20
+  - prefab: {fileID: 0}
+    dropChance: 40
 --- !u!1 &6181202752097300131
 GameObject:
   m_ObjectHideFlags: 0

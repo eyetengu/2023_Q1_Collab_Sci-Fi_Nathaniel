@@ -6,22 +6,23 @@ public class RSPlayer : MonoBehaviour
 {
     [SerializeField]
     private GameObject _bulletGameObj;
+    [SerializeField]
+    private GameObject _bigBulletGameObj;
 
     [SerializeField]
     private GameObject _bombGameObject;
 
-    public static RSPlayer Instance {  get; private set; }
-    public bool isRightFacing { get=> _isRightFacing; }
-
+    public static RSPlayer Instance { get; private set; }
+    public bool isRightFacing { get => _isRightFacing; }
+    public bool hasLazerPowerup { get; set; }
     private const float SPEED = 20f;
     private const float VERTICAL_SPEED = 75f;
     private const float LEFT_ROTATION = 270f;
     private const float RIGHT_ROTATION = 90f;
     private const float FORWARD_FORCE = 3f;
     private bool _isRightFacing;
-    private RSPlayerInputActions _actions;
     private bool _isRotating;
-    private float _fireRate = 0.25f;
+    private float _fireRate = 0.5f;
     private float _canFire = -1;
 
     private void Awake()
@@ -31,21 +32,30 @@ public class RSPlayer : MonoBehaviour
             Debug.LogError("Too many player instances!");
         }
         Instance = this;
-        _actions = new RSPlayerInputActions();
-        _actions.RSPlayer.Enable();
-
     }
-
     private void OnEnable()
     {
-        _actions.RSPlayer.Left.performed += Left_performed;
-        _actions.RSPlayer.Right.performed += Right_performed;
-        _actions.RSPlayer.PrimaryFire.performed += PrimaryFire_performed;
-        _actions.RSPlayer.SecondaryFire.performed += SecondaryFire_performed;
-
+        if (RSGameInput.Instance != null)
+        {
+            RSGameInput.Instance.OnLeftPressed += Instance_OnLeftPressed;
+            RSGameInput.Instance.OnRightPressed += Instance_OnRightPressed;
+            RSGameInput.Instance.OnFirePressed += Instance_OnFirePressed;
+            RSGameInput.Instance.OnSecondaryPressed += Instance_OnSecondaryPressed;
+        }
     }
 
-    private void SecondaryFire_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void OnDisable()
+    {
+        if (RSGameInput.Instance != null)
+        {
+            RSGameInput.Instance.OnLeftPressed -= Instance_OnLeftPressed;
+            RSGameInput.Instance.OnRightPressed -= Instance_OnRightPressed;
+            RSGameInput.Instance.OnFirePressed -= Instance_OnFirePressed;
+            RSGameInput.Instance.OnSecondaryPressed -= Instance_OnSecondaryPressed;
+        }
+    }
+
+    private void Instance_OnSecondaryPressed()
     {
         if (Time.time > _canFire)
         {
@@ -54,9 +64,34 @@ public class RSPlayer : MonoBehaviour
         }
     }
 
-    private void PrimaryFire_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Instance_OnFirePressed()
     {
-        FireProjectile(_bulletGameObj);
+        if (hasLazerPowerup)
+        {
+            StartCoroutine(FireProjectiles(_bigBulletGameObj));
+        }
+        else
+        {
+            FireProjectile(_bulletGameObj);
+        }
+    }
+
+    private void Instance_OnRightPressed()
+    {
+        if (!_isRightFacing && !_isRotating)
+        {
+            StartCoroutine(RotatePlayer(RIGHT_ROTATION));
+            _isRightFacing = true;
+        }
+    }
+
+    private void Instance_OnLeftPressed()
+    {
+        if (_isRightFacing && !_isRotating)
+        {
+            StartCoroutine(RotatePlayer(LEFT_ROTATION));
+            _isRightFacing = false;
+        }
     }
 
     private void FireProjectile(GameObject projectile)
@@ -67,34 +102,10 @@ public class RSPlayer : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-        _actions.RSPlayer.Disable();
-        _actions.RSPlayer.Left.performed -= Left_performed;
-        _actions.RSPlayer.Right.performed -= Right_performed;
-
-    }
     private void Start()
     {
         StartCoroutine(RotatePlayer(RIGHT_ROTATION));
         _isRightFacing = true;
-    }
-    private void Right_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        if (!_isRightFacing && !_isRotating)
-        {
-            StartCoroutine(RotatePlayer(RIGHT_ROTATION));
-            _isRightFacing = true;
-        }
-    }
-
-    private void Left_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        if (_isRightFacing && !_isRotating)
-        {
-            StartCoroutine(RotatePlayer(LEFT_ROTATION));
-            _isRightFacing = false;
-        }
     }
 
     private void OnDestroy()
@@ -104,23 +115,27 @@ public class RSPlayer : MonoBehaviour
 
     private void Update()
     {
-        var moveDirection = _actions.RSPlayer.Move.ReadValue<Vector2>();
-        var normalizedMoveDirection = moveDirection.normalized;
-        float verticalVector = normalizedMoveDirection.y * VERTICAL_SPEED * Time.deltaTime;
+        if (RSGameInput.Instance != null)
+        {
+            Vector2 normalizedMoveDirection = RSGameInput.Instance.GetMovementNormalized();
+            float verticalVector = normalizedMoveDirection.y * VERTICAL_SPEED * Time.deltaTime;
 
-        if (!_isRotating)
-        {
-            float forwardVector = (FORWARD_FORCE + Mathf.Abs(normalizedMoveDirection.x)) * SPEED * Time.deltaTime;
-            var targetVector = new Vector3(0, verticalVector, forwardVector);
-            transform.Translate(targetVector);
-        }
-        else
-        {
-            var targetVector = new Vector3(transform.position.x, transform.position.y, 0);
-            transform.position = targetVector;
+            if (!_isRotating)
+            {
+                float forwardVector = (FORWARD_FORCE + Mathf.Abs(normalizedMoveDirection.x)) * SPEED * Time.deltaTime;
+                var targetVector = new Vector3(0, verticalVector, forwardVector);
+                transform.Translate(targetVector);
+            }
+            else
+            {
+                var targetVector = new Vector3(transform.position.x, transform.position.y, 0);
+                transform.position = targetVector;
+
+            }
 
         }
     }
+
 
     private IEnumerator RotatePlayer(float targetRotation)
     {
@@ -148,5 +163,17 @@ public class RSPlayer : MonoBehaviour
     public static void Destroy()
     {
         Destroy(Instance);
+    }
+
+    IEnumerator FireProjectiles(GameObject bullet)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            // Instantiate the projectile at the fire point
+            FireProjectile(bullet);
+
+            // Wait for the specified delay before firing the next projectile
+            yield return new WaitForSeconds(_fireRate);
+        }
     }
 }

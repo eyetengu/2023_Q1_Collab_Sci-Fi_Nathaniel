@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 6852330687524499694}
   - component: {fileID: 4419219790103542758}
   - component: {fileID: 3497445073289153980}
+  - component: {fileID: 5916539818958103511}
   m_Layer: 0
   m_Name: StaticEnemy
   m_TagString: Untagged
@@ -130,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 24867843325498930, guid: 88e67dc1493f62548bf2cca073449c6a,
     type: 3}
-  spawnInterval: 1
+  spawnInterval: 1.5
 --- !u!114 &3497445073289153980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,6 +146,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   MaxHealth: 100
+--- !u!114 &5916539818958103511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3011643253174206054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e683b09633ae9439dacbfbe7a69ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUps:
+  - prefab: {fileID: 4116984650998502195, guid: 89c2e95dde25fff4e8232c1a9dbc628e,
+      type: 3}
+    dropChance: 15
+  - prefab: {fileID: 0}
+    dropChance: 85
 --- !u!1001 &1828077186690459613
 PrefabInstance:
   m_ObjectHideFlags: 0

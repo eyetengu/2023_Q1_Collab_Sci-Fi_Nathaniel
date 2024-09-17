@@ -30,9 +30,17 @@ public class RSEnemy : MonoBehaviour, IRSEnemy
             Destroy(other.gameObject);
 
             TakeDamage(basicLazerScript.Damage);
-            if (RSGameManager.Instance != null)
+            if (_healthComponent.Health <= 0)
             {
-                RSGameManager.Instance.AddScore(100);
+                var itemDropComponent = GetComponent<RSPowerupDropper>();
+                if (itemDropComponent != null)
+                {
+                    itemDropComponent.DropPowerUp();
+                }
+                if (RSGameManager.Instance != null)
+                {
+                    RSGameManager.Instance.AddScore(100);
+                }
             }
 
         }

@@ -818,11 +818,11 @@ MonoBehaviour:
   m_HorizontalDamping: 0
   m_VerticalDamping: 0
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.378
   m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
+  m_DeadZoneHeight: 0.659
   m_SoftZoneWidth: 0
-  m_SoftZoneHeight: 0.331
+  m_SoftZoneHeight: 0.669
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
@@ -1534,7 +1534,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557666278}
   serializedVersion: 2
-  m_LocalRotation: {x: -1e-45, y: 0.1943186, z: 0, w: 0.9809385}
+  m_LocalRotation: {x: 0.0601458, y: 0.193953, z: -0.011914558, w: 0.97909284}
   m_LocalPosition: {x: 0, y: 0, z: -121.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1741,24 +1741,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5755062887944433134, guid: 8a3d0a6e87e773c439fcd7175cd579ed,
-        type: 3}
-      propertyPath: _lazerGameObj
-      value: 
-      objectReference: {fileID: 7052183846742630725, guid: 9430280e3d6badf4a8d73532b6b8da0d,
-        type: 3}
-    - target: {fileID: 5755062887944433134, guid: 8a3d0a6e87e773c439fcd7175cd579ed,
-        type: 3}
-      propertyPath: _bulletGameObj
-      value: 
-      objectReference: {fileID: 7052183846742630725, guid: 9430280e3d6badf4a8d73532b6b8da0d,
-        type: 3}
-    - target: {fileID: 5755062887944433134, guid: 8a3d0a6e87e773c439fcd7175cd579ed,
-        type: 3}
-      propertyPath: _bombGameObject
-      value: 
-      objectReference: {fileID: 3927964373973165728, guid: fbfdee8b69aaa52418d9e537ff8c8656,
-        type: 3}
     - target: {fileID: 5762092256607242581, guid: 8a3d0a6e87e773c439fcd7175cd579ed,
         type: 3}
       propertyPath: m_Name
@@ -2340,7 +2322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949626882}
   serializedVersion: 2
-  m_LocalRotation: {x: -1e-45, y: 0.1943186, z: 0, w: 0.9809385}
+  m_LocalRotation: {x: 0.0601458, y: 0.193953, z: -0.011914558, w: 0.97909284}
   m_LocalPosition: {x: 0, y: 0, z: -121.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2360,7 +2342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 467d33606f5cc1743878de70eabad6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distanceFromPlayerX: 35
+  _distanceFromPlayerX: 55
+  _distanceFromPlayerZ: -150
 --- !u!4 &954072664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4707158679270136, guid: 84c87c5cabcd16746934df7fda1708c2,
@@ -3181,6 +3164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1637121206}
   - component: {fileID: 1637121207}
+  - component: {fileID: 1637121208}
   m_Layer: 0
   m_Name: GameInput
   m_TagString: Untagged
@@ -3216,6 +3200,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _countdownReturn: 12
+--- !u!114 &1637121208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637121205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 619c27b86fd1fde46abeeb7291e1d037, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1664011592
 GameObject:
   m_ObjectHideFlags: 0
@@ -4094,11 +4090,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4419219790103542758, guid: cc875e27e878bb44baabbdc8c10ba73e,
-        type: 3}
-      propertyPath: spawnInterval
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4108,6 +4099,8 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 596666943}
+  - {fileID: 1637121206}
   - {fileID: 557666281}
   - {fileID: 949626885}
   - {fileID: 945366271}
@@ -4115,5 +4108,3 @@ SceneRoots:
   - {fileID: 614568838}
   - {fileID: 730389900}
   - {fileID: 2110107896}
-  - {fileID: 596666943}
-  - {fileID: 1637121206}
