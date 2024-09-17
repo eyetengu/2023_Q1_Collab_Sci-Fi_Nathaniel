@@ -45,7 +45,7 @@ public class RSGameManager : MonoBehaviour
     public void ObjectiveCompleted()
     {
         completedObjectives++;
-        if (completedObjectives == totalObjectives)
+        if (completedObjectives == totalObjectives && !victoryText.IsDestroyed())
         {
             victoryText.gameObject.SetActive(true);
             _menu.ReturnToOriginalMenu();

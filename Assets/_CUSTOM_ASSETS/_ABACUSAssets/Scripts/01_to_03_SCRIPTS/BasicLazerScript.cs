@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class BasicLazerScript : MonoBehaviour
 {
-    public float bulletSpeed;
+    [SerializeField] private float bulletSpeed;
+    [SerializeField] private int _damage = 10;
+    public int Damage { get => _damage; }
     private Camera _camera;
 
     private void Start()

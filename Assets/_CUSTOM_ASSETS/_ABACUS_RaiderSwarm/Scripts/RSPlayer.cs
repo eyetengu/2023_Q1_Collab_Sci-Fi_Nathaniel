@@ -5,7 +5,10 @@ using UnityEngine;
 public class RSPlayer : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _lazerGameObj;
+    private GameObject _bulletGameObj;
+
+    [SerializeField]
+    private GameObject _bombGameObject;
 
     public static RSPlayer Instance {  get; private set; }
     public bool isRightFacing { get=> _isRightFacing; }
@@ -18,6 +21,8 @@ public class RSPlayer : MonoBehaviour
     private bool _isRightFacing;
     private RSPlayerInputActions _actions;
     private bool _isRotating;
+    private float _fireRate = 0.25f;
+    private float _canFire = -1;
 
     private void Awake()
     {
@@ -36,14 +41,29 @@ public class RSPlayer : MonoBehaviour
         _actions.RSPlayer.Left.performed += Left_performed;
         _actions.RSPlayer.Right.performed += Right_performed;
         _actions.RSPlayer.PrimaryFire.performed += PrimaryFire_performed;
+        _actions.RSPlayer.SecondaryFire.performed += SecondaryFire_performed;
 
+    }
+
+    private void SecondaryFire_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if (Time.time > _canFire)
+        {
+            _canFire = Time.time + _fireRate;
+            FireProjectile(_bombGameObject);
+        }
     }
 
     private void PrimaryFire_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
+        FireProjectile(_bulletGameObj);
+    }
+
+    private void FireProjectile(GameObject projectile)
+    {
         if (!_isRotating)
         {
-            Instantiate(_lazerGameObj, transform.position, transform.rotation);
+            Instantiate(projectile, transform.position, transform.rotation);
         }
     }
 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -342494239474488773}
   - component: {fileID: 5265652213220188238}
   - component: {fileID: 8782654876590528832}
+  - component: {fileID: -4964062392371593614}
   m_Layer: 0
   m_Name: BasicEnemyDown
   m_TagString: Untagged
@@ -69,7 +70,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 15, y: 15, z: 15}
+  m_Size: {x: 5, y: 5, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5265652213220188238
 Rigidbody:
@@ -113,6 +114,18 @@ MonoBehaviour:
   speed: 0.05
   frequency: 3
   amplitude: 0.1
+--- !u!114 &-4964062392371593614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24867843325498930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba92e530e6d0a648a4a6a7c3d5a496c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6181202752097300131
 GameObject:
   m_ObjectHideFlags: 0

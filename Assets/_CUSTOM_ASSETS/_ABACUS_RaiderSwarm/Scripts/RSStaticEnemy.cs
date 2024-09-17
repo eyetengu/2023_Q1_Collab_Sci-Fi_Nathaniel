@@ -46,11 +46,13 @@ public class RSStaticEnemy : MonoBehaviour, IRSEnemy
             }
             
         }
-        if (other.gameObject.GetComponent<BasicLazerScript>() != null)
+
+        BasicLazerScript basicLazerScript = other.gameObject.GetComponent<BasicLazerScript>();
+        if (basicLazerScript != null)
         {
             Destroy(other.gameObject);
 
-            TakeDamage(10);
+            TakeDamage(basicLazerScript.Damage);
         }
     }
 
