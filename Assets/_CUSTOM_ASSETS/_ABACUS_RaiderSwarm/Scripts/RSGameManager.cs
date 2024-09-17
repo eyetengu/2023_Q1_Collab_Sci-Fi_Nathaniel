@@ -14,6 +14,9 @@ public class RSGameManager : MonoBehaviour
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI victoryText;
 
+    public TextMeshProUGUI weaponText;
+    public TextMeshProUGUI altFireText;
+
     private int completedObjectives = 0;
     private ReturnToMainMenu _menu;
 
@@ -51,6 +54,21 @@ public class RSGameManager : MonoBehaviour
             _menu.ReturnToOriginalMenu();
         }
         UpdateUI();
+    }
+    public void UpdateWeapon(RSWeaponType weaponType)
+    {
+        if (weaponText != null)
+        {
+            weaponText.text = weaponType.ToString();
+        }
+    }
+
+    public void UpdateAltWeapon(RSAlternateFireTypes altFireType)
+    {
+        if (weaponText != null)
+        {
+            weaponText.text = altFireType.ToString();
+        }
     }
 
     void UpdateUI()

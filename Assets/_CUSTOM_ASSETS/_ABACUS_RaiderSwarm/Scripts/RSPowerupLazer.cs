@@ -20,13 +20,14 @@ public class RSPowerupLazer : MonoBehaviour
         if (RSPlayer.Instance != null)
         {
             RSPlayer.Instance.hasLazerPowerup = true;
-
+            RSGameManager.Instance.UpdateWeapon(RSWeaponType.BigBullet);
             Visuals.SetActive(false);
 
 
             yield return new WaitForSeconds(duration);
 
             RSPlayer.Instance.hasLazerPowerup = false;
+            RSGameManager.Instance.UpdateWeapon(RSWeaponType.Bullet);
             Destroy(gameObject);
         }
     }
