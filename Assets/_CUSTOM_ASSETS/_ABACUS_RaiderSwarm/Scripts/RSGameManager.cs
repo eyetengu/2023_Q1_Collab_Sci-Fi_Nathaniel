@@ -59,6 +59,18 @@ public class RSGameManager : MonoBehaviour
     {
         if (weaponText != null)
         {
+            switch (weaponType)
+            {
+                case RSWeaponType.Bullet:
+                    weaponText.text = weaponType.ToString();
+                    break;
+                case RSWeaponType.BigBullet:
+                    weaponText.text = "Big Lazer";
+                    break;
+                case RSWeaponType.None:
+                default:
+                    break;
+            }
             weaponText.text = weaponType.ToString();
         }
     }

@@ -22,7 +22,8 @@ public class RSPowerupLazer : MonoBehaviour
             RSPlayer.Instance.hasLazerPowerup = true;
             RSGameManager.Instance.UpdateWeapon(RSWeaponType.BigBullet);
             Visuals.SetActive(false);
-
+            var boxCollider = GetComponent<BoxCollider>();
+            boxCollider.enabled = false;
 
             yield return new WaitForSeconds(duration);
 
