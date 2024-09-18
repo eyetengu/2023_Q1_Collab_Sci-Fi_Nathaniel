@@ -19,7 +19,6 @@ public class Enemy_Radar : MonoBehaviour
 
     [SerializeField] List<Transform> _enemyAgents;
     [SerializeField] List<Transform> _availableTargets = new List<Transform>();
-    //[SerializeField] List<Transform> _planetTransforms;
 
     [Header("TARGET ACQUISITION")]
     [SerializeField] bool _selectClosestTarget;
@@ -33,7 +32,7 @@ public class Enemy_Radar : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Enemies: " + _enemyAgents.Count);
+        //Debug.Log("Enemies: " + _enemyAgents.Count);
 
         if(_currentTarget == null)
         {            
@@ -43,7 +42,7 @@ public class Enemy_Radar : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Other: " + other.name);
+        //Debug.Log("Other: " + other.name);
         if(other.tag == "Player")   { _playerTransform = other.transform;  SelectTarget(); }
         if(other.tag == "Enemy")    { _enemyAgents.Add(other.transform);    }
         

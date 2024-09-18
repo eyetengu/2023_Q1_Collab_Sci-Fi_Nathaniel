@@ -168,16 +168,17 @@ public class UIManager : MonoBehaviour
     }
 
 //ENEMY COUNT
-    public void DisplayRemainingEnemies(int enemyCountIn)
-    {
-        _enemiesActive.text = $"ENEMIES\n{enemyCountIn.ToString()}";        
-    }
+    //public void DisplayRemainingEnemies(int enemyCountIn)
+    //{
+        //_enemiesActive.text = $"ENEMIES\n{enemyCountIn.ToString()}";        
+    //}
 
-    public void DisplayEnemyCounts(int total, int dead, int active)
+    public void DisplayEnemyCounts(int total, int active, int dead)
     {
+        //Debug.Log("Displaying Enemy Counts");
         _enemiesTotal.text = $"TOTAL    " + total;
-        _enemiesDead.text = $"DEAD     " + dead;
         _enemiesActive.text = $"ACTIVE   " + active;
+        _enemiesDead.text = $"DEAD     " + dead;
     }
 
 

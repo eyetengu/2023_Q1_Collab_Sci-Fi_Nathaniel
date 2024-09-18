@@ -29,7 +29,6 @@ public class Enemy_V3 : MonoBehaviour
     [SerializeField] float _disengageDistance = 3.0f;
 
     [Header("SCORING")]
-    [SerializeField] private int _score = 1;
 
     float _step;
     float _speedMultiplier = 1f;
@@ -95,10 +94,6 @@ public class Enemy_V3 : MonoBehaviour
     void DistanceChecker()
     {
         var distance = Vector3.Distance(transform.position, _currentTarget.position);
-        //if(distance < _firingRange && _currentState == EnemyStates.EngageTarget)
-        //{
-            //FireAtWill();
-        //}
 
         if(distance < _disengageDistance && _currentState == EnemyStates.EngageTarget)
         {

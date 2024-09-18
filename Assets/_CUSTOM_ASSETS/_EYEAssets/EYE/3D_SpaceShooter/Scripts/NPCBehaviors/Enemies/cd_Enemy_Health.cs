@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class cd_Enemy_Health : MonoBehaviour, IDamageable
 {
+    Enemy_Count_Manager _enemyCountManager;
+
     [Header("VFX")]
     [SerializeField] private GameObject _bulletFX;
     [SerializeField] private GameObject _fireFX;
     [SerializeField] private GameObject _explosionFX;
 
+    [SerializeField] private bool _isEnemy;
+
+    BoxCollider _boxCollider;
+    SphereCollider _sphereCollider;
     AudioManager_3DSpace _audioManager;
     NewSpawnManager _spawnManager;
 
@@ -20,9 +26,18 @@ public class cd_Enemy_Health : MonoBehaviour, IDamageable
 //BUILT-IN FUNCTIONS
     void Start()
     {
+        _enemyCountManager = FindObjectOfType<Enemy_Count_Manager>();
         _spawnManager = GameObject.FindObjectOfType<NewSpawnManager>();
         _audioManager = GameObject.FindObjectOfType<AudioManager_3DSpace>();
+        _boxCollider = GetComponent<BoxCollider>();
+        _sphereCollider = GetComponent<SphereCollider>();
+
         Health = 5;
+
+        if(_boxCollider != null)
+            _boxCollider.enabled = true;
+        else
+            _sphereCollider.enabled = true;
     }
 
 
@@ -62,13 +77,21 @@ public class cd_Enemy_Health : MonoBehaviour, IDamageable
             if (Health <= 0)
             {
                 Event_Manager.Instance.Score_Increase();
+
+                if (_boxCollider != null)
+                    _boxCollider.enabled = false;
+                else
+                    _sphereCollider.enabled = false;
+
+                //ACTIVATE LOCAL COMPONENTS
                 _fireFX.SetActive(false);
                 _bulletFX.SetActive(false);
                 _explosionFX.SetActive(true);
 
                 StartCoroutine(DisableCraftTimer());
                 //GameManager.Instance.GetComponent<ScoreManager>().SetScore(_score);
-                _spawnManager.EnemyDies();
+                if(_isEnemy)
+                    _enemyCountManager.RemoveEnemy();
             }
             if (Health <= 3)
             {

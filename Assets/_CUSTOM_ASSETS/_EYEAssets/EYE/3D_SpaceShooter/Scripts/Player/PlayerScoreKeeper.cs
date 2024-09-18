@@ -15,7 +15,7 @@ public class PlayerScoreKeeper : MonoBehaviour
 
     private void OnDisable()
     {
-        Event_Manager.increaseScore += IncreaseScoreByOne;
+        Event_Manager.increaseScore -= IncreaseScoreByOne;
     }
 
     private void Start()

@@ -45,7 +45,7 @@ public class CollectableBehavior : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Player Detected");
+            //Debug.Log("Player Detected");
             if (_isCollected == false)
             {
                 _isCollected = true;

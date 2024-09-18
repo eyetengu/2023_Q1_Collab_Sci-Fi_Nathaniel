@@ -15,7 +15,6 @@ public class Game_Manager : MonoBehaviour
                 Debug.LogError("Game_Manager is NULL");
             return _instance;
         }
-
     }
 
 
@@ -43,7 +42,7 @@ public class Game_Manager : MonoBehaviour
     
     void Start()
     {
-        LockCursorInvisible();
+        HideAndLock();
         _timeScale = 1.0f;
         GameSpeed();
     }
@@ -60,12 +59,12 @@ public class Game_Manager : MonoBehaviour
 //PAUSE FUNCTIONS
     public void PausePlayer()
     {
-        Event_Manager.Instance.Decree_PausePlayerMovement();
+        Event_Manager.Instance.Decree_PauseGame();
     }
 
     public void UnpausePlayer()
     {
-        Event_Manager.Instance.Decree_UnPausePlayerMovement();
+        Event_Manager.Instance.Decree_PauseGame();
     }
 
 
@@ -76,27 +75,25 @@ public class Game_Manager : MonoBehaviour
         if(_gameOver && Input.GetKeyDown(KeyCode.R))
         {
             _gameOver = false;
-            //_isPaused = false;
-            //PauseGame();
             _timeScale = 1.0f;
             GameSpeed();
             SceneManager.LoadScene(_restartIndex);
         }
 
-        //Unpause And Keep Game Over
+    //Unpause And Keep Game Over
         if(_gameOver && Input.GetKeyDown(KeyCode.T))
         {
-            Event_Manager.Instance.Decree_WalkAround();
+            Event_Manager.Instance.Decree_PauseState();
 
             _timeScale = 1.0f;            
             GameSpeed();
         }
 
-        //SPEED INDEX MANIPULATOR
+    //SPEED INDEX MANIPULATOR
         if (Input.GetKeyDown(KeyCode.P))
             Event_Manager.Instance.Decree_PauseGame();
 
-        //CURSOR VISIBILITY
+    //APPLICATION QUIT
         if (Input.GetKey(KeyCode.Escape))
             Application.Quit();                
     }
@@ -142,25 +139,46 @@ public class Game_Manager : MonoBehaviour
 
 
 //CURSOR FUNCTIONS
-    public void LockCursorInvisible()
+//---INVISIBLE-----------------------------
+    public void HideAndFree() 
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = false;
+    }
+
+    public void HideAndConfine() 
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
+    }
+
+    public void HideAndLock()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    
-    public void ShowAndConfineCursor()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
-    }
 
-    public void UnlockCursorVisible()
+
+//---VISIBLE-------------------------------
+    public void ShowAndFree()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    
+    public void ShowAndConfine()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
+
+    public void ShowAndLock() 
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = true;
+    }
+
+
 //COROUTINES
     IEnumerator PauseBeforeNextLevel()
     {

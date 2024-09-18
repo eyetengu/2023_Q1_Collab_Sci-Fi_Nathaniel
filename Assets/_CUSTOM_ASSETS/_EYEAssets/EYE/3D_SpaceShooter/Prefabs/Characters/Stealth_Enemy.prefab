@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5716035106281272333}
-  - component: {fileID: 422118926673727055}
   - component: {fileID: 3576178127330330602}
   - component: {fileID: 5556218166320323133}
   - component: {fileID: 7896253091472331518}
   - component: {fileID: 6432081498626631976}
+  - component: {fileID: 422118926673727055}
   - component: {fileID: 6683988814706706097}
   - component: {fileID: 7189834590106578822}
   - component: {fileID: 3454760955498217225}
@@ -24,7 +24,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5716035106281272333
 Transform:
   m_ObjectHideFlags: 0
@@ -43,26 +43,6 @@ Transform:
   - {fileID: 5177132599980532803}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &422118926673727055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2714018492100701213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e88a1e1f293c4b54d8fa09514fd520a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _convoyTargets: []
-  _homeBase: {fileID: 0}
-  _currentTarget: {fileID: 0}
-  _currentState: 0
-  _speed: 3
-  _firingRange: 7
-  _disengageDistance: 3
-  _score: 1
 --- !u!54 &3576178127330330602
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -228,6 +208,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &422118926673727055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714018492100701213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e88a1e1f293c4b54d8fa09514fd520a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _convoyTargets: []
+  _homeBase: {fileID: 0}
+  _currentTarget: {fileID: 0}
+  _currentState: 0
+  _speed: 3
+  _firingRange: 7
+  _disengageDistance: 3
 --- !u!114 &6683988814706706097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +242,7 @@ MonoBehaviour:
   _bulletFX: {fileID: 7441369766159570365}
   _fireFX: {fileID: 7232519797960177995}
   _explosionFX: {fileID: 7155897752729100577}
+  _isEnemy: 1
 --- !u!114 &7189834590106578822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2714018492100701213}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d36f29f9595be954cb0811e81e66f507, type: 3}
   m_Name: 

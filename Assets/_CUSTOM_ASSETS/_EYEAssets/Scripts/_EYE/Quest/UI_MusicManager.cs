@@ -71,7 +71,7 @@ public class UI_MusicManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.M))
         {
-            _gameManager.ShowAndConfineCursor();
+            _gameManager.ShowAndConfine();
                 
             _mainCanvasPanels.SetActive(false);
 

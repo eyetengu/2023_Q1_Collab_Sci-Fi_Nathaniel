@@ -54,12 +54,12 @@ public class Inventory_Manager : MonoBehaviour
         if (_showInventory)
         {
             _inventoryPanel.SetActive(true);
-            _gameManager.ShowAndConfineCursor();
+            _gameManager.ShowAndConfine();
             _gameManager.PausePlayer();
         }
         else
         {
-            _gameManager.LockCursorInvisible();
+            _gameManager.HideAndLock();
             _inventoryPanel.SetActive(false);
             _gameManager.UnpausePlayer();
         }
