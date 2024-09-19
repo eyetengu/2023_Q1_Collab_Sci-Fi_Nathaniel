@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RSGameManager : MonoBehaviour
 {
     public static RSGameManager Instance;
-    public int score = 0;
     public int totalObjectives = 10; // Set this to the total number of objectives in your game
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI objectivesText;
@@ -18,13 +18,15 @@ public class RSGameManager : MonoBehaviour
     public TextMeshProUGUI altFireText;
 
     private int completedObjectives = 0;
-    private ReturnToMainMenu _menu;
+    [SerializeField] private int _countdown;
+    [SerializeField] private int nextLevelSceneId = 11;
 
     private void Awake()
     {
         if (Instance != null)
         {
             Debug.LogError("RSGameManager.Awake():: >multiple gamemagers detected");
+            Destroy(gameObject);
         }
         else
         {
@@ -33,7 +35,6 @@ public class RSGameManager : MonoBehaviour
     }
     void Start()
     {
-        _menu = GetComponent<ReturnToMainMenu>();
         UpdateUI();
         gameOverText.gameObject.SetActive(false);
         victoryText.gameObject.SetActive(false);
@@ -41,7 +42,7 @@ public class RSGameManager : MonoBehaviour
 
     public void AddScore(int points)
     {
-        score += points;
+        RSScoreManager.Instance.AddScore(points);
         UpdateUI();
     }
 
@@ -51,7 +52,8 @@ public class RSGameManager : MonoBehaviour
         if (completedObjectives == totalObjectives && !victoryText.IsDestroyed())
         {
             victoryText.gameObject.SetActive(true);
-            _menu.ReturnToOriginalMenu();
+            StartCoroutine(WaitForNextRound(nextLevelSceneId));
+
         }
         UpdateUI();
     }
@@ -100,12 +102,22 @@ public class RSGameManager : MonoBehaviour
 
     private string FormatScoreforUI()
     {
-        return score.ToString("D8");
+        return RSScoreManager.Instance.score.ToString("D8");
     }
 
     public void GameOver()
     {
         gameOverText.gameObject.SetActive(true);
-        _menu.ReturnToOriginalMenu();
+        StartCoroutine(WaitForNextRound(SceneManager.GetActiveScene().buildIndex));
+    }
+
+    IEnumerator WaitForNextRound(int sceneId)
+    {
+        for (int i = 0; i < _countdown; i++)
+        {
+            yield return new WaitForSeconds(1f);
+            Debug.Log(".");
+        }
+        SceneManager.LoadScene(sceneId);
     }
 }
