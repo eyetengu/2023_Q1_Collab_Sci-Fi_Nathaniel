@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class RSGameManager : MonoBehaviour
 {
+    private const string BIG_BULLET_TEXT = "Big Lazer";
     public static RSGameManager Instance;
     public int totalObjectives = 10; // Set this to the total number of objectives in your game
     public TextMeshProUGUI scoreText;
@@ -49,7 +50,7 @@ public class RSGameManager : MonoBehaviour
     public void ObjectiveCompleted()
     {
         completedObjectives++;
-        if (completedObjectives == totalObjectives && !victoryText.IsDestroyed())
+        if (completedObjectives >= totalObjectives && !victoryText.IsDestroyed())
         {
             victoryText.gameObject.SetActive(true);
             StartCoroutine(WaitForNextRound(nextLevelSceneId));
@@ -63,17 +64,15 @@ public class RSGameManager : MonoBehaviour
         {
             switch (weaponType)
             {
-                case RSWeaponType.Bullet:
-                    weaponText.text = weaponType.ToString();
-                    break;
                 case RSWeaponType.BigBullet:
-                    weaponText.text = "Big Lazer";
+                    weaponText.text = BIG_BULLET_TEXT;
                     break;
+                case RSWeaponType.Bullet:
                 case RSWeaponType.None:
                 default:
+                    weaponText.text = weaponType.ToString();
                     break;
             }
-            weaponText.text = weaponType.ToString();
         }
     }
 
