@@ -12,5 +12,5 @@ public enum RSAlternateFireTypes
 {
     None = 0,
     Bomb,
-    Cluster
+    Missile
 }

@@ -11,10 +11,14 @@ public class RSPlayer : MonoBehaviour
 
     [SerializeField]
     private GameObject _bombGameObject;
+    [SerializeField]
+    private GameObject _missileGameObject;
 
     public static RSPlayer Instance { get; private set; }
     public bool isRightFacing { get => _isRightFacing; }
-    public bool hasLazerPowerup { get; set; }
+    public bool hasPrimaryPowerup { get; set; }
+    public bool hasAlternatePowerup { get; set; }
+
     private const float SPEED = 20f;
     private const float VERTICAL_SPEED = 75f;
     private const float LEFT_ROTATION = 270f;
@@ -22,7 +26,7 @@ public class RSPlayer : MonoBehaviour
     private const float FORWARD_FORCE = 3f;
     private bool _isRightFacing;
     private bool _isRotating;
-    private float _fireRate = 0.5f;
+    private float _fireRate = 0.75f;
     private float _canFire = -1;
 
     private void Awake()
@@ -60,13 +64,20 @@ public class RSPlayer : MonoBehaviour
         if (Time.time > _canFire)
         {
             _canFire = Time.time + _fireRate;
-            FireProjectile(_bombGameObject);
+            if (hasAlternatePowerup)
+            {
+                FireProjectile(_missileGameObject);
+            }
+            else
+            {
+                FireProjectile(_bombGameObject);
+            }
         }
     }
 
     private void Instance_OnFirePressed()
     {
-        if (hasLazerPowerup)
+        if (hasPrimaryPowerup)
         {
             StartCoroutine(FireProjectiles(_bigBulletGameObj));
         }

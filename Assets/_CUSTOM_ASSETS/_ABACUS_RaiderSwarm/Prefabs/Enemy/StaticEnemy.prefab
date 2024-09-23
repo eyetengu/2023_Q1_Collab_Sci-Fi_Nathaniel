@@ -161,9 +161,12 @@ MonoBehaviour:
   powerUps:
   - prefab: {fileID: 4116984650998502195, guid: 89c2e95dde25fff4e8232c1a9dbc628e,
       type: 3}
-    dropChance: 15
+    dropChance: 20
+  - prefab: {fileID: 4116984650998502195, guid: 3c07418b22c4aa24991d06df4acb9221,
+      type: 3}
+    dropChance: 20
   - prefab: {fileID: 0}
-    dropChance: 85
+    dropChance: 100
 --- !u!1001 &1828077186690459613
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -78,9 +78,9 @@ public class RSGameManager : MonoBehaviour
 
     public void UpdateAltWeapon(RSAlternateFireTypes altFireType)
     {
-        if (weaponText != null)
+        if (altFireText != null)
         {
-            weaponText.text = altFireType.ToString();
+            altFireText.text = altFireType.ToString();
         }
     }
 

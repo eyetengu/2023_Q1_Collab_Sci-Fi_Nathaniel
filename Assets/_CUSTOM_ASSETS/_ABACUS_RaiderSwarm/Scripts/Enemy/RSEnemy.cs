@@ -24,12 +24,12 @@ public class RSEnemy : MonoBehaviour, IRSEnemy
             RSGameManager.Instance.GameOver();
         }
 
-        BasicLazerScript basicLazerScript = other.gameObject.GetComponent<BasicLazerScript>();
-        if (basicLazerScript != null)
+        IDamage iDamage = other.gameObject.GetComponent<IDamage>();
+        if (iDamage != null)
         {
             Destroy(other.gameObject);
 
-            TakeDamage(basicLazerScript.Damage);
+            TakeDamage(iDamage.Damage);
             if (_healthComponent.Health <= 0)
             {
                 var itemDropComponent = GetComponent<RSPowerupDropper>();

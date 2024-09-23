@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BasicLazerScript : MonoBehaviour
+public class BasicLazerScript : MonoBehaviour, IDamage
 {
     [SerializeField] private float bulletSpeed;
     [SerializeField] private int _damage = 10;

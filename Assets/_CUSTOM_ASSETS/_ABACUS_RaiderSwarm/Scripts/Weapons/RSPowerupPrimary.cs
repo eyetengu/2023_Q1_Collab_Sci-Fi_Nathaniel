@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RSPowerupLazer : MonoBehaviour
+public class RSPowerupPrimary : MonoBehaviour
 {
     [SerializeField] private float duration = 5f; // Duration of the powerup effect
     [SerializeField] private GameObject Visuals;
@@ -19,7 +19,7 @@ public class RSPowerupLazer : MonoBehaviour
     {
         if (RSPlayer.Instance != null)
         {
-            RSPlayer.Instance.hasLazerPowerup = true;
+            RSPlayer.Instance.hasPrimaryPowerup = true;
             RSGameManager.Instance.UpdateWeapon(RSWeaponType.BigBullet);
             Visuals.SetActive(false);
             var boxCollider = GetComponent<BoxCollider>();
@@ -27,7 +27,7 @@ public class RSPowerupLazer : MonoBehaviour
 
             yield return new WaitForSeconds(duration);
 
-            RSPlayer.Instance.hasLazerPowerup = false;
+            RSPlayer.Instance.hasPrimaryPowerup = false;
             RSGameManager.Instance.UpdateWeapon(RSWeaponType.Bullet);
             Destroy(gameObject);
         }
