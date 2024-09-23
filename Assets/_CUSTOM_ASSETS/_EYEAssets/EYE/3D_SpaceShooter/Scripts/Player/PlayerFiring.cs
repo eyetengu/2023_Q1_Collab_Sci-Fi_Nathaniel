@@ -15,7 +15,7 @@ public class PlayerFiring : MonoBehaviour
     float _fireRate = 0.25f;
     float _canFire = -1f;
     bool _gameOver;
-
+    bool _gameReady;
 
     //BUILT-IN FUNCTIONS
     private void OnEnable()
@@ -36,12 +36,12 @@ public class PlayerFiring : MonoBehaviour
 
     private void Event_Manager_gameReady()
     {
-        _gameOver = false;
+        _gameReady = true;
     }
 
     private void Event_Manager_gameOver()
     {
-        _gameOver = true;
+        _gameReady = false;
     }
 
     private void Start()
@@ -60,16 +60,19 @@ public class PlayerFiring : MonoBehaviour
     {
         if (_gameOver == false)
         {
-            if (Time.time > _canFire)
+            if (_gameReady)
             {
-                _canFire = Time.time + _fireRate;
-
-                var projectile = Instantiate(_projectilePrefab, _firingPort.position, _firingPort.rotation);
-                if (projectile != null)
-                    projectile.transform.SetParent(_ammoPouch);
-                if (_audioManager != null)
+                if (Time.time > _canFire)
                 {
-                    _audioManager.ProjectileAudio();
+                    _canFire = Time.time + _fireRate;
+
+                    var projectile = Instantiate(_projectilePrefab, _firingPort.position, _firingPort.rotation);
+
+                    if (projectile != null)
+                        projectile.transform.SetParent(_ammoPouch);
+
+                    if (_audioManager != null)                    
+                        _audioManager.ProjectileAudio();                    
                 }
             }
         }

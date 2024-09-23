@@ -67,7 +67,7 @@ public class cd_Enemy_Health : MonoBehaviour, IDamageable
     {
         if (collision.gameObject.tag == "Projectile")
         {
-            Debug.Log("BOOM!");
+            //Debug.Log("BOOM!");
 
             Damage(1);
             _bulletFX.SetActive(true);

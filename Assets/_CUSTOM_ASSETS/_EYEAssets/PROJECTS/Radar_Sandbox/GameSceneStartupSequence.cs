@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class GameSceneStartupAndEnd : MonoBehaviour
+public class GameSceneStartupSequence : MonoBehaviour
 {
 //CONVOY
     [SerializeField] Transform _largeCarrier;
@@ -18,7 +18,6 @@ public class GameSceneStartupAndEnd : MonoBehaviour
     
 //WARP GATE
     [SerializeField] Transform _warpGate;
-
 
     bool _convoyHasArrived;
     bool _releasingPirates;
@@ -36,6 +35,7 @@ public class GameSceneStartupAndEnd : MonoBehaviour
 
     void Update()
     {
+    //run our speed variable setup
         _carrierStep = _carrierSpeed * Time.deltaTime;
         _retreatStep = _retreatSpeed * Time.deltaTime;
 
@@ -116,11 +116,9 @@ public class GameSceneStartupAndEnd : MonoBehaviour
             ReleaseNextPirate();
         else if(_pirateID >= _pirateVessels.Length)
         {
-            //Debug.Log("PIRATES IN POSITION - Begin Spawining!");
             _releasingPirates = false;
             _piratesAssembled = true;
 
-            Event_Manager.Instance.Decree_GameReady();
 
             return;
         }

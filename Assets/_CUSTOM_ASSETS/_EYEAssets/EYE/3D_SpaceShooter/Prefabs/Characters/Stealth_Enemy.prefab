@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gunBarrel: {fileID: 5613073262071682145}
-  _laserPrefab: {fileID: 6885406394123457307, guid: 0e87fc40ae26c87428d7f38e1ac2fc33,
+  _laserPrefab: {fileID: 9065568263454198539, guid: 87210a494527e8443ab18b62ad598782,
     type: 3}
   _ammoPouch: {fileID: 0}
   _gunShotAudio: {fileID: 8300000, guid: 68afba37b0add4662b322912a5e54259, type: 3}
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2714018492100701213}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0f4d7b43f1a4eb47a44ed78452ce50f, type: 3}
   m_Name: 

@@ -28,18 +28,21 @@ public class cd_Enemy_Firing : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
     }
-    
+
+    private void Update()
+    {
+        if(Firing)
+            FireAtWill();
+    }
+
     void FireAtWill()
     {
-        if (Firing)
+        if (Time.time > _canFire)
         {
-            if (Time.time > _canFire)
-            {
-                _canFire = Time.time + _fireRate;
-                var laserShot = Instantiate(_laserPrefab, _gunBarrel.position, _gunBarrel.rotation);
-                laserShot.transform.SetParent(_ammoPouch);
-                _audioSource.PlayOneShot(_gunShotAudio);
-            }
-        }
+            _canFire = Time.time + _fireRate;
+            var laserShot = Instantiate(_laserPrefab, _gunBarrel.position, _gunBarrel.rotation);
+            laserShot.transform.SetParent(_ammoPouch);
+            _audioSource.PlayOneShot(_gunShotAudio);
+        }        
     }
 }

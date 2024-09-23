@@ -28,7 +28,7 @@ public class EnemyTarget_Ship : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Projectile_Enemy")
+        if(other.tag == "Projectile")
         {
             ShowRandomRicochet();
 

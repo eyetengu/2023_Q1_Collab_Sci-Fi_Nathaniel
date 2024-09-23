@@ -35,10 +35,15 @@ public class ConvoyLogic : MonoBehaviour
         
         int numberOfTargets = targets.Count;
 
-        if (numberOfTargets <= 0)
+        if (numberOfTargets <= 0 && _isConvoyDestroyed == false)
         {
             _isConvoyDestroyed= true;
-            _gameManager.Died = true;
+
+            Event_Manager.Instance.Decree_GameOver();
+            Event_Manager.Instance.Decree_GameLost();
+            Event_Manager.Instance.Decree_PauseGame();
+
+            //_gameManager.Died = true;
             _destructionFX.SetActive(true);
         }
     }

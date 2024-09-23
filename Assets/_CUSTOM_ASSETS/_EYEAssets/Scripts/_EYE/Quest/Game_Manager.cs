@@ -90,8 +90,8 @@ public class Game_Manager : MonoBehaviour
         }
 
     //SPEED INDEX MANIPULATOR
-        if (Input.GetKeyDown(KeyCode.P))
-            Event_Manager.Instance.Decree_PauseGame();
+        //if (Input.GetKeyDown(KeyCode.P))
+            //Event_Manager.Instance.Decree_PauseGame();
 
     //APPLICATION QUIT
         if (Input.GetKey(KeyCode.Escape))
@@ -108,7 +108,7 @@ public class Game_Manager : MonoBehaviour
     public void YouWin()
     {
         StartCoroutine(PauseBeforeNextLevel());
-        
+        Event_Manager.Instance.Decree_PauseGame();
         Event_Manager.Instance.Decree_GameWon();
 
         _gameOver = true;
@@ -122,8 +122,10 @@ public class Game_Manager : MonoBehaviour
     public void YouLose()
     {
         Event_Manager.Instance.Decree_PauseGame();
+        Event_Manager.Instance.Decree_GameLost();
 
         _gameOver = true;
+
         _timeScale = 0;
         GameSpeed();
         Debug.Log("YOU LOSE!");

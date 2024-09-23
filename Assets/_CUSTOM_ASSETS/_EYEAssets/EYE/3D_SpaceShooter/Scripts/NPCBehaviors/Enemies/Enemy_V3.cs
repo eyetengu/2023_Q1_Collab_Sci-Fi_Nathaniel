@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 public class Enemy_V3 : MonoBehaviour
 {
     AudioManager_3DSpace _audioManager;
+    cd_Enemy_Firing _enemyFiring;
 
     [Header("TRANSFORMS")]
     [SerializeField] List<Transform> _convoyTargets= new List<Transform>();
@@ -38,7 +39,8 @@ public class Enemy_V3 : MonoBehaviour
     {
         _audioManager = GameObject.FindObjectOfType<AudioManager_3DSpace>();
         _homeBase = GameObject.Find("Bandit_Main").GetComponent<Transform>();
-        _currentState = EnemyStates.DetermineTargets;   
+        _currentState = EnemyStates.DetermineTargets;
+        _enemyFiring = GetComponent<cd_Enemy_Firing>();
     }
 
     void Update()
@@ -94,10 +96,27 @@ public class Enemy_V3 : MonoBehaviour
     void DistanceChecker()
     {
         var distance = Vector3.Distance(transform.position, _currentTarget.position);
-
-        if(distance < _disengageDistance && _currentState == EnemyStates.EngageTarget)
+        //TOO CLOSE- DISENGAGE
+        if (distance < _disengageDistance && _currentState == EnemyStates.EngageTarget)
         {
             _currentState = EnemyStates.DisengageTarget;
+            _enemyFiring.Firing = false;
+        }
+        //WITHIN FIRING RANGE
+        else if (distance < _firingRange && distance > _disengageDistance)
+        {
+            _currentState = EnemyStates.EngageTarget;
+            _enemyFiring.Firing = true;
+        }
+        //WITHING TRACKING RANGE
+        else if (distance < 20)
+        {
+            _enemyFiring.Firing = false;
+        }
+        //OUTSIDE OF TRACKING RANGE
+        else if (distance > 20)
+        {
+            _enemyFiring.Firing = false;
         }
     }
 
@@ -109,9 +128,7 @@ public class Enemy_V3 : MonoBehaviour
         var newDirection = Vector3.RotateTowards(transform.forward, targetDirection, _step, 0.0f);
         transform.rotation= Quaternion.LookRotation(newDirection);
     }
-
     
-
     void DisengageTarget()
     {
         transform.Translate(new Vector3(0, 0, 4 * _step));

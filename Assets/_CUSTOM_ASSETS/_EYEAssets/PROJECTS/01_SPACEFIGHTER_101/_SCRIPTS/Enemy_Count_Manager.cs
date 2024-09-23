@@ -27,14 +27,14 @@ public class Enemy_Count_Manager : MonoBehaviour
     private void Update()
     {
         //Here is where we check to see if the enemies have been spawned and if their active count is zero
-        //if the enemy wave has been released AND there are no more enemies(because they are all dead)
+        //if the enemy wave has been released AND there are no more enemies(presumably, because they are all dead)
         //Trigger the Spawn Wave event
         //Run the Wave Manager
         if (WaveReleased && _activeEnemy <= 0)
         { 
+            WaveReleased = false;
             Debug.Log("All Enemies Have Been Killed"); 
-            Event_Manager.Instance.SpawnWave();
-            //_waveManager.RunWaveDisplayAndSpawnRoutine();
+            Event_Manager.Instance.SpawnWave();            
         }
     }
 
@@ -42,7 +42,7 @@ public class Enemy_Count_Manager : MonoBehaviour
 //ENEMY COUNT UPDATES
     public void AddEnemy() 
     {
-        Debug.Log("To Enemy Count Manager"); 
+        Debug.Log("Add To Enemy Count Manager"); 
         _totalEnemy++; 
         _activeEnemy++;
         DisplayEnemyBodyCount();
@@ -50,7 +50,6 @@ public class Enemy_Count_Manager : MonoBehaviour
 
     public void RemoveEnemy()
     {
-        //Debug.Log("Removing Enemy From Enemy Count Manager");
         if (_activeEnemy > 0)
         {
             _activeEnemy--;
@@ -66,10 +65,5 @@ public class Enemy_Count_Manager : MonoBehaviour
     { 
         _uiManager.DisplayEnemyCounts(_totalEnemy, _activeEnemy, _deadEnemy); 
     }
-    
 
-//POSSIBLE LATER USE METHODS
-    //void SolveForTotal()    { _totalEnemy   = _deadEnemy    + _activeEnemy; }
-    //void SolveForActive()   { _activeEnemy  = _totalEnemy   - _deadEnemy;   }
-    //void SolveForDead()     { _deadEnemy    = _totalEnemy   - _activeEnemy; }
 }

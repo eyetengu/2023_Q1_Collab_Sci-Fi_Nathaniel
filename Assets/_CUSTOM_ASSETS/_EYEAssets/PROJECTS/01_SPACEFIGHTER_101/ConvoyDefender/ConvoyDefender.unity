@@ -13489,7 +13489,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396928172}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.628119, y: -0.19215299, z: 0.16399473, w: 0.7359685}
+  m_LocalRotation: {x: 0.62811893, y: -0.19215296, z: 0.16399468, w: 0.7359685}
   m_LocalPosition: {x: 51.426186, y: 44.29297, z: -4.5233173}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -34052,7 +34052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1055331633
 RectTransform:
   m_ObjectHideFlags: 0
@@ -60247,6 +60247,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Target_MINE_Blinking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780718577078699733, guid: e78dfdc77eec0cf409eafab0adc24545,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6904189592247246655, guid: e78dfdc77eec0cf409eafab0adc24545, type: 3}

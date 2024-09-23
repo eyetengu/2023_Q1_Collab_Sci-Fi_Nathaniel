@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
-{    
+{
     private Game_Manager _gameManager;
     private Camera_Manager_CDEND _cameraManager;
     Scene_Manager _sceneManager;
@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
 
     [Header("PLAYER")]
     [SerializeField] private TMP_Text _playerMessage;
-    [SerializeField] private Slider _playerHealthSlider;    
+    [SerializeField] private Slider _playerHealthSlider;
     [SerializeField] private TMP_Text _scoreDisplay;
     [SerializeField] private TMP_Text _speedDisplay;
 
@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject _persistentScreen;
 
 
+//BUILT-IN FUNCTIONS
     private void OnEnable()
     {
         //Game_Manager.Instance.gameLost += GameOverSequence_UI;
@@ -67,7 +68,7 @@ public class UIManager : MonoBehaviour
     }
 
 
-//INITIAL FUNCTIONS
+    //INITIAL FUNCTIONS
     void CloseAllMessages()
     {
         foreach (GameObject message in _messages)
@@ -92,17 +93,17 @@ public class UIManager : MonoBehaviour
     }
 
 
-//GAME STATE
+    //GAME STATE
     public void DisplayGameStateMessage(string messageIn)
     {
         _playerMessage.text = messageIn;
 
         StartCoroutine(ClearPlayerMessageTimer());
     }
-    
+
     public void DisplayGameOverPanel()
     {
-        if(_gameOverPanel != null)
+        if (_gameOverPanel != null)
             _gameOverPanel.SetActive(true);
     }
 
@@ -125,14 +126,14 @@ public class UIManager : MonoBehaviour
     }
 
 
-//PLAYER MESSAGE
+    //PLAYER MESSAGE
     public void ClearPlayerMessage()
     {
         _playerMessage.text = "";
     }
     public void UpdatePlayerMessage(string playerMessageIn)
     {
-        _playerMessage.text = playerMessageIn; 
+        _playerMessage.text = playerMessageIn;
 
         StartCoroutine(ClearPlayerMessageTimer());
     }
@@ -144,20 +145,16 @@ public class UIManager : MonoBehaviour
 
 
 //______HUD FUNCTIONS______
-//SPEED
-    public void DisplaySpeed(float speedValueIn)
+    //ENEMIES
+    public void DisplayEnemyCounts(int total, int active, int dead)
     {
-        if (_speedDisplay != null)
-            _speedDisplay.text = $"SPEED\n{(speedValueIn * 10).ToString("F2")}";
+        //Debug.Log("Displaying Enemy Counts");
+        _enemiesTotal.text = $"TOTAL    " + total;
+        _enemiesActive.text = $"ACTIVE   " + active;
+        _enemiesDead.text = $"DEAD     " + dead;
     }
 
-//SCORE
-    public void DisplayScore(int scoreIn)
-    {
-        _scoreDisplay.text = $"Score: {scoreIn.ToString()}";
-    }
-
-//HEALTH
+    //HEALTH
     public void SliderSetMaxValue(int healthIn)
     {
         _playerHealthSlider.maxValue = healthIn;
@@ -167,43 +164,19 @@ public class UIManager : MonoBehaviour
         _playerHealthSlider.value = healthValue;
     }
 
-//ENEMY COUNT
-    //public void DisplayRemainingEnemies(int enemyCountIn)
-    //{
-        //_enemiesActive.text = $"ENEMIES\n{enemyCountIn.ToString()}";        
-    //}
-
-    public void DisplayEnemyCounts(int total, int active, int dead)
-    {
-        //Debug.Log("Displaying Enemy Counts");
-        _enemiesTotal.text = $"TOTAL    " + total;
-        _enemiesActive.text = $"ACTIVE   " + active;
-        _enemiesDead.text = $"DEAD     " + dead;
-    }
-
-
-//GAME OVER SEQUENCE
-    void GameOverSequence_UI(int value)
-    {
-        switch(value)
-        {
-            case 0:
-                DisplayGameStateMessage("Player WinGs");
-                break;
-            case 1:
-                DisplayGameOverPanel();
-                break;
-        }
-    }
-
-
-//PLAYER HUD
+    //PLAYER HUD
     void DisplayPlayerHUD()
     {
+        //Enable the player HUD panels as well as the persistent panel
+        //Triggers the gameReady event
+        //Uses a coroutine to wait for 1.0 seconds before triggering spawnWave event
+
         _playerHUD.SetActive(true);
         _persistentScreen.SetActive(true);
-                
-        Event_Manager.Instance.Decree_GameReady();
+
+        //Event_Manager.Instance.Decree_GameReady();
+        Event_Manager.Instance.GameStartEventSequence();
+        StartCoroutine(SpawnDelay());
     }
 
     void HidePlayerHUD()
@@ -212,6 +185,22 @@ public class UIManager : MonoBehaviour
         _persistentScreen.SetActive(false);
     }
 
+    //SCORE
+    public void DisplayScore(int scoreIn)
+    {
+        _scoreDisplay.text = $"Score: {scoreIn.ToString()}";
+    }
+
+    //SPEED
+    public void DisplaySpeed(float speedValueIn)
+    {
+        if (_speedDisplay != null)
+            _speedDisplay.text = $"SPEED\n{(speedValueIn * 10).ToString("F2")}";
+    }
+
+
+
+//COROUTINES------------------------
 //INTRO MESSAGES
     IEnumerator IntroMessageTimer()
     {
@@ -222,10 +211,13 @@ public class UIManager : MonoBehaviour
             _messages[i].gameObject.SetActive(true);
             yield return new WaitForSeconds(2.0f);
 
-            if(i == 2) { _cameraManager.EnableGroupIntroCamera(); }
+            if (i == 2) { _cameraManager.EnableGroupIntroCamera(); }
         }
+
         yield return new WaitForSeconds(1.5f);
+
         _cameraManager.EnableGameCamera();
+
         yield return new WaitForSeconds(1.5f);
 
         foreach (var message in _messages)
@@ -233,7 +225,13 @@ public class UIManager : MonoBehaviour
 
         //GAME READY EVENT TRIGGERED
         DisplayPlayerHUD();
-        Event_Manager.Instance.Decree_UnpauseGame();
+        //Event_Manager.Instance.Decree_UnpauseGame();
+    }
 
+//SPAWN DELAY
+    IEnumerator SpawnDelay()
+    {
+        yield return new WaitForSeconds(1.0f);
+        Event_Manager.Instance.SpawnWave();
     }
 }

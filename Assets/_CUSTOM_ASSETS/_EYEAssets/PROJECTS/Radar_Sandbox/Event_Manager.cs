@@ -36,13 +36,6 @@ public class Event_Manager : MonoBehaviour
 //PAUSED STATES
 //A pause state may exist where the player is pinned in place while his/her adherents flock to them
 //moreover, you may need to pause everything so that nobody ends up at a disadvantage.
-//for our purposes we will drop the pausePlayerMover events from available options
-    //public delegate void PausePlayerMovement();
-    //public static event PausePlayerMovement pausePlayerMover;
-
-    //public delegate void UnpausePlayerMovement();
-    //public static event UnpausePlayerMovement _unpausePlayerMover;
-
     public delegate void GamePause();
     public static event GamePause pauseGame;
 
@@ -61,6 +54,11 @@ public class Event_Manager : MonoBehaviour
     public static event SpawnEnemyWave spawnEnemyWave;
 
 
+//NEW WAVES
+    public delegate void NewWave();
+    public static event NewWave newWave;
+
+
 //-------------------------------------------------------
 
     private void Awake()
@@ -68,20 +66,45 @@ public class Event_Manager : MonoBehaviour
         _instance = this;
     }
 
-    
+    public void GameStartEventSequence()
+    {
+        Decree_GameReady();
+        Decree_UnpauseGame();        
+    }
+
     public void Score_Increase()
     {
         increaseScore();
     }
 
     //GAME STATES
-    public void Decree_GameReady()      {   if (gameReady != null)      gameReady();}
+    public void Decree_GameReady()      
+    {
+        if (gameReady != null)
+        {
+            gameReady();
+            Debug.Log("Game Ready");
+        }
+    }
 
-    public void Decree_GameOver()       {   if (gameOver   != null)     gameOver(); }
 
-    public void Decree_GameWon()        {   if(win         != null)     win();      }
+    public void Decree_GameOver()       
+    {   
+        if (gameOver != null)     
+            gameOver(); 
+    }
 
-    public  void Decree_GameLost()      {   if(lose        != null)     lose();     }
+    public void Decree_GameWon()        
+    {   
+        if(win != null)     
+            win();      
+    }
+
+    public  void Decree_GameLost()      
+    {   
+        if(lose != null)     
+            lose();
+    }
 
 
 //PAUSE STATES
@@ -91,21 +114,53 @@ public class Event_Manager : MonoBehaviour
         if (_paused)
         {
             if (pauseGame != null)
+            {
                 pauseGame();
+                Debug.Log("Pause Switch- Pause");
+            }
         }
         else if (_paused == false)
         {
             if (unPauseGame != null)
+            {
                 unPauseGame();
+                Debug.Log("Pause Switch_Unpause");
+            }
         }
     }
 
-    public void Decree_PauseGame()      {   if(pauseGame != null)       pauseGame();    }
+    public void Decree_PauseGame()      
+    {
+        if (pauseGame != null)
+        {
+            pauseGame();
+            Debug.Log("PauSE");
+        }
+    }
 
-    public void Decree_UnpauseGame()    {   if(unPauseGame != null)     unPauseGame();  }
+    public void Decree_UnpauseGame()    
+    {
+        if (unPauseGame != null)
+        {
+            unPauseGame();
+            Debug.Log("UNPUased");
+        }
+    }
 
+    //WAVES
+    public void AdvanceToNewWave()
+    {
+        if (newWave != null)
+            newWave();
+        Debug.Log("New Wave");
+    }
 
-//WAVES
-    public void SpawnWave()             { if (spawnEnemyWave != null) { spawnEnemyWave(); Debug.Log("Wave Spawning"); }   }
-    
+    public void SpawnWave()
+    {
+        if (spawnEnemyWave != null)
+        {
+            spawnEnemyWave();
+            Debug.Log("Wave Spawning");
+        }
+    }    
 }
