@@ -7,9 +7,9 @@ public class RSMissile : MonoBehaviour, IDamage
     [SerializeField] private int _damage = 10;
     public int Damage { get => _damage; }
 
-    private float amplitude = 2.0f; // Amplitude (a)
-    private float period = 3.0f; // Period (b)
-    private float speed = 10.0f; // Speed of the movement
+    private float amplitude = 0.25f; // Amplitude (a)
+    private float period = 2.0f; // Period (b)
+    private float speed = 5.0f; // Speed of the movement
 
     private float startTime;
 
