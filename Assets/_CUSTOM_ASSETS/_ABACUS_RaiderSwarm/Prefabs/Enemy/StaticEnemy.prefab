@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4219ec4ee9d4f1d43af0b12e72483bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  _health: 0
   MaxHealth: 100
 --- !u!114 &5916539818958103511
 MonoBehaviour:
@@ -232,7 +232,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9cc05dbbc727f27499fdb727a4d10523, type: 2}
+      objectReference: {fileID: 2100000, guid: 0420222675490954fbfab5242b2a1b49, type: 2}
     m_RemovedComponents:
     - {fileID: 64084461875667276, guid: 59c52aad69955654794f62765f1da656, type: 3}
     m_RemovedGameObjects: []
