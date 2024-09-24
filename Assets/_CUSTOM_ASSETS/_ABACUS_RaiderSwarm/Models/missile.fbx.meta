@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 57a08126c9170624d8f46b00a0c93ef1
+guid: c39867c54c61e8042b4e5d1aecbd52d2
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: missile
+    second: {fileID: 2800000, guid: 15d6b448b20edfb41937d106fe04d75a, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
