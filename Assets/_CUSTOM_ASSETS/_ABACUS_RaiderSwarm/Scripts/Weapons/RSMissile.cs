@@ -9,7 +9,7 @@ public class RSMissile : MonoBehaviour, IDamage
 
     [SerializeField] private float amplitude = 0.25f; // Amplitude (a)
     [SerializeField] private float period = 0.25f; // Period (b)
-    [SerializeField] private float speed = 0.5f; // Speed of the movement
+    [SerializeField] private float speed = 0.25f; // Speed of the movement
 
     private float startTime;
 
