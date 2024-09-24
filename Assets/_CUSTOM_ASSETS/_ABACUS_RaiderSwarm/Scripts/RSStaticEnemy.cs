@@ -1,72 +1,75 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using RaiderSwarm.Interfaces;
+using RaiderSwarm.Manager;
+using RaiderSwarm.Player;
+using RaiderSwarm.Powerup;
 using UnityEngine;
-
-public class RSStaticEnemy : MonoBehaviour, IRSEnemy
+namespace RaiderSwarm.Enemy
 {
-    public GameObject enemyPrefab; // The enemy prefab to spawn
-    public float spawnInterval = 5f; // Time interval between spawns
-
-    private float timer;
-    private HealthComponent _healthComponent;
-
-    private void Start()
+    public class RSStaticEnemy : MonoBehaviour, IRSEnemy
     {
-        _healthComponent = GetComponent<HealthComponent>();
-    }
-    void Update()
-    {
-        timer += Time.deltaTime;
+        public GameObject enemyPrefab; // The enemy prefab to spawn
+        public float spawnInterval = 5f; // Time interval between spawns
 
-        if (timer >= spawnInterval)
+        private float timer;
+        private HealthComponent _healthComponent;
+
+        private void Start()
         {
-            SpawnEnemy();
-            timer = 0f;
+            _healthComponent = GetComponent<HealthComponent>();
         }
-    }
-
-    void SpawnEnemy()
-    {
-        Instantiate(enemyPrefab, transform.position, transform.rotation);
-    }
-
-    public void TakeDamage(int damage)
-    {
-        _healthComponent.Damage(damage);
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject == RSPlayer.Instance?.gameObject)
+        void Update()
         {
-            Destroy(other.gameObject);
+            timer += Time.deltaTime;
+
+            if (timer >= spawnInterval)
+            {
+                SpawnEnemy();
+                timer = 0f;
+            }
+        }
+
+        void SpawnEnemy()
+        {
+            Instantiate(enemyPrefab, transform.position, transform.rotation);
+        }
+
+        public void TakeDamage(int damage)
+        {
+            _healthComponent.Damage(damage);
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject == RSPlayer.Instance?.gameObject)
+            {
+                Destroy(other.gameObject);
+                if (RSGameManager.Instance != null)
+                {
+                    RSGameManager.Instance.GameOver();
+                }
+
+            }
+
+            IDamage iDamage = other.gameObject.GetComponent<IDamage>();
+            if (iDamage != null)
+            {
+                Destroy(other.gameObject);
+
+                TakeDamage(iDamage.Damage);
+            }
+        }
+
+        private void OnDestroy()
+        {
             if (RSGameManager.Instance != null)
             {
-                RSGameManager.Instance.GameOver();
+                var itemDropComponent = GetComponent<RSPowerupDropper>();
+                if (itemDropComponent != null)
+                {
+                    itemDropComponent.DropPowerUp();
+                }
+                RSGameManager.Instance.AddScore(1000);
+                RSGameManager.Instance.ObjectiveCompleted();
             }
-            
-        }
-
-        IDamage iDamage = other.gameObject.GetComponent<IDamage>();
-        if (iDamage != null)
-        {
-            Destroy(other.gameObject);
-
-            TakeDamage(iDamage.Damage);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if(RSGameManager.Instance != null)
-        {
-            var itemDropComponent = GetComponent<RSPowerupDropper>();
-            if (itemDropComponent != null)
-            {
-                itemDropComponent.DropPowerUp();
-            }
-            RSGameManager.Instance.AddScore(1000);
-            RSGameManager.Instance.ObjectiveCompleted();
         }
     }
 }

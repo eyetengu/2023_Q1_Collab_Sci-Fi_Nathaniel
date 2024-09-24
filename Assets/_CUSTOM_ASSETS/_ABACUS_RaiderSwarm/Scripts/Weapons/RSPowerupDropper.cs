@@ -1,43 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class RSPowerupDropper : MonoBehaviour
+namespace RaiderSwarm.Powerup
 {
-    [System.Serializable]
-    public class PowerUp
-    {
-        public GameObject prefab;
-        public float dropChance; // The chance of this power-up dropping
-    }
 
-    public PowerUp[] powerUps;
-
-    public void DropPowerUp()
+    public class RSPowerupDropper : MonoBehaviour
     {
-        float totalWeight = 0f;
-        foreach (PowerUp powerUp in powerUps)
+        [System.Serializable]
+        public class PowerUp
         {
-            totalWeight += powerUp.dropChance;
+            public GameObject prefab;
+            public float dropChance; // The chance of this power-up dropping
         }
 
-        float randomValue = Random.Range(0f, totalWeight);
-        float cumulativeWeight = 0f;
+        public PowerUp[] powerUps;
 
-        foreach (PowerUp powerUp in powerUps)
+        public void DropPowerUp()
         {
-            cumulativeWeight += powerUp.dropChance;
-            if (randomValue < cumulativeWeight && powerUp.prefab != null)
+            float totalWeight = 0f;
+            foreach (PowerUp powerUp in powerUps)
             {
-                Instantiate(powerUp.prefab, transform.position, Quaternion.identity);
-                break;
+                totalWeight += powerUp.dropChance;
+            }
+
+            float randomValue = Random.Range(0f, totalWeight);
+            float cumulativeWeight = 0f;
+
+            foreach (PowerUp powerUp in powerUps)
+            {
+                cumulativeWeight += powerUp.dropChance;
+                if (randomValue < cumulativeWeight && powerUp.prefab != null)
+                {
+                    Instantiate(powerUp.prefab, transform.position, Quaternion.identity);
+                    break;
+                }
             }
         }
-    }
 
-    // This method should be called when the enemy is defeated
-    public void OnEnemyDefeated()
-    {
-        DropPowerUp();
+        // This method should be called when the enemy is defeated
+        public void OnEnemyDefeated()
+        {
+            DropPowerUp();
+        }
     }
 }

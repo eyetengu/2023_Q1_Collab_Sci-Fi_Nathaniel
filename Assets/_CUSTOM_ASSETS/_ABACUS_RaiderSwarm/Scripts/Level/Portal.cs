@@ -1,17 +1,20 @@
+using RaiderSwarm.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Portal : MonoBehaviour
+namespace RaiderSwarm.Level
 {
-    [SerializeField] private float _targetXPosition;
-
-    private void OnTriggerEnter(Collider other)
+    public class Portal : MonoBehaviour
     {
-        if (other != null && other.gameObject == RSPlayer.Instance.gameObject)
+        [SerializeField] private float _targetXPosition;
+
+        private void OnTriggerEnter(Collider other)
         {
-            var playerPosition = other.transform.position;
-            other.transform.position = new Vector3(_targetXPosition, playerPosition.y, playerPosition.z);
+            if (other != null && other.gameObject == RSPlayer.Instance.gameObject)
+            {
+                var playerPosition = other.transform.position;
+                other.transform.position = new Vector3(_targetXPosition, playerPosition.y, playerPosition.z);
+            }
         }
     }
 }

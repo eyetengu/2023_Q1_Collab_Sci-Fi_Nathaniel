@@ -1,16 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum RSWeaponType { 
-    None = 0,
-    Bullet,
-    BigBullet
-}
-
-public enum RSAlternateFireTypes
+namespace RaiderSwarm.Enums
 {
-    None = 0,
-    Bomb,
-    Missile
+    public enum RSWeaponType
+    {
+        None = 0,
+        Bullet,
+        BigBullet
+    }
 }
