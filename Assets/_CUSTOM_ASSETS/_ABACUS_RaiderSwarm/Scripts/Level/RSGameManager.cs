@@ -20,7 +20,7 @@ public class RSGameManager : MonoBehaviour
 
     private int completedObjectives = 0;
     [SerializeField] private int _countdown;
-    [SerializeField] private int nextLevelSceneId = 11;
+    [SerializeField] private int nextLevelSceneId = 1;
 
     private void Awake()
     {
