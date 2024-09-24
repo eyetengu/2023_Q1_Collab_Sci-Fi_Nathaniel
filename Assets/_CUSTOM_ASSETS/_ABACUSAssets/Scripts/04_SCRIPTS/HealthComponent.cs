@@ -5,46 +5,45 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
-    [SerializeField] private int Health = 0;
+    [SerializeField] private int _health = 0;
     [SerializeField] private int MaxHealth = 10;
-
+    public int Health { get => _health; }
     private const int _minHealth = 0;
 
     public void Start()
     {
-        Health = MaxHealth;
+        _health = MaxHealth;
     }
     public void Heal(int healing)
     {
-        if (Health + healing >= MaxHealth)
+        if (_health + healing >= MaxHealth)
         {
-            Health = MaxHealth;
+            _health = MaxHealth;
             return;
         }
-        Health += healing;
+        _health += healing;
 
     }
     public void Damage(int damage)
     {
-        if (damage < 0)
+         if (damage < 0)
         {
             Heal(damage);
         }
-        if(damage > Health)
+        if(damage > _health)
         {
-            Health -= Health;
-            return;
+            _health -= _health;
         }
         else
         {
-            Health -= damage;
+            _health -= damage;
         }
         CheckIfDead();
     }
 
     private void CheckIfDead()
     {
-        if (Health <= _minHealth)
+        if (_health <= _minHealth)
         {
             Destroy(gameObject);
         }
