@@ -27,8 +27,12 @@ public class ProjectileBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        IDamageable _enemyDamage = other.GetComponent<IDamageable>();
+
         if(other.tag == "Enemy")
         {
+            if (_enemyDamage != null)
+                _enemyDamage.Damage(10);
             gameObject.SetActive(false);
         }
     }

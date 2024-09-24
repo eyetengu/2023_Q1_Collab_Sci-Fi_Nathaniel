@@ -14,7 +14,7 @@ public class Enemy_BaseClass : MonoBehaviour, IDamageable
     public bool _hasPlayedAudio;
 
     PlayerScoreKeeper _scoreKeeper;
-    [SerializeField] int _killValue = 1;
+    int _killValue = 1;
 
     public int Health { get; set; }
 

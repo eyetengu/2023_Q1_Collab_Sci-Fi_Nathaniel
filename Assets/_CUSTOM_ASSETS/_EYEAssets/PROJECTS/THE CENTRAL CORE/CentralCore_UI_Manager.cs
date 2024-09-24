@@ -10,18 +10,10 @@ public class CentralCore_UI_Manager : MonoBehaviour
     [SerializeField] GameObject _mainMenuScreen;
 
 
-    [SerializeField] TMP_Text _speedDisplay;
-
-
 //BUILT-IN FUNCTIONS
     void Start()
     {
         InitiateUIStartScreenSequence();
-    }
-
-    void Update()
-    {
-        
     }
 
 
@@ -32,17 +24,6 @@ public class CentralCore_UI_Manager : MonoBehaviour
         _mainMenuScreen.SetActive(false);
         _titleScreen.SetActive(true);
     }
-
-
-    void DisplaySpeed(float velocityIn)
-    {
-        string speed = velocityIn.ToString();
-        _speedDisplay.text = $"Speed: {speed}";
-    }
-
-
-
-
 
 
 //COROUTINES

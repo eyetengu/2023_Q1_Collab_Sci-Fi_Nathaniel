@@ -45,12 +45,16 @@ public class CollectableBehavior : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Player Detected");
+            //Debug.Log("Player Detected");
             if (_isCollected == false)
             {
                 _isCollected = true;
+                
                 ICanCollect _collector = other.GetComponent<ICanCollect>();
-                _collector.PassItemInfo(Health);
+                
+                if(_collector != null)
+                    _collector.PassItemInfo(Health);
+                
                 if(_audioManager != null)
                     _audioManager.PickupAudio();
 

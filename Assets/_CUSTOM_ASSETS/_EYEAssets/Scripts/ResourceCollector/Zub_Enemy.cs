@@ -20,7 +20,7 @@ public class Zub_Enemy : MonoBehaviour
     {
         _canMove = true;
 
-        _disturbance = GameObject.Find("Gas").GetComponent<Transform>();
+        //_disturbance = GameObject.Find("Gas").GetComponent<Transform>();
         //ZubMoving();
     }
 
@@ -98,9 +98,12 @@ public class Zub_Enemy : MonoBehaviour
 
     void MoveTowardsDisturbance()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _disturbance.position, _step);
+        if (_disturbance != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _disturbance.position, _step);
 
-        RotateTowardsPlayer();
+            RotateTowardsPlayer();
+        }
     }
 
     void RotateTowardsPlayer()

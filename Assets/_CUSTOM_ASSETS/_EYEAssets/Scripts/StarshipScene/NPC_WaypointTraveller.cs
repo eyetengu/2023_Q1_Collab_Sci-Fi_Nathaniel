@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class NPC_WaypointTraveller : MonoBehaviour
 {
-    NavMeshAgent _agent;
+    //NavMeshAgent _agent;
     Rigidbody _rb;
 
     [SerializeField] private Transform[] _roomWaypoints;
@@ -20,7 +20,7 @@ public class NPC_WaypointTraveller : MonoBehaviour
 
     private void Start()
     {
-        _agent = GetComponent<NavMeshAgent>();
+        //_agent = GetComponent<NavMeshAgent>();
         _rb = GetComponent<Rigidbody>();
         StartCoroutine(ChooseNextTimer());
         _currentWaypoint = _roomWaypoints[_waypointID];
@@ -28,25 +28,25 @@ public class NPC_WaypointTraveller : MonoBehaviour
 
     private void Update()
     {
-        if(_agent.isOnNavMesh==false)
-            Debug.Log("NONAVMESH");
+        //if(_agent.isOnNavMesh==false)
+            //Debug.Log("NONAVMESH");
 
         if (_warping)
         {
             Debug.Log("Warping");
-            _agent.Warp(_currentWaypoint.position);
+            //_agent.Warp(_currentWaypoint.position);
         }
         else
         {
-            _agent.SetDestination(_currentWaypoint.position);
-            _agent.Move(_currentWaypoint.position);
+            //_agent.SetDestination(_currentWaypoint.position);
+            //_agent.Move(_currentWaypoint.position);
 
         }
 
-        if(_agent.remainingDistance < .15f)
-        {
-            StartCoroutine(FaceStationTimer());
-        }
+        //if(_agent.remainingDistance < .15f)
+        //{
+            //StartCoroutine(FaceStationTimer());
+        //}
     }
 
     void ChooseNextWaypoint()

@@ -2,22 +2,32 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    static int playerScore;
-    public int PlayersScore
+    private static ScoreManager _instance;
+    public  static ScoreManager Instance
     {
         get
         {
-            return playerScore;
+            if (_instance == null)
+                Debug.Log("Instance = Null");
+            return _instance;
         }
+    }
+
+    public int PlayerScore { get; set; }
+
+
+    private void Awake()
+    {
+        _instance = this;
     }
 
     public void SetScore(int incomingScore)
     {
-        playerScore += incomingScore;
+        PlayerScore += incomingScore;
     }
 
     public void ResetScore()
     {
-        playerScore = 00000000;
+        PlayerScore = 00000000;
     }
 }

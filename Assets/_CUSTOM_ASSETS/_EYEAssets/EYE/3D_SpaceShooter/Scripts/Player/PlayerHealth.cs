@@ -35,7 +35,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         _uiManager.SliderSetMaxValue(_playerMaxHealth);
         
         Health = _playerMaxHealth;
-        _uiManager.UpdatePlayerHealthBar(Health);
+        _uiManager.UpdatePlayerHealthBar(_playerMaxHealth);
     }
 
     void Damage()
@@ -61,7 +61,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
         if (Health <= 0)
         {
-            _gameManager.Died = true;
+            Event_Manager.Instance.Decree_GameLost();
+            
             //message = "Player Is Dead";
             _uiManager.ClearPlayerMessage();
             _uiManager.DisplayGameOverPanel();
