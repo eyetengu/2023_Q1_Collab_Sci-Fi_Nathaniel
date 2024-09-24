@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public interface IDamage
+namespace RaiderSwarm.Interfaces
 {
-    public int Damage { get; }
+    public interface IDamage
+    {
+        public int Damage { get; }
+    }
 }

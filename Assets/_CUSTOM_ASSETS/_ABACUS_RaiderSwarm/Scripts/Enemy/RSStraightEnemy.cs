@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class RSStraightEnemy : MonoBehaviour
+namespace RaiderSwarm.Enemy
 {
-    public float speed = 50f;
-
-    void Update()
+    public class RSStraightEnemy : MonoBehaviour
     {
-        // Move the enemy to the left
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        public float speed = 50f;
+
+        void Update()
+        {
+            // Move the enemy to the left
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+        }
     }
 }

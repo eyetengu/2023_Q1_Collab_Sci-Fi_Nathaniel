@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class RSEnemySpawner : MonoBehaviour
+namespace RaiderSwarm.Enemy
 {
-    [SerializeField] private GameObject _enemyGameObject;
-    public void SpawnEnemy()
+
+    public class RSEnemySpawner : MonoBehaviour
     {
-        Instantiate(_enemyGameObject, transform);
+        [SerializeField] private GameObject _enemyGameObject;
+        public void SpawnEnemy()
+        {
+            Instantiate(_enemyGameObject, transform);
+        }
     }
 }

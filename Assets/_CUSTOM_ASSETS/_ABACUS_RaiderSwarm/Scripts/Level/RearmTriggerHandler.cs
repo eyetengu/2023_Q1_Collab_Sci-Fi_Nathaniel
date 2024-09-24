@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using RaiderSwarm.Player;
 using UnityEngine;
-
-public class RearmTriggerHandler : MonoBehaviour
+namespace RaiderSwarm.Level
 {
-    [SerializeField] private GameObject[] _enemyTriggers;
-    private void OnTriggerEnter(Collider other)
+    public class RearmTriggerHandler : MonoBehaviour
     {
-        if(other.gameObject == RSPlayer.Instance.gameObject)
+        [SerializeField] private GameObject[] _enemyTriggers;
+        private void OnTriggerEnter(Collider other)
         {
-            foreach(var trigger in _enemyTriggers)
+            if (other.gameObject == RSPlayer.Instance.gameObject)
             {
-                trigger.gameObject.SetActive(true);
+                foreach (var trigger in _enemyTriggers)
+                {
+                    trigger.gameObject.SetActive(true);
+                }
             }
         }
     }

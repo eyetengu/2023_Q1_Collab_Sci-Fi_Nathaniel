@@ -1,48 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
+using RaiderSwarm.Interfaces;
+using RaiderSwarm.Manager;
+using RaiderSwarm.Player;
+using RaiderSwarm.Powerup;
 using UnityEngine;
 
-public class RSEnemy : MonoBehaviour, IRSEnemy
+namespace RaiderSwarm.Enemy
 {
-    private HealthComponent _healthComponent;
-
-    public void TakeDamage(int damage)
+    public class RSEnemy : MonoBehaviour, IRSEnemy
     {
-        _healthComponent.Damage(damage);
-    }
+        private HealthComponent _healthComponent;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _healthComponent = GetComponent<HealthComponent>();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject == RSPlayer.Instance?.gameObject) {
-            Destroy(other.gameObject);
-            RSGameManager.Instance.GameOver();
+        public void TakeDamage(int damage)
+        {
+            _healthComponent.Damage(damage);
         }
 
-        IDamage iDamage = other.gameObject.GetComponent<IDamage>();
-        if (iDamage != null)
+        // Start is called before the first frame update
+        void Start()
         {
-            Destroy(other.gameObject);
+            _healthComponent = GetComponent<HealthComponent>();
+        }
 
-            TakeDamage(iDamage.Damage);
-            if (_healthComponent.Health <= 0)
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject == RSPlayer.Instance?.gameObject)
             {
-                var itemDropComponent = GetComponent<RSPowerupDropper>();
-                if (itemDropComponent != null)
-                {
-                    itemDropComponent.DropPowerUp();
-                }
-                if (RSGameManager.Instance != null)
-                {
-                    RSGameManager.Instance.AddScore(100);
-                }
+                Destroy(other.gameObject);
+                RSGameManager.Instance.GameOver();
             }
 
+            IDamage iDamage = other.gameObject.GetComponent<IDamage>();
+            if (iDamage != null)
+            {
+                Destroy(other.gameObject);
+
+                TakeDamage(iDamage.Damage);
+                if (_healthComponent.Health <= 0)
+                {
+                    var itemDropComponent = GetComponent<RSPowerupDropper>();
+                    if (itemDropComponent != null)
+                    {
+                        itemDropComponent.DropPowerUp();
+                    }
+                    if (RSGameManager.Instance != null)
+                    {
+                        RSGameManager.Instance.AddScore(100);
+                    }
+                }
+
+            }
         }
     }
 }

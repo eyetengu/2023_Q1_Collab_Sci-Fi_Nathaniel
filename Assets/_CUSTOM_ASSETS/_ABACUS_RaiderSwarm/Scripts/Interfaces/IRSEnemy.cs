@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public interface IRSEnemy
+namespace RaiderSwarm.Interfaces
 {
-    public void TakeDamage(int damage);
+    public interface IRSEnemy
+    {
+        public void TakeDamage(int damage);
+    }
 }

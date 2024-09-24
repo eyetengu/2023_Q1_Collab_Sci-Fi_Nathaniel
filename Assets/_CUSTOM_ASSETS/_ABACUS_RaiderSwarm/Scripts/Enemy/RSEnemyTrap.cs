@@ -1,21 +1,25 @@
+using RaiderSwarm.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class RSEnemyTrap : MonoBehaviour
+namespace RaiderSwarm.Enemy
 {
-    [SerializeField] private GameObject[] _enemySpawns;
 
-    private void OnTriggerEnter(Collider other)
+    public class RSEnemyTrap : MonoBehaviour
     {
-        if(other.gameObject == RSPlayer.Instance.gameObject)
+        [SerializeField] private GameObject[] _enemySpawns;
+
+        private void OnTriggerEnter(Collider other)
         {
-            foreach(var trap in _enemySpawns)
+            if (other.gameObject == RSPlayer.Instance.gameObject)
             {
-                var spawner = trap.GetComponent<RSEnemySpawner>();
-                spawner.SpawnEnemy();
+                foreach (var trap in _enemySpawns)
+                {
+                    var spawner = trap.GetComponent<RSEnemySpawner>();
+                    spawner.SpawnEnemy();
+                }
+                gameObject.SetActive(false);
             }
-            gameObject.SetActive(false);
         }
     }
 }
