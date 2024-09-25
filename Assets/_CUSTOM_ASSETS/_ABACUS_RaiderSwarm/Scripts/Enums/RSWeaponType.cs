@@ -5,8 +5,8 @@ namespace RaiderSwarm.Enums
 {
     public enum RSWeaponType
     {
-        None = 0,
-        Bullet,
-        BigBullet
+        NONE = 0,
+        BULLET,
+        BIGLAZER
     }
 }

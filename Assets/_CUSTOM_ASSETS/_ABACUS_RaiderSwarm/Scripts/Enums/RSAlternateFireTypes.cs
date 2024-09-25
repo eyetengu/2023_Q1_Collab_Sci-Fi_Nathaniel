@@ -2,8 +2,8 @@
 {
     public enum RSAlternateFireTypes
     {
-        None = 0,
-        Bomb,
-        Missile
+        NONE = 0,
+        BOMB,
+        MISSILE
     }
 }

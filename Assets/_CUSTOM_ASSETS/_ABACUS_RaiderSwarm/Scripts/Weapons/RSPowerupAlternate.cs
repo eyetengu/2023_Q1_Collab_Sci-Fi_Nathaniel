@@ -24,7 +24,7 @@ namespace RaiderSwarm.Powerup
             if (RSPlayer.Instance != null)
             {
                 RSPlayer.Instance.hasAlternatePowerup = true;
-                RSGameManager.Instance.UpdateAltWeapon(RSAlternateFireTypes.Missile);
+                RSGameManager.Instance.UpdateAltWeapon(RSAlternateFireTypes.MISSILE);
                 visuals.SetActive(false);
                 var boxCollider = GetComponent<BoxCollider>();
                 boxCollider.enabled = false;
@@ -32,7 +32,7 @@ namespace RaiderSwarm.Powerup
                 yield return new WaitForSeconds(duration);
 
                 RSPlayer.Instance.hasAlternatePowerup = false;
-                RSGameManager.Instance.UpdateAltWeapon(RSAlternateFireTypes.Bomb);
+                RSGameManager.Instance.UpdateAltWeapon(RSAlternateFireTypes.BOMB);
                 Destroy(gameObject);
             }
         }

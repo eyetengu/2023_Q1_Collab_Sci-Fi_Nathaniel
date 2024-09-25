@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 4971834904571717365}
   - component: {fileID: 5755062887944433134}
   - component: {fileID: 4676310727320053073}
+  - component: {fileID: 3189304831499411002}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -309,7 +310,8 @@ MonoBehaviour:
     type: 3}
   _bombGameObject: {fileID: 3927964373973165728, guid: fbfdee8b69aaa52418d9e537ff8c8656,
     type: 3}
-  _missileGameObject: {fileID: 0}
+  _missileGameObject: {fileID: 6541190978425254551, guid: ce9cf27c44e23c54bbd1dbb4c98f0145,
+    type: 3}
 --- !u!65 &4676310727320053073
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -331,6 +333,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 26.31, y: 6, z: 18.77}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3189304831499411002
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5762092256607242581}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &7637126884944725483
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +516,18 @@ PrefabInstance:
       value: SM_Ship_Bomber_04
       objectReference: {fileID: 0}
     - target: {fileID: 4939080124132854, guid: 6cb85941fc317e843bb3db908ed714e9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939080124132854, guid: 6cb85941fc317e843bb3db908ed714e9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939080124132854, guid: 6cb85941fc317e843bb3db908ed714e9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939080124132854, guid: 6cb85941fc317e843bb3db908ed714e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
       objectReference: {fileID: 0}
@@ -540,7 +581,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: eaee0f11d6e5b7d4db338fedb688937e, type: 2}
+      objectReference: {fileID: 2100000, guid: bcaa4f37939a5bf42b5fb1a833c5714e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
