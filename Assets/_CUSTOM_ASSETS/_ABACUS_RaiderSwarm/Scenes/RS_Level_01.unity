@@ -4402,8 +4402,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Welcome to Raider Swarm! This is a short game where you play as a pilot
-    surviving 3 rounds of space pirate attacks, with a boss in the final round.
+  m_text: 'Welcome to Raider Swarm! Survive 3 rounds as a pilot defending against
+    the Space Pirates. Destroy the objectives to move to the next round.
 
 
     K/M
@@ -4464,8 +4464,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 42
+  m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6158,6 +6158,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 6072609483273987846}
+  - {fileID: 103333530}
   - {fileID: 5311813692850459418}
   - {fileID: 2236856275530228838}
   - {fileID: 557666281}
@@ -6168,4 +6169,3 @@ SceneRoots:
   - {fileID: 730389900}
   - {fileID: 2110107896}
   - {fileID: 1865950642}
-  - {fileID: 103333530}
