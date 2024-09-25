@@ -1777,6 +1777,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7667770248904076402, guid: 8a3d0a6e87e773c439fcd7175cd579ed,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667770248904076402, guid: 8a3d0a6e87e773c439fcd7175cd579ed,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667770248904076402, guid: 8a3d0a6e87e773c439fcd7175cd579ed,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5311,11 +5326,6 @@ PrefabInstance:
       objectReference: {fileID: 42146831}
     - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
-      propertyPath: _countdown
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
-        type: 3}
       propertyPath: weaponText
       value: 
       objectReference: {fileID: 1838485381}
@@ -5339,16 +5349,6 @@ PrefabInstance:
       propertyPath: objectivesText
       value: 
       objectReference: {fileID: 1074828744}
-    - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
-        type: 3}
-      propertyPath: totalObjectives
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
-        type: 3}
-      propertyPath: nextLevelSceneId
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8184158546626661128, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: m_Name

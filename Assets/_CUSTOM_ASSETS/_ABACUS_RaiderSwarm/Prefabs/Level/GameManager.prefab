@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6791349992622571656}
   - component: {fileID: 7000244074242259778}
-  - component: {fileID: 2982750590360601855}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10f2d6fd629a3654db1919c3c92c27e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
   totalObjectives: 5
   scoreText: {fileID: 0}
   objectivesText: {fileID: 0}
@@ -53,18 +51,5 @@ MonoBehaviour:
   victoryText: {fileID: 0}
   weaponText: {fileID: 0}
   altFireText: {fileID: 0}
-  _countdown: 10
-  nextLevelSceneId: 11
---- !u!114 &2982750590360601855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8184158546626661128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9d37797dfec2084cb179b6bc2d9fb71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _countdownReturn: 12
+  _countdown: 5
+  nextLevelSceneId: 2
