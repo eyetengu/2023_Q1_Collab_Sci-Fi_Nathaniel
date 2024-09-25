@@ -91,7 +91,7 @@ namespace RaiderSwarm.Player
 
         private void Instance_OnRightPressed()
         {
-            if (!_isRightFacing && !_isRotating)
+            if (!_isRightFacing && !_isRotating && RSGameManager.Instance.GameStarted)
             {
                 StartCoroutine(RotatePlayer(RIGHT_ROTATION));
                 _isRightFacing = true;
@@ -100,7 +100,7 @@ namespace RaiderSwarm.Player
 
         private void Instance_OnLeftPressed()
         {
-            if (_isRightFacing && !_isRotating)
+            if (_isRightFacing && !_isRotating && RSGameManager.Instance.GameStarted)
             {
                 StartCoroutine(RotatePlayer(LEFT_ROTATION));
                 _isRightFacing = false;
@@ -109,7 +109,7 @@ namespace RaiderSwarm.Player
 
         private void FireProjectile(GameObject projectile)
         {
-            if (!_isRotating)
+            if (!_isRotating && RSGameManager.Instance.GameStarted)
             {
                 Instantiate(projectile, transform.position, transform.rotation);
             }
@@ -128,7 +128,7 @@ namespace RaiderSwarm.Player
 
         private void Update()
         {
-            if (RSGameInput.Instance != null)
+            if (RSGameInput.Instance != null && RSGameManager.Instance.GameStarted)
             {
                 Vector2 normalizedMoveDirection = RSGameInput.Instance.GetMovementNormalized();
                 float verticalVector = normalizedMoveDirection.y * VERTICAL_SPEED * Time.deltaTime;

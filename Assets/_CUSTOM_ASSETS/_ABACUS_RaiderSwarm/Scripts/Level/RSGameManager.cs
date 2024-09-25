@@ -13,7 +13,7 @@ namespace RaiderSwarm.Manager
     {
         private const string BIG_LAZER_TEXT = "Big Lazer";
         public static RSGameManager Instance;
-        public int totalObjectives = 10; // Set this to the total number of objectives in your game
+        public int totalObjectives = 1; // Set this to the total number of objectives in your game
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI objectivesText;
         public TextMeshProUGUI gameOverText;
@@ -21,7 +21,7 @@ namespace RaiderSwarm.Manager
 
         public TextMeshProUGUI weaponText;
         public TextMeshProUGUI altFireText;
-
+        public bool GameStarted = false;
         private int completedObjectives = 0;
         [SerializeField] private int _countdown;
         [SerializeField] private int nextLevelSceneId = 1;

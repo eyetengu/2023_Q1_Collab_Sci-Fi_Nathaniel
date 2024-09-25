@@ -1537,7 +1537,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557666278}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06998859, y: 0.0030883616, z: -0.00021668243, w: 0.99754304}
+  m_LocalRotation: {x: 0.06998859, y: 0.0030883958, z: -0.00021668483, w: 0.99754304}
   m_LocalPosition: {x: 1123.4727, y: 0, z: -188.07259}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4716,7 +4716,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935178130}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06998859, y: 0.0030883616, z: -0.00021668243, w: 0.99754304}
+  m_LocalRotation: {x: 0.06998859, y: 0.0030883958, z: -0.00021668483, w: 0.99754304}
   m_LocalPosition: {x: 1123.4727, y: 0, z: -188.07259}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5423,6 +5423,11 @@ PrefabInstance:
       propertyPath: weaponText
       value: 
       objectReference: {fileID: 1838485381}
+    - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
+        type: 3}
+      propertyPath: GameStarted
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: altFireText

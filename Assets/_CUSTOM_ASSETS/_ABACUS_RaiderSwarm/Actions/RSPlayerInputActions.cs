@@ -372,6 +372,45 @@ public partial class @RSPlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""RSUI"",
+            ""id"": ""fae7b557-ade2-41f9-ac1d-981bf739ed11"",
+            ""actions"": [
+                {
+                    ""name"": ""Accept"",
+                    ""type"": ""Button"",
+                    ""id"": ""2bc0bfd3-794d-4a3f-a3d2-453b9ec9ae19"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""da898936-e2ab-470f-874b-e84fd1ecde96"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accept"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""acb995c5-616a-46f0-9d59-c49bf9e15e6f"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accept"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -383,6 +422,9 @@ public partial class @RSPlayerInputActions: IInputActionCollection2, IDisposable
         m_RSPlayer_PrimaryFire = m_RSPlayer.FindAction("PrimaryFire", throwIfNotFound: true);
         m_RSPlayer_SecondaryFire = m_RSPlayer.FindAction("SecondaryFire", throwIfNotFound: true);
         m_RSPlayer_Move = m_RSPlayer.FindAction("Move", throwIfNotFound: true);
+        // RSUI
+        m_RSUI = asset.FindActionMap("RSUI", throwIfNotFound: true);
+        m_RSUI_Accept = m_RSUI.FindAction("Accept", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -518,6 +560,52 @@ public partial class @RSPlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public RSPlayerActions @RSPlayer => new RSPlayerActions(this);
+
+    // RSUI
+    private readonly InputActionMap m_RSUI;
+    private List<IRSUIActions> m_RSUIActionsCallbackInterfaces = new List<IRSUIActions>();
+    private readonly InputAction m_RSUI_Accept;
+    public struct RSUIActions
+    {
+        private @RSPlayerInputActions m_Wrapper;
+        public RSUIActions(@RSPlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Accept => m_Wrapper.m_RSUI_Accept;
+        public InputActionMap Get() { return m_Wrapper.m_RSUI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(RSUIActions set) { return set.Get(); }
+        public void AddCallbacks(IRSUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_RSUIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_RSUIActionsCallbackInterfaces.Add(instance);
+            @Accept.started += instance.OnAccept;
+            @Accept.performed += instance.OnAccept;
+            @Accept.canceled += instance.OnAccept;
+        }
+
+        private void UnregisterCallbacks(IRSUIActions instance)
+        {
+            @Accept.started -= instance.OnAccept;
+            @Accept.performed -= instance.OnAccept;
+            @Accept.canceled -= instance.OnAccept;
+        }
+
+        public void RemoveCallbacks(IRSUIActions instance)
+        {
+            if (m_Wrapper.m_RSUIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IRSUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_RSUIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_RSUIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public RSUIActions @RSUI => new RSUIActions(this);
     public interface IRSPlayerActions
     {
         void OnLeft(InputAction.CallbackContext context);
@@ -525,5 +613,9 @@ public partial class @RSPlayerInputActions: IInputActionCollection2, IDisposable
         void OnPrimaryFire(InputAction.CallbackContext context);
         void OnSecondaryFire(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+    }
+    public interface IRSUIActions
+    {
+        void OnAccept(InputAction.CallbackContext context);
     }
 }

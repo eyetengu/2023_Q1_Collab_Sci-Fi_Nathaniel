@@ -19,12 +19,15 @@ namespace RaiderSwarm.Enemy
         }
         void Update()
         {
-            timer += Time.deltaTime;
-
-            if (timer >= spawnInterval)
+            if (RSGameManager.Instance.GameStarted)
             {
-                SpawnEnemy();
-                timer = 0f;
+                timer += Time.deltaTime;
+
+                if (timer >= spawnInterval)
+                {
+                    SpawnEnemy();
+                    timer = 0f;
+                }
             }
         }
 
