@@ -11,7 +11,7 @@ namespace RaiderSwarm.Manager
 
     public class RSGameManager : MonoBehaviour
     {
-        private const string BIG_BULLET_TEXT = "Big Lazer";
+        private const string BIG_LAZER_TEXT = "Big Lazer";
         public static RSGameManager Instance;
         public int totalObjectives = 10; // Set this to the total number of objectives in your game
         public TextMeshProUGUI scoreText;
@@ -64,27 +64,20 @@ namespace RaiderSwarm.Manager
         }
         public void UpdateWeapon(RSWeaponType weaponType)
         {
-            if (weaponText != null)
+            if (weaponText == null) return;
+
+            weaponText.text = weaponType switch
             {
-                switch (weaponType)
-                {
-                    case RSWeaponType.BigBullet:
-                        weaponText.text = BIG_BULLET_TEXT;
-                        break;
-                    case RSWeaponType.Bullet:
-                    case RSWeaponType.None:
-                    default:
-                        weaponText.text = weaponType.ToString();
-                        break;
-                }
-            }
+                RSWeaponType.BIGLAZER => BIG_LAZER_TEXT,
+                _ => weaponType.ToString()
+            };
         }
 
         public void UpdateAltWeapon(RSAlternateFireTypes altFireType)
         {
             if (altFireText != null)
             {
-                altFireText.text = altFireType.ToString();
+                altFireText.text = altFireType.ToString().ToUpper();
             }
         }
 

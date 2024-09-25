@@ -130,7 +130,7 @@ MonoBehaviour:
   _damage: 100
   amplitude: 0.25
   period: 0.1
-  speed: 0.35
+  speed: 0.5
 --- !u!1001 &9147454823050330021
 PrefabInstance:
   m_ObjectHideFlags: 0

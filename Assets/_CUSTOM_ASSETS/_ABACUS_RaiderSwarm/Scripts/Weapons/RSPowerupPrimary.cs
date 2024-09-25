@@ -25,7 +25,7 @@ namespace RaiderSwarm.Powerup
             if (RSPlayer.Instance != null)
             {
                 RSPlayer.Instance.hasPrimaryPowerup = true;
-                RSGameManager.Instance.UpdateWeapon(RSWeaponType.BigBullet);
+                RSGameManager.Instance.UpdateWeapon(RSWeaponType.BIGLAZER);
                 Visuals.SetActive(false);
                 var boxCollider = GetComponent<BoxCollider>();
                 boxCollider.enabled = false;
@@ -33,7 +33,7 @@ namespace RaiderSwarm.Powerup
                 yield return new WaitForSeconds(duration);
 
                 RSPlayer.Instance.hasPrimaryPowerup = false;
-                RSGameManager.Instance.UpdateWeapon(RSWeaponType.Bullet);
+                RSGameManager.Instance.UpdateWeapon(RSWeaponType.BULLET);
                 Destroy(gameObject);
             }
         }
