@@ -116,7 +116,8 @@ public class Enemy_V3 : MonoBehaviour
         //OUTSIDE OF TRACKING RANGE
         else if (distance > 20)
         {
-            _enemyFiring.Firing = false;
+            if(_enemyFiring != null)
+                _enemyFiring.Firing = false;
         }
     }
 
