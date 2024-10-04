@@ -1397,7 +1397,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557666278}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.072942056, y: 0.0030873942, z: -0.00022580348, w: 0.9973314}
+  m_LocalRotation: {x: 0.072942056, y: 0.0030874028, z: -0.00022580409, w: 0.9973314}
   m_LocalPosition: {x: 6.8311462, y: 0, z: -181.1584}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1770,10 +1770,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1745093117652406728, guid: 59eeda09f4a88d04984339197ef511ba,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1860971248829286872, guid: 59eeda09f4a88d04984339197ef511ba,
         type: 3}
       propertyPath: m_Name
       value: Boss_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604006935911490907, guid: 59eeda09f4a88d04984339197ef511ba,
+        type: 3}
+      propertyPath: ignorePlayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4538,7 +4548,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935178130}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.072942056, y: 0.0030873942, z: -0.00022580348, w: 0.9973314}
+  m_LocalRotation: {x: 0.072942056, y: 0.0030874028, z: -0.00022580409, w: 0.9973314}
   m_LocalPosition: {x: 6.8311462, y: 0, z: -181.1584}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

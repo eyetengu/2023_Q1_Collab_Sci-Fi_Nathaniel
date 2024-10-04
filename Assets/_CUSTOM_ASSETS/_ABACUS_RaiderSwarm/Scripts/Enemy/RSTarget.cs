@@ -9,6 +9,7 @@ public class RSTarget : MonoBehaviour, IRSEnemy
 {
     private RSActivator _activator;
     private HealthComponent _healthComponent;
+    [SerializeField] private bool ignorePlayer = false;
     public void TakeDamage(int damage)
     {
         _healthComponent.Damage(damage);
@@ -21,7 +22,7 @@ public class RSTarget : MonoBehaviour, IRSEnemy
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == RSPlayer.Instance?.gameObject)
+        if (other.gameObject == RSPlayer.Instance?.gameObject && !ignorePlayer)
         {
             Destroy(other.gameObject);
             if (RSGameManager.Instance != null)
