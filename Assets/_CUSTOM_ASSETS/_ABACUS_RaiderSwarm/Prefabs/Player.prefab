@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 4971834904571717365}
   - component: {fileID: 5755062887944433134}
   - component: {fileID: 4676310727320053073}
-  - component: {fileID: 3189304831499411002}
+  - component: {fileID: 6686235984595720414}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -333,7 +333,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 26.31, y: 6, z: 18.77}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &3189304831499411002
+--- !u!54 &6686235984595720414
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -369,6 +369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 790691407701369995}
+  - component: {fileID: 102251030513024580}
   m_Layer: 0
   m_Name: VIsuals
   m_TagString: Untagged
@@ -392,6 +393,27 @@ Transform:
   - {fileID: 7667770248904076402}
   m_Father: {fileID: 4971834904571717365}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &102251030513024580
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7637126884944725483}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a3a81f9aa49fbc54f843b8ef071f2ad5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8097465150193199816
 GameObject:
   m_ObjectHideFlags: 0
