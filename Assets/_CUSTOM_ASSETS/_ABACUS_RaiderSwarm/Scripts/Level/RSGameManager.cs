@@ -46,7 +46,7 @@ namespace RaiderSwarm.Manager
         }
         private void Update()
         {
-            if ((Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Start")) && !GameStarted)
+            if (Input.GetKeyDown(KeyCode.R) && !GameStarted)
             {
                 StartCoroutine(WaitForNextRound(SceneManager.GetActiveScene().buildIndex, 0));
             }
