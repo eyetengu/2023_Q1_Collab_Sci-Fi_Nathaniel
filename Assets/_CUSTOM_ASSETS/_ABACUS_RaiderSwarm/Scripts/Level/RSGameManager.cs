@@ -44,7 +44,13 @@ namespace RaiderSwarm.Manager
             gameOverText.gameObject.SetActive(false);
             victoryText.gameObject.SetActive(false);
         }
-
+        private void Update()
+        {
+            if ((Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Start")) && !GameStarted)
+            {
+                StartCoroutine(WaitForNextRound(SceneManager.GetActiveScene().buildIndex, 0));
+            }
+        }
         public void AddScore(int points)
         {
             RSScoreManager.Instance.AddScore(points);
@@ -57,7 +63,7 @@ namespace RaiderSwarm.Manager
             if (completedObjectives >= totalObjectives && !victoryText.IsDestroyed())
             {
                 victoryText.gameObject.SetActive(true);
-                StartCoroutine(WaitForNextRound(nextLevelSceneId));
+                StartCoroutine(WaitForNextRound(nextLevelSceneId, _countdown));
 
             }
             UpdateUI();
@@ -104,12 +110,12 @@ namespace RaiderSwarm.Manager
         public void GameOver()
         {
             gameOverText.gameObject.SetActive(true);
-            StartCoroutine(WaitForNextRound(SceneManager.GetActiveScene().buildIndex));
+            GameStarted = false;
         }
 
-        IEnumerator WaitForNextRound(int sceneId)
+        IEnumerator WaitForNextRound(int sceneId, int countdown)
         {
-            for (int i = 0; i < _countdown; i++)
+            for (int i = 0; i < countdown; i++)
             {
                 yield return new WaitForSeconds(1f);
                 Debug.Log(".");
