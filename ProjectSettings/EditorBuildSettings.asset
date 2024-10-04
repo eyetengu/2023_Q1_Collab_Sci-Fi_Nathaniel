@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_CUSTOM_ASSETS/_ABACUS_RaiderSwarm/Scenes/RS_Level_02.unity
     guid: de343aacf27b68d4992054e77627fdfe
+  - enabled: 1
+    path: Assets/_CUSTOM_ASSETS/_ABACUS_RaiderSwarm/Scenes/RS_Level_03.unity
+    guid: 312b1a3965edcf8448c672ec6a127490
+  - enabled: 1
+    path: Assets/_CUSTOM_ASSETS/_ABACUS_RaiderSwarm/Scenes/RS_Credits.unity
+    guid: 8134d1ac6dd3e1d40a9fd80e8ba1501a
   m_configObjects: {}

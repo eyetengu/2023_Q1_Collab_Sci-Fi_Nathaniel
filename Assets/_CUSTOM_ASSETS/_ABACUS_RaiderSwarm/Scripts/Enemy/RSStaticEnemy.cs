@@ -33,7 +33,10 @@ namespace RaiderSwarm.Enemy
 
         void SpawnEnemy()
         {
-            Instantiate(enemyPrefab, transform.position, transform.rotation);
+            if (enemyPrefab != null)
+            {
+                Instantiate(enemyPrefab, transform.position, transform.rotation);
+            }
         }
 
         public void TakeDamage(int damage)
