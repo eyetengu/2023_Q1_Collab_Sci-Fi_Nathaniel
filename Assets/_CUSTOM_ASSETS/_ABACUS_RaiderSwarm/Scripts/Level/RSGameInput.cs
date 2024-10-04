@@ -14,12 +14,14 @@ namespace RaiderSwarm.Manager
         public delegate void Right_Pressed();
         public delegate void Fire_Pressed();
         public delegate void Secondary_Pressed();
+        public delegate void Restart_Pressed();
 
         // Define an event based on that delegate.
         public event Left_Pressed OnLeftPressed;
         public event Right_Pressed OnRightPressed;
         public event Fire_Pressed OnFirePressed;
         public event Secondary_Pressed OnSecondaryPressed;
+        public event Restart_Pressed OnRestartPressed;
 
         private void Awake()
         {
@@ -40,7 +42,9 @@ namespace RaiderSwarm.Manager
             _actions.RSPlayer.Right.performed += Right_performed;
             _actions.RSPlayer.PrimaryFire.performed += PrimaryFire_performed;
             _actions.RSPlayer.SecondaryFire.performed += SecondaryFire_performed;
+            _actions.RSPlayer.Restart.performed += Restart_performed;
         }
+
 
         private void OnDisable()
         {
@@ -48,6 +52,7 @@ namespace RaiderSwarm.Manager
             _actions.RSPlayer.Right.performed -= Right_performed;
             _actions.RSPlayer.PrimaryFire.performed -= PrimaryFire_performed;
             _actions.RSPlayer.SecondaryFire.performed -= SecondaryFire_performed;
+            _actions.RSPlayer.Restart.performed -= Restart_performed;
             _actions.RSPlayer.Disable();
         }
 
@@ -56,6 +61,10 @@ namespace RaiderSwarm.Manager
             var moveDirection = _actions.RSPlayer.Move.ReadValue<Vector2>();
             var normalizedMoveDirection = moveDirection.normalized;
             return normalizedMoveDirection;
+        }
+        private void Restart_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+        {
+            OnRestartPressed?.Invoke();
         }
 
         private void Right_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)

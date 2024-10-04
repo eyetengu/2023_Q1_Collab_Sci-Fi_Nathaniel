@@ -38,19 +38,29 @@ namespace RaiderSwarm.Manager
                 Instance = this;
             }
         }
+        private void OnEnable()
+        {
+            if (RSGameInput.Instance != null)
+            {
+                RSGameInput.Instance.OnRestartPressed += Instance_OnRestartPressed; ;
+            }
+        }
+
+        private void Instance_OnRestartPressed()
+        {
+            if (!GameStarted)
+            {
+                StartCoroutine(WaitForNextRound(SceneManager.GetActiveScene().buildIndex, 0));
+            }
+        }
+
         void Start()
         {
             UpdateUI();
             gameOverText.gameObject.SetActive(false);
             victoryText.gameObject.SetActive(false);
         }
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.R) && !GameStarted)
-            {
-                StartCoroutine(WaitForNextRound(SceneManager.GetActiveScene().buildIndex, 0));
-            }
-        }
+
         public void AddScore(int points)
         {
             RSScoreManager.Instance.AddScore(points);
