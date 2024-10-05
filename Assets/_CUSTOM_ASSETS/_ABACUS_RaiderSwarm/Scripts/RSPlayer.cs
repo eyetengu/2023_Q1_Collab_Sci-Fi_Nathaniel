@@ -30,7 +30,7 @@ namespace RaiderSwarm.Player
         private bool _isRotating;
         private float _fireRate = 0.75f;
         private float _canFire = -1;
-
+        private Animator animator;
         private void Awake()
         {
             if (Instance != null)
@@ -119,6 +119,8 @@ namespace RaiderSwarm.Player
         {
             StartCoroutine(RotatePlayer(RIGHT_ROTATION));
             _isRightFacing = true;
+            animator = GetComponent<Animator>();
+
         }
 
         private void OnDestroy()
@@ -135,12 +137,21 @@ namespace RaiderSwarm.Player
 
                 if (!_isRotating)
                 {
+                    if (animator != null)
+                    {
+                        animator.SetFloat("yDirection", normalizedMoveDirection.y);
+                    }
                     float forwardVector = (FORWARD_FORCE + Mathf.Abs(normalizedMoveDirection.x)) * SPEED * Time.deltaTime;
                     var targetVector = new Vector3(0, verticalVector, forwardVector);
                     transform.Translate(targetVector);
                 }
                 else
                 {
+                    if (animator != null)
+                    {
+                        animator.SetFloat("yDirection", 0f);
+                    }
+
                     var targetVector = new Vector3(transform.position.x, transform.position.y, 0);
                     transform.position = targetVector;
 
