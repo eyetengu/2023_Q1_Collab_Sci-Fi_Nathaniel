@@ -119,7 +119,7 @@ namespace RaiderSwarm.Player
         {
             StartCoroutine(RotatePlayer(RIGHT_ROTATION));
             _isRightFacing = true;
-            animator = GetComponent<Animator>();
+            animator = GetComponentInChildren<Animator>();
 
         }
 
