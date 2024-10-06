@@ -2091,7 +2091,9 @@ MonoBehaviour:
     OVER
 
 
-    Press R to restart'
+    Press R to restart
+
+    or Start on Controller'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6e44388df9d6e1a4c9695067da5f47cc, type: 2}
   m_sharedMaterial: {fileID: -2297196077212902361, guid: 6e44388df9d6e1a4c9695067da5f47cc,
@@ -2119,8 +2121,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 120
-  m_fontSizeBase: 120
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
