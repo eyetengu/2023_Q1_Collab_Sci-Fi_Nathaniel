@@ -22,6 +22,7 @@ namespace RaiderSwarm.Manager
         public TextMeshProUGUI weaponText;
         public TextMeshProUGUI altFireText;
         public bool GameStarted = false;
+        private bool isGameOver;
         private int completedObjectives = 0;
         [SerializeField] private int _countdown;
         [SerializeField] private int nextLevelSceneId = 1;
@@ -48,7 +49,7 @@ namespace RaiderSwarm.Manager
 
         private void Instance_OnRestartPressed()
         {
-            if (!GameStarted)
+            if (isGameOver)
             {
                 StartCoroutine(WaitForNextRound(SceneManager.GetActiveScene().buildIndex, 0));
             }
@@ -121,6 +122,7 @@ namespace RaiderSwarm.Manager
         {
             gameOverText.gameObject.SetActive(true);
             GameStarted = false;
+            isGameOver = true;
         }
 
         IEnumerator WaitForNextRound(int sceneId, int countdown)
