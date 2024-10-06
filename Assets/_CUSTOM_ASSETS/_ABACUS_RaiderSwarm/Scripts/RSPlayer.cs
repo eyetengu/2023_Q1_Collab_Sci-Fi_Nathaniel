@@ -145,7 +145,7 @@ namespace RaiderSwarm.Player
                     var targetVector = new Vector3(0, verticalVector, forwardVector);
                     transform.Translate(targetVector);
                 }
-                else
+                else              
                 {
                     if (animator != null)
                     {
