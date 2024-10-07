@@ -74,6 +74,7 @@ namespace RaiderSwarm.Manager
             if (completedObjectives >= totalObjectives && !victoryText.IsDestroyed())
             {
                 victoryText.gameObject.SetActive(true);
+                GameStarted = false;
                 StartCoroutine(WaitForNextRound(nextLevelSceneId, _countdown));
 
             }
@@ -130,9 +131,12 @@ namespace RaiderSwarm.Manager
 
         public void GameOver()
         {
-            gameOverText.gameObject.SetActive(true);
-            GameStarted = false;
-            isGameOver = true;
+            if (GameStarted)
+            {
+                gameOverText.gameObject.SetActive(true);
+                GameStarted = false;
+                isGameOver = true;
+            }
         }
 
         IEnumerator WaitForNextRound(int sceneId, int countdown)
