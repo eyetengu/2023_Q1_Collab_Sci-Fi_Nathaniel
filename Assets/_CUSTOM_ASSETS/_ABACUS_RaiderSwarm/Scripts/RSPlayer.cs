@@ -117,9 +117,10 @@ namespace RaiderSwarm.Player
 
         private void Start()
         {
+            animator = GetComponentInChildren<Animator>();
+
             StartCoroutine(RotatePlayer(RIGHT_ROTATION));
             _isRightFacing = true;
-            animator = GetComponentInChildren<Animator>();
 
         }
 
@@ -168,6 +169,7 @@ namespace RaiderSwarm.Player
                 yield return null;
             }
             _isRotating = true;
+            animator.SetTrigger("rs_player_rotate");
             float currentRotation = transform.eulerAngles.y;
             float startRotation = currentRotation;
             float endRotation = targetRotation;
@@ -180,6 +182,7 @@ namespace RaiderSwarm.Player
                 transform.eulerAngles = new Vector3(0, yRotation, 0);
                 yield return null;
             }
+            animator.SetTrigger("rs_player_idle");
 
             _isRotating = false;
         }
