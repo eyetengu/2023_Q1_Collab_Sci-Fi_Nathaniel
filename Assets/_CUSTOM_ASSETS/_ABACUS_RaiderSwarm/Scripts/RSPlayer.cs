@@ -30,7 +30,7 @@ namespace RaiderSwarm.Player
         private bool _isRotating;
         private float _fireRate = 0.75f;
         private float _canFire = -1;
-
+        private Animator animator;
         private void Awake()
         {
             if (Instance != null)
@@ -91,7 +91,7 @@ namespace RaiderSwarm.Player
 
         private void Instance_OnRightPressed()
         {
-            if (!_isRightFacing && !_isRotating)
+            if (!_isRightFacing && !_isRotating && RSGameManager.Instance.GameStarted)
             {
                 StartCoroutine(RotatePlayer(RIGHT_ROTATION));
                 _isRightFacing = true;
@@ -100,7 +100,7 @@ namespace RaiderSwarm.Player
 
         private void Instance_OnLeftPressed()
         {
-            if (_isRightFacing && !_isRotating)
+            if (_isRightFacing && !_isRotating && RSGameManager.Instance.GameStarted)
             {
                 StartCoroutine(RotatePlayer(LEFT_ROTATION));
                 _isRightFacing = false;
@@ -109,7 +109,7 @@ namespace RaiderSwarm.Player
 
         private void FireProjectile(GameObject projectile)
         {
-            if (!_isRotating)
+            if (!_isRotating && RSGameManager.Instance.GameStarted)
             {
                 Instantiate(projectile, transform.position, transform.rotation);
             }
@@ -117,8 +117,9 @@ namespace RaiderSwarm.Player
 
         private void Start()
         {
-            StartCoroutine(RotatePlayer(RIGHT_ROTATION));
+            animator = GetComponentInChildren<Animator>();
             _isRightFacing = true;
+
         }
 
         private void OnDestroy()
@@ -128,19 +129,28 @@ namespace RaiderSwarm.Player
 
         private void Update()
         {
-            if (RSGameInput.Instance != null)
+            if (RSGameInput.Instance != null && RSGameManager.Instance.GameStarted)
             {
                 Vector2 normalizedMoveDirection = RSGameInput.Instance.GetMovementNormalized();
                 float verticalVector = normalizedMoveDirection.y * VERTICAL_SPEED * Time.deltaTime;
 
                 if (!_isRotating)
                 {
+                    if (animator != null)
+                    {
+                        animator.SetFloat("yDirection", normalizedMoveDirection.y);
+                    }
                     float forwardVector = (FORWARD_FORCE + Mathf.Abs(normalizedMoveDirection.x)) * SPEED * Time.deltaTime;
                     var targetVector = new Vector3(0, verticalVector, forwardVector);
                     transform.Translate(targetVector);
                 }
-                else
+                else              
                 {
+                    if (animator != null)
+                    {
+                        animator.SetFloat("yDirection", 0f);
+                    }
+
                     var targetVector = new Vector3(transform.position.x, transform.position.y, 0);
                     transform.position = targetVector;
 
@@ -152,11 +162,13 @@ namespace RaiderSwarm.Player
 
         private IEnumerator RotatePlayer(float targetRotation)
         {
-            if (_isRotating == true)
+            if (_isRotating == true || RSGameManager.Instance.GameStarted)
             {
                 yield return null;
             }
             _isRotating = true;
+
+            animator.SetTrigger("rs_player_rotate");
             float currentRotation = transform.eulerAngles.y;
             float startRotation = currentRotation;
             float endRotation = targetRotation;
@@ -169,6 +181,7 @@ namespace RaiderSwarm.Player
                 transform.eulerAngles = new Vector3(0, yRotation, 0);
                 yield return null;
             }
+            animator.SetTrigger("rs_player_idle");
 
             _isRotating = false;
         }

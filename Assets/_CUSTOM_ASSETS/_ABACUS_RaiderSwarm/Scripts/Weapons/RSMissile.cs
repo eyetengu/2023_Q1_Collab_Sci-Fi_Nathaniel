@@ -13,10 +13,13 @@ namespace RaiderSwarm.Weapon
         [SerializeField] private float speed = 0.25f; // Speed of the movement
 
         private float startTime;
+        private Camera _camera;
 
         void Start()
         {
             startTime = Time.time;
+            _camera = Camera.main;
+
         }
 
         void Update()
@@ -30,6 +33,16 @@ namespace RaiderSwarm.Weapon
             Vector3 newPosition = transform.position + forwardMovement + new Vector3(0f, y, 0f);
 
             transform.position = newPosition;
+            CheckCameraViewPortBeforeDestroy();
         }
+        private void CheckCameraViewPortBeforeDestroy()
+        {
+            var screenCoordinate = _camera.WorldToScreenPoint(transform.position);
+            if (screenCoordinate.x > _camera.pixelWidth || screenCoordinate.x < 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+
     }
 }

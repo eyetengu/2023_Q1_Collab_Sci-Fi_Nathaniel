@@ -71,6 +71,15 @@ public partial class @RSPlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""7504d4e4-0838-4753-915a-86c465406f2f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -370,6 +379,122 @@ public partial class @RSPlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Dpad"",
+                    ""id"": ""3ebce176-6b79-45f1-8fd5-7bbd57acc97c"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""92f76b7c-b42b-4059-b3c0-3e5471bad716"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""95c241c7-1e84-48dc-a900-2b9f1f42cfa1"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""973ca43b-ea0d-4da3-a914-4f96fa7383b7"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""9205d031-2e6f-4b14-9404-c17e883ea015"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf690d0f-4a56-4356-b1d5-94240bd4de0b"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ac2e37f-eaf1-4d05-af80-872e6b924e97"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""RSUI"",
+            ""id"": ""fae7b557-ade2-41f9-ac1d-981bf739ed11"",
+            ""actions"": [
+                {
+                    ""name"": ""Accept"",
+                    ""type"": ""Button"",
+                    ""id"": ""2bc0bfd3-794d-4a3f-a3d2-453b9ec9ae19"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""da898936-e2ab-470f-874b-e84fd1ecde96"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accept"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""acb995c5-616a-46f0-9d59-c49bf9e15e6f"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accept"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -383,6 +508,10 @@ public partial class @RSPlayerInputActions: IInputActionCollection2, IDisposable
         m_RSPlayer_PrimaryFire = m_RSPlayer.FindAction("PrimaryFire", throwIfNotFound: true);
         m_RSPlayer_SecondaryFire = m_RSPlayer.FindAction("SecondaryFire", throwIfNotFound: true);
         m_RSPlayer_Move = m_RSPlayer.FindAction("Move", throwIfNotFound: true);
+        m_RSPlayer_Restart = m_RSPlayer.FindAction("Restart", throwIfNotFound: true);
+        // RSUI
+        m_RSUI = asset.FindActionMap("RSUI", throwIfNotFound: true);
+        m_RSUI_Accept = m_RSUI.FindAction("Accept", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -449,6 +578,7 @@ public partial class @RSPlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_RSPlayer_PrimaryFire;
     private readonly InputAction m_RSPlayer_SecondaryFire;
     private readonly InputAction m_RSPlayer_Move;
+    private readonly InputAction m_RSPlayer_Restart;
     public struct RSPlayerActions
     {
         private @RSPlayerInputActions m_Wrapper;
@@ -458,6 +588,7 @@ public partial class @RSPlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @PrimaryFire => m_Wrapper.m_RSPlayer_PrimaryFire;
         public InputAction @SecondaryFire => m_Wrapper.m_RSPlayer_SecondaryFire;
         public InputAction @Move => m_Wrapper.m_RSPlayer_Move;
+        public InputAction @Restart => m_Wrapper.m_RSPlayer_Restart;
         public InputActionMap Get() { return m_Wrapper.m_RSPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -482,6 +613,9 @@ public partial class @RSPlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Restart.started += instance.OnRestart;
+            @Restart.performed += instance.OnRestart;
+            @Restart.canceled += instance.OnRestart;
         }
 
         private void UnregisterCallbacks(IRSPlayerActions instance)
@@ -501,6 +635,9 @@ public partial class @RSPlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Restart.started -= instance.OnRestart;
+            @Restart.performed -= instance.OnRestart;
+            @Restart.canceled -= instance.OnRestart;
         }
 
         public void RemoveCallbacks(IRSPlayerActions instance)
@@ -518,6 +655,52 @@ public partial class @RSPlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public RSPlayerActions @RSPlayer => new RSPlayerActions(this);
+
+    // RSUI
+    private readonly InputActionMap m_RSUI;
+    private List<IRSUIActions> m_RSUIActionsCallbackInterfaces = new List<IRSUIActions>();
+    private readonly InputAction m_RSUI_Accept;
+    public struct RSUIActions
+    {
+        private @RSPlayerInputActions m_Wrapper;
+        public RSUIActions(@RSPlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Accept => m_Wrapper.m_RSUI_Accept;
+        public InputActionMap Get() { return m_Wrapper.m_RSUI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(RSUIActions set) { return set.Get(); }
+        public void AddCallbacks(IRSUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_RSUIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_RSUIActionsCallbackInterfaces.Add(instance);
+            @Accept.started += instance.OnAccept;
+            @Accept.performed += instance.OnAccept;
+            @Accept.canceled += instance.OnAccept;
+        }
+
+        private void UnregisterCallbacks(IRSUIActions instance)
+        {
+            @Accept.started -= instance.OnAccept;
+            @Accept.performed -= instance.OnAccept;
+            @Accept.canceled -= instance.OnAccept;
+        }
+
+        public void RemoveCallbacks(IRSUIActions instance)
+        {
+            if (m_Wrapper.m_RSUIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IRSUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_RSUIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_RSUIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public RSUIActions @RSUI => new RSUIActions(this);
     public interface IRSPlayerActions
     {
         void OnLeft(InputAction.CallbackContext context);
@@ -525,5 +708,10 @@ public partial class @RSPlayerInputActions: IInputActionCollection2, IDisposable
         void OnPrimaryFire(InputAction.CallbackContext context);
         void OnSecondaryFire(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnRestart(InputAction.CallbackContext context);
+    }
+    public interface IRSUIActions
+    {
+        void OnAccept(InputAction.CallbackContext context);
     }
 }
