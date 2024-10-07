@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 0
-  MaxHealth: 200
+  MaxHealth: 150
 --- !u!65 &2057832445948933871
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -162,8 +162,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 55, y: 25, z: 55}
-  m_Center: {x: 0, y: -26.39, z: 0}
+  m_Size: {x: 15, y: 15, z: 15}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5888625222370999983
 PrefabInstance:
   m_ObjectHideFlags: 0
