@@ -5603,7 +5603,7 @@ PrefabInstance:
         type: 3}
       propertyPath: scoreText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 913637035}
     - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: _countdown
@@ -5613,7 +5613,7 @@ PrefabInstance:
         type: 3}
       propertyPath: weaponText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 737770535}
     - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: GameStarted
@@ -5623,22 +5623,22 @@ PrefabInstance:
         type: 3}
       propertyPath: altFireText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 180806144}
     - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: victoryText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1221311699}
     - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: gameOverText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 865323158}
     - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: objectivesText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 776929813}
     - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: totalObjectives

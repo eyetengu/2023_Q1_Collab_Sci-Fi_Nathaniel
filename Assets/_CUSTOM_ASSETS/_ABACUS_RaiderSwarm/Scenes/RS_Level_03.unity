@@ -1569,7 +1569,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557666278}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.072942056, y: 0.0030874028, z: -0.00022580409, w: 0.9973314}
+  m_LocalRotation: {x: 0.043718655, y: 0.0030926848, z: -0.0001353381, w: 0.9990391}
   m_LocalPosition: {x: 6.8311462, y: 0, z: -181.1584}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3879,11 +3879,11 @@ MonoBehaviour:
   m_HorizontalDamping: 0.5
   m_VerticalDamping: 0.5
   m_ScreenX: 0.5
-  m_ScreenY: 0.366
+  m_ScreenY: 0.421
   m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0.4
+  m_DeadZoneHeight: 0.349
   m_SoftZoneWidth: 0.051
-  m_SoftZoneHeight: 0.45
+  m_SoftZoneHeight: 0.349
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
@@ -4304,7 +4304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935178130}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.072942056, y: 0.0030874028, z: -0.00022580409, w: 0.9973314}
+  m_LocalRotation: {x: 0.043718655, y: 0.0030926848, z: -0.0001353381, w: 0.9990391}
   m_LocalPosition: {x: 6.8311462, y: 0, z: -181.1584}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5086,7 +5086,7 @@ PrefabInstance:
         type: 3}
       propertyPath: scoreText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1302479388}
     - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: _countdown
@@ -5096,7 +5096,7 @@ PrefabInstance:
         type: 3}
       propertyPath: weaponText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 385424613}
     - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: GameStarted
@@ -5106,22 +5106,22 @@ PrefabInstance:
         type: 3}
       propertyPath: altFireText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2130343493}
     - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: victoryText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 921954683}
     - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: gameOverText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 850325349}
     - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: objectivesText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1469946737}
     - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: totalObjectives
