@@ -88,6 +88,10 @@ namespace RaiderSwarm.Manager
                 RSWeaponType.BIGLAZER => BIG_LAZER_TEXT,
                 _ => weaponType.ToString()
             };
+            weaponText.color = weaponType switch { 
+                RSWeaponType.BIGLAZER => Color.red, 
+                _ => Color.white 
+            };
         }
 
         public void UpdateAltWeapon(RSAlternateFireTypes altFireType)
@@ -96,6 +100,12 @@ namespace RaiderSwarm.Manager
             {
                 altFireText.text = altFireType.ToString().ToUpper();
             }
+            altFireText.color = altFireType switch
+            {
+                RSAlternateFireTypes.MISSILE => Color.red,
+                _ => Color.white
+            };
+
         }
 
         void UpdateUI()
