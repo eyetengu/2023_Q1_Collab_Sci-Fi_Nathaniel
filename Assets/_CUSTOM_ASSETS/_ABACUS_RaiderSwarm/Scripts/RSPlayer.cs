@@ -164,11 +164,12 @@ namespace RaiderSwarm.Player
 
         private IEnumerator RotatePlayer(float targetRotation)
         {
-            if (_isRotating == true)
+            if (_isRotating == true || RSGameManager.Instance.GameStarted)
             {
                 yield return null;
             }
             _isRotating = true;
+
             animator.SetTrigger("rs_player_rotate");
             float currentRotation = transform.eulerAngles.y;
             float startRotation = currentRotation;
