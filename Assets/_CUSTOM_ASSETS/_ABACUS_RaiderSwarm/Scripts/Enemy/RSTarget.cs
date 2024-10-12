@@ -24,11 +24,8 @@ public class RSTarget : MonoBehaviour, IRSEnemy
     {
         if (other.gameObject == RSPlayer.Instance?.gameObject && !ignorePlayer)
         {
-            Destroy(other.gameObject);
-            if (RSGameManager.Instance != null)
-            {
-                RSGameManager.Instance.GameOver();
-            }
+            RSPlayer.Instance.DestroyPlayer();
+            
 
         }
 

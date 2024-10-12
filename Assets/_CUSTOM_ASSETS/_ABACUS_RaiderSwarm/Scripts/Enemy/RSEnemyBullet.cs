@@ -17,8 +17,7 @@ public class RSEnemyBullet : MonoBehaviour
     {
         if (other.gameObject == RSPlayer.Instance.gameObject) 
         {
-            Destroy(other.gameObject);
-            RSGameManager.Instance.GameOver();
+            RSPlayer.Instance.DestroyPlayer();
         }
     }
 }

@@ -47,12 +47,7 @@ namespace RaiderSwarm.Enemy
         {
             if (other.gameObject == RSPlayer.Instance?.gameObject)
             {
-                Destroy(other.gameObject);
-                if (RSGameManager.Instance != null)
-                {
-                    RSGameManager.Instance.GameOver();
-                }
-
+                RSPlayer.Instance.DestroyPlayer();
             }
 
             IDamage iDamage = other.gameObject.GetComponent<IDamage>();

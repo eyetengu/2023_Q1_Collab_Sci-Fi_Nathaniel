@@ -1,4 +1,5 @@
 using RaiderSwarm.Manager;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,14 +31,19 @@ namespace RaiderSwarm.Player
         private bool _isRotating;
         private float _fireRate = 0.75f;
         private float _canFire = -1;
-        private Animator animator;
+        private Animator _animator;
+
         private void Awake()
         {
             if (Instance != null)
             {
                 Debug.LogError("Too many player instances!");
+                Destroy(gameObject);
             }
-            Instance = this;
+            else
+            {
+                Instance = this;
+            }
         }
         private void OnEnable()
         {
@@ -117,14 +123,9 @@ namespace RaiderSwarm.Player
 
         private void Start()
         {
-            animator = GetComponentInChildren<Animator>();
+            _animator = GetComponentInChildren<Animator>();
             _isRightFacing = true;
 
-        }
-
-        private void OnDestroy()
-        {
-            Instance = null;
         }
 
         private void Update()
@@ -136,19 +137,19 @@ namespace RaiderSwarm.Player
 
                 if (!_isRotating)
                 {
-                    if (animator != null)
+                    if (_animator != null)
                     {
-                        animator.SetFloat("yDirection", normalizedMoveDirection.y);
+                        _animator.SetFloat("yDirection", normalizedMoveDirection.y);
                     }
                     float forwardVector = (FORWARD_FORCE + Mathf.Abs(normalizedMoveDirection.x)) * SPEED * Time.deltaTime;
                     var targetVector = new Vector3(0, verticalVector, forwardVector);
                     transform.Translate(targetVector);
                 }
-                else              
+                else
                 {
-                    if (animator != null)
+                    if (_animator != null)
                     {
-                        animator.SetFloat("yDirection", 0f);
+                        _animator.SetFloat("yDirection", 0f);
                     }
 
                     var targetVector = new Vector3(transform.position.x, transform.position.y, 0);
@@ -168,7 +169,7 @@ namespace RaiderSwarm.Player
             }
             _isRotating = true;
 
-            animator.SetTrigger("rs_player_rotate");
+            _animator.SetTrigger("rs_player_rotate");
             float currentRotation = transform.eulerAngles.y;
             float startRotation = currentRotation;
             float endRotation = targetRotation;
@@ -181,17 +182,12 @@ namespace RaiderSwarm.Player
                 transform.eulerAngles = new Vector3(0, yRotation, 0);
                 yield return null;
             }
-            animator.SetTrigger("rs_player_idle");
+            _animator.SetTrigger("rs_player_idle");
 
             _isRotating = false;
         }
 
-        public static void Destroy()
-        {
-            Destroy(Instance);
-        }
-
-        IEnumerator FireProjectiles(GameObject bullet)
+        private IEnumerator FireProjectiles(GameObject bullet)
         {
             for (int i = 0; i < 3; i++)
             {
@@ -201,6 +197,19 @@ namespace RaiderSwarm.Player
                 // Wait for the specified delay before firing the next projectile
                 yield return new WaitForSeconds(_fireRate);
             }
+        }
+
+        public void DestroyPlayer()
+        {
+            _animator.SetBool("isPlayerKilled", true);
+            StartCoroutine(DeathDelay());
+
+        }
+
+        private IEnumerator DeathDelay()
+        {
+            yield return new WaitForSeconds(1.5f);
+            RSGameManager.Instance.GameOver();
         }
     }
 }
