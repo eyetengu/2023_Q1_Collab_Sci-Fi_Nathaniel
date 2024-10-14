@@ -2,6 +2,8 @@ using RaiderSwarm.Interfaces;
 using RaiderSwarm.Manager;
 using RaiderSwarm.Player;
 using RaiderSwarm.Powerup;
+using System;
+using System.Collections;
 using UnityEngine;
 namespace RaiderSwarm.Enemy
 {
@@ -12,10 +14,12 @@ namespace RaiderSwarm.Enemy
 
         private float timer;
         private HealthComponent _healthComponent;
-
-        private void Start()
+        private Animator _animator;
+        private bool _isDestroyed = false;
+        private void Awake()
         {
             _healthComponent = GetComponent<HealthComponent>();
+            _animator = GetComponentInChildren<Animator>();
         }
         void Update()
         {
@@ -31,9 +35,44 @@ namespace RaiderSwarm.Enemy
             }
         }
 
+        private void OnEnable()
+        {
+            _healthComponent.OnDeath += _healthComponent_OnDeath;
+            
+        }
+
+        private void OnDisable()
+        {
+            _healthComponent.OnDeath -= _healthComponent_OnDeath;
+        }
+
+        private void _healthComponent_OnDeath()
+        {
+            if (RSGameManager.Instance != null && !_isDestroyed)
+            {
+                _isDestroyed = true;
+                var itemDropComponent = GetComponent<RSPowerupDropper>();
+                if (itemDropComponent != null)
+                {
+                    itemDropComponent.DropPowerUp();
+                }
+                RSGameManager.Instance.AddScore(1000);
+                RSGameManager.Instance.ObjectiveCompleted();
+                StartCoroutine(DisableEnemy());
+            }
+        }
+
+        private IEnumerator DisableEnemy()
+        {
+            _animator.SetTrigger("triggerDeath");
+            yield return new WaitForSeconds(1.5f);
+            gameObject.SetActive(false);
+            yield return null;
+        }
+
         void SpawnEnemy()
         {
-            if (enemyPrefab != null)
+            if (enemyPrefab != null && !_isDestroyed)
             {
                 Instantiate(enemyPrefab, transform.position, transform.rotation);
             }
@@ -41,11 +80,12 @@ namespace RaiderSwarm.Enemy
 
         public void TakeDamage(int damage)
         {
+            _animator.SetTrigger("triggerHit");
             _healthComponent.Damage(damage);
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject == RSPlayer.Instance?.gameObject)
+            if (other.gameObject == RSPlayer.Instance?.gameObject && !_isDestroyed)
             {
                 RSPlayer.Instance.DestroyPlayer();
             }
@@ -56,20 +96,6 @@ namespace RaiderSwarm.Enemy
                 Destroy(other.gameObject);
 
                 TakeDamage(iDamage.Damage);
-            }
-        }
-
-        private void OnDestroy()
-        {
-            if (RSGameManager.Instance != null)
-            {
-                var itemDropComponent = GetComponent<RSPowerupDropper>();
-                if (itemDropComponent != null)
-                {
-                    itemDropComponent.DropPowerUp();
-                }
-                RSGameManager.Instance.AddScore(1000);
-                RSGameManager.Instance.ObjectiveCompleted();
             }
         }
     }

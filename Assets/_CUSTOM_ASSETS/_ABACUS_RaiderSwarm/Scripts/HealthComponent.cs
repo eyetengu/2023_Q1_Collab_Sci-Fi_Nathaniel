@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
+    public event Action OnDeath;
     [SerializeField] private int _health = 0;
     [SerializeField] private int MaxHealth = 10;
     public int Health { get => _health; }
@@ -14,6 +13,7 @@ public class HealthComponent : MonoBehaviour
     {
         _health = MaxHealth;
     }
+
     public void Heal(int healing)
     {
         if (_health + healing >= MaxHealth)
@@ -22,15 +22,15 @@ public class HealthComponent : MonoBehaviour
             return;
         }
         _health += healing;
-
     }
+
     public void Damage(int damage)
     {
-         if (damage < 0)
+        if (damage < 0)
         {
             Heal(damage);
         }
-        if(damage > _health)
+        if (damage > _health)
         {
             _health -= _health;
         }
@@ -45,7 +45,7 @@ public class HealthComponent : MonoBehaviour
     {
         if (_health <= _minHealth)
         {
-            Destroy(gameObject);
+            OnDeath?.Invoke(); // Emit the death event
         }
     }
 }

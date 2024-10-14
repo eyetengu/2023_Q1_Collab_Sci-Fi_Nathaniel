@@ -2,6 +2,7 @@ using RaiderSwarm.Interfaces;
 using RaiderSwarm.Manager;
 using RaiderSwarm.Player;
 using RaiderSwarm.Powerup;
+using System.Collections;
 using UnityEngine;
 
 namespace RaiderSwarm.Enemy
@@ -16,9 +17,33 @@ namespace RaiderSwarm.Enemy
         }
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             _healthComponent = GetComponent<HealthComponent>();
+        }
+
+        private void OnEnable()
+        {
+            _healthComponent.OnDeath += _healthComponent_OnDeath;
+        }
+        private void OnDisable()
+        {
+            _healthComponent.OnDeath -= _healthComponent_OnDeath;
+        }
+
+        private void _healthComponent_OnDeath()
+        {
+            var itemDropComponent = GetComponent<RSPowerupDropper>();
+            if (itemDropComponent != null)
+            {
+                itemDropComponent.DropPowerUp();
+            }
+            if (RSGameManager.Instance != null)
+            {
+                RSGameManager.Instance.AddScore(100);
+            }
+            gameObject.SetActive(false);
+
         }
 
         private void OnTriggerEnter(Collider other)
@@ -34,19 +59,6 @@ namespace RaiderSwarm.Enemy
                 Destroy(other.gameObject);
 
                 TakeDamage(iDamage.Damage);
-                if (_healthComponent.Health <= 0)
-                {
-                    var itemDropComponent = GetComponent<RSPowerupDropper>();
-                    if (itemDropComponent != null)
-                    {
-                        itemDropComponent.DropPowerUp();
-                    }
-                    if (RSGameManager.Instance != null)
-                    {
-                        RSGameManager.Instance.AddScore(100);
-                    }
-                }
-
             }
         }
     }
