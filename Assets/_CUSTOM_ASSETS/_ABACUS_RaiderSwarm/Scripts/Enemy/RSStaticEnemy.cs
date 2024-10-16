@@ -4,23 +4,44 @@ using RaiderSwarm.Player;
 using RaiderSwarm.Powerup;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 namespace RaiderSwarm.Enemy
 {
     public class RSStaticEnemy : MonoBehaviour, IRSEnemy
     {
         public GameObject enemyPrefab; // The enemy prefab to spawn
+        [SerializeField] private int _enemyCount = 5;
         public float spawnInterval = 5f; // Time interval between spawns
 
         private float timer;
         private HealthComponent _healthComponent;
         private Animator _animator;
         private bool _isDestroyed = false;
+
+        private List<GameObject> _enemyCollection = new List<GameObject>();
         private void Awake()
         {
             _healthComponent = GetComponent<HealthComponent>();
             _animator = GetComponentInChildren<Animator>();
+            SetupEnemyCollection(_enemyCount);
+
         }
+
+        private void SetupEnemyCollection(int enemyCount)
+        {
+            if (enemyPrefab != null)
+            {
+                for (int i = 0; i < enemyCount; i++)
+                {
+                    var enemy = Instantiate(enemyPrefab, transform);
+                    enemy.gameObject.SetActive(false);
+                    _enemyCollection.Add(enemy);
+                }
+            }
+        }
+
         void Update()
         {
             if (RSGameManager.Instance.GameStarted)
@@ -38,7 +59,7 @@ namespace RaiderSwarm.Enemy
         private void OnEnable()
         {
             _healthComponent.OnDeath += _healthComponent_OnDeath;
-            
+
         }
 
         private void OnDisable()
@@ -72,10 +93,21 @@ namespace RaiderSwarm.Enemy
 
         void SpawnEnemy()
         {
-            if (enemyPrefab != null && !_isDestroyed)
+            if (!_isDestroyed)
             {
-                Instantiate(enemyPrefab, transform.position, transform.rotation);
+                var enemy = _enemyCollection.FirstOrDefault(x => !x.gameObject.activeSelf);
+                if (enemy != null)
+                {
+                    SetEnemy(enemy);
+                }
             }
+        }
+
+        private void SetEnemy(GameObject enemy)
+        {
+            enemy.transform.position = transform.position;
+            enemy.transform.rotation = transform.rotation;
+            enemy.SetActive(true);
         }
 
         public void TakeDamage(int damage)

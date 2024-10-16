@@ -15,11 +15,36 @@ public class RSTarget : MonoBehaviour, IRSEnemy
         _healthComponent.Damage(damage);
     }
 
-    private void Start()
+    private void Awake()
     {
         _healthComponent = GetComponent<HealthComponent>();
         _activator = GetComponent<RSActivator>();
     }
+
+    private void OnEnable()
+    {
+        _healthComponent.OnDeath += _healthComponent_OnDeath;
+    }
+
+    private void _healthComponent_OnDeath()
+    {
+        if (RSGameManager.Instance != null)
+        {
+            var itemDropComponent = GetComponent<RSPowerupDropper>();
+            if (itemDropComponent != null)
+            {
+                itemDropComponent.DropPowerUp();
+            }
+            RSGameManager.Instance.AddScore(3000);
+            RSGameManager.Instance.ObjectiveCompleted();
+            if (_activator != null)
+            {
+
+                _activator.ActivateGameObject();
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == RSPlayer.Instance?.gameObject && !ignorePlayer)
@@ -37,23 +62,4 @@ public class RSTarget : MonoBehaviour, IRSEnemy
             TakeDamage(iDamage.Damage);
         }
     }
-
-    private void OnDestroy()
-    {
-        if (RSGameManager.Instance != null)
-        {
-            var itemDropComponent = GetComponent<RSPowerupDropper>();
-            if (itemDropComponent != null)
-            {
-                itemDropComponent.DropPowerUp();
-            }
-            RSGameManager.Instance.AddScore(3000);
-            RSGameManager.Instance.ObjectiveCompleted();
-            if (_activator != null) {
-
-                _activator.ActivateGameObject();
-            }
-        }
-    }
-
 }

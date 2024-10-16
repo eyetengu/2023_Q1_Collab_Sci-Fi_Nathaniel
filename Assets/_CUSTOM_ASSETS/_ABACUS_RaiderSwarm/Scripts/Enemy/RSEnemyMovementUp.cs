@@ -12,7 +12,7 @@ namespace RaiderSwarm.Enemy
 
         private float startTime;
 
-        void Start()
+        void OnEnable()
         {
             startTime = Time.time;
         }
@@ -24,10 +24,6 @@ namespace RaiderSwarm.Enemy
             float y = elapsedTime * speed;
 
             transform.position = new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z);
-            if (transform.position.y > 300f)
-            {
-                Destroy(gameObject);
-            }
         }
     }
 }

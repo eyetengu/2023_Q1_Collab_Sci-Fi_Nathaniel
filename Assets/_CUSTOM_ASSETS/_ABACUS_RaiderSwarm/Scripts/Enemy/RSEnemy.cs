@@ -10,6 +10,8 @@ namespace RaiderSwarm.Enemy
     public class RSEnemy : MonoBehaviour, IRSEnemy
     {
         private HealthComponent _healthComponent;
+        private Vector3 _startingPosition;
+        private float _distanceFromSpawn = 300f;
 
         public void TakeDamage(int damage)
         {
@@ -31,6 +33,19 @@ namespace RaiderSwarm.Enemy
             _healthComponent.OnDeath -= _healthComponent_OnDeath;
         }
 
+        private void Start()
+        {
+            _startingPosition = transform.position;
+        }
+        private void Update()
+        {
+            var currentPosition = transform.position;
+            var offset = currentPosition - _startingPosition;
+            if (Mathf.Abs(offset.x) > _distanceFromSpawn || Mathf.Abs(offset.y) > _distanceFromSpawn)
+            {
+                gameObject.SetActive(false);
+            }
+        }
         private void _healthComponent_OnDeath()
         {
             var itemDropComponent = GetComponent<RSPowerupDropper>();
@@ -56,7 +71,7 @@ namespace RaiderSwarm.Enemy
             IDamage iDamage = other.gameObject.GetComponent<IDamage>();
             if (iDamage != null)
             {
-                Destroy(other.gameObject);
+                other.gameObject.SetActive(false);
 
                 TakeDamage(iDamage.Damage);
             }
