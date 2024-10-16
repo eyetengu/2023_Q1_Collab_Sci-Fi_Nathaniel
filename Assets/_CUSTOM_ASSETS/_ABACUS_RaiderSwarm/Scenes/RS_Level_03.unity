@@ -1947,7 +1947,8 @@ PrefabInstance:
       propertyPath: ignorePlayer
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4842530245973456689, guid: 59eeda09f4a88d04984339197ef511ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
