@@ -25,7 +25,10 @@ public class RSTarget : MonoBehaviour, IRSEnemy
     {
         _healthComponent.OnDeath += _healthComponent_OnDeath;
     }
-
+    private void OnDisable()
+    {
+        _healthComponent.OnDeath -= _healthComponent_OnDeath;
+    }
     private void _healthComponent_OnDeath()
     {
         if (RSGameManager.Instance != null)
@@ -42,6 +45,7 @@ public class RSTarget : MonoBehaviour, IRSEnemy
 
                 _activator.ActivateGameObject();
             }
+            gameObject.SetActive(false);
         }
     }
 
@@ -57,7 +61,7 @@ public class RSTarget : MonoBehaviour, IRSEnemy
         IDamage iDamage = other.gameObject.GetComponent<IDamage>();
         if (iDamage != null)
         {
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
 
             TakeDamage(iDamage.Damage);
         }
