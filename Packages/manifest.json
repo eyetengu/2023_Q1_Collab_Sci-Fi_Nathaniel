@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.bezi.sidekick": "file:C:/Users/13162/Downloads/BeziSidekickUnity-main/BeziSidekickUnity-main",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ai.navigation": "1.1.5",
     "com.unity.animation.rigging": "1.2.1",

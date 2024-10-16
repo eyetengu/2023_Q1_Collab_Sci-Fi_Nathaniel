@@ -4,12 +4,26 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MovablePictureElement : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
+public class DragElement : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
     private Image image;
-    [SerializeField] int dragCompareValue;
+    [SerializeField] int _dragValue;
+    [SerializeField] Transform _moveableImagesZone;
 
     Vector3 _oldPosition;
+
+
+//PROPERTIES
+    public int DragValue { get => _dragValue; }
+
+
+//BUILT-IN FUNCTIONS
+    void Start()
+    {
+        image = GetComponent<Image>();
+        _oldPosition = image.rectTransform.localPosition;
+        Debug.Log("Old Position: " + _oldPosition);
+    }
 
 
 //EVENT HANDLERS
@@ -31,27 +45,22 @@ public class MovablePictureElement : MonoBehaviour, IDragHandler, IEndDragHandle
 
     public void OnEndDrag(PointerEventData eventData)
     {
-    //Image Color
+        Debug.Log("Drag Ended");
+        //Image Color
         var tempColor = image.color;
         tempColor.a = 1.0f;
         image.color = tempColor;
 
     //Raycast Target
         image.raycastTarget = true;
-        ResetPosition();
+        //ResetPosition();                
     }
 
 
-//BUILT-IN FUNCTIONS
-    void Start()
-    {
-        image = GetComponent<Image>();
-        _oldPosition = image.rectTransform.localPosition;
-        Debug.Log("Old Position: " + _oldPosition);
-    }
-    
-    void ResetPosition()
+//RESET POSITION
+    void ResetPosition()//or maybe reset parent instead
     {
         image.rectTransform.localPosition = _oldPosition;
+        //transform.SetParent(_moveableImagesZone);        
     }
 }
