@@ -14,7 +14,7 @@ public class ReturnToMainMenu : MonoBehaviour
 //BUILT-IN FUNCTIONS
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     void Update()
@@ -38,7 +38,14 @@ public class ReturnToMainMenu : MonoBehaviour
         SceneManager.LoadScene(sceneId);
     }
 
-//COROUTINES
+    public void ShowAndFree()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+
+    //COROUTINES
     IEnumerator SceneLoadTimer()
     {
         for (int i = 0; i < _countdownReturn; i++)
@@ -46,7 +53,7 @@ public class ReturnToMainMenu : MonoBehaviour
             yield return new WaitForSeconds(.3f);
             Debug.Log(".");
         }
-
+        ShowAndFree();
         if (_returnToBase)
             SceneManager.LoadScene(0);
         else if(_returnToBase == false)

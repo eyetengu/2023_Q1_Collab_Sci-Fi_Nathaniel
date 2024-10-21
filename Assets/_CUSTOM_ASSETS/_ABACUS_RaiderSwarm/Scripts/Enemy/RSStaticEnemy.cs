@@ -18,6 +18,8 @@ namespace RaiderSwarm.Enemy
         private float timer;
         private HealthComponent _healthComponent;
         private Animator _animator;
+        private AudioSource _audioSource;
+        [SerializeField] private AudioClip[] audioClips;
         private bool _isDestroyed = false;
 
         private List<GameObject> _enemyCollection = new List<GameObject>();
@@ -25,6 +27,8 @@ namespace RaiderSwarm.Enemy
         {
             _healthComponent = GetComponent<HealthComponent>();
             _animator = GetComponentInChildren<Animator>();
+            _audioSource = GetComponent<AudioSource>();
+
             SetupEnemyCollection(_enemyCount);
 
         }
@@ -79,6 +83,7 @@ namespace RaiderSwarm.Enemy
                 }
                 RSGameManager.Instance.AddScore(1000);
                 RSGameManager.Instance.ObjectiveCompleted();
+                PlayAudioClip(1);
                 StartCoroutine(DisableEnemy());
             }
         }
@@ -112,8 +117,12 @@ namespace RaiderSwarm.Enemy
 
         public void TakeDamage(int damage)
         {
-            _animator.SetTrigger("triggerHit");
-            _healthComponent.Damage(damage);
+            if (!_isDestroyed)
+            {
+                _animator.SetTrigger("triggerHit");
+                PlayAudioClip(0);
+                _healthComponent.Damage(damage);
+            }
         }
         private void OnTriggerEnter(Collider other)
         {
@@ -129,6 +138,20 @@ namespace RaiderSwarm.Enemy
 
                 TakeDamage(iDamage.Damage);
             }
+        }
+
+        public void PlayAudioClip(int index)
+        {
+            if (index >= 0 && index < audioClips.Length)
+            {
+                _audioSource.clip = audioClips[index];
+                _audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("Invalid audio clip index");
+            }
+
         }
     }
 }

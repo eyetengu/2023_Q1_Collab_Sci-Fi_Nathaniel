@@ -5,10 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class RSSceneTransition : MonoBehaviour
 {
-    private int default_scene = 0;
     public void OnAnimationComplete()
     {
-        SceneManager.LoadScene(default_scene); // Replace with your scene name
+        SceneManager.LoadScene((int)SceneSelection.MainMenu); // Replace with your scene name
 
     }
 }
