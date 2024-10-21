@@ -94,8 +94,8 @@ public class Game_Manager : MonoBehaviour
             //Event_Manager.Instance.Decree_PauseGame();
 
     //APPLICATION QUIT
-        if (Input.GetKey(KeyCode.Escape))
-            Application.Quit();                
+        //if (Input.GetKey(KeyCode.Escape))
+        //    Application.Quit();                
     }
 
     void GameTimer()
