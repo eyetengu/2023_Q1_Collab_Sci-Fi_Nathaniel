@@ -14,7 +14,7 @@ public class ReturnToMainMenu : MonoBehaviour
 //BUILT-IN FUNCTIONS
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     void Update()

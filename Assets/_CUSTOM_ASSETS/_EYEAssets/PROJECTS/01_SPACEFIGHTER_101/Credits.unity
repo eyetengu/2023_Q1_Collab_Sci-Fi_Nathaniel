@@ -525,18 +525,21 @@ MonoBehaviour:
 
     Sounds:
 
-    PLACEHOLDER
+    Ovani
+    SFX
 
 
     Art:
 
-    Synty
-    Scifi Pack
+    Synty Scifi Pack
+
+    Skybox
 
 
     Font:
 
-    Acme Special Agent by Blambot
+    Acme Special
+    Agent by Blambot
 
 
 
@@ -545,23 +548,42 @@ MonoBehaviour:
 
     Programming:
 
-    Nathaniel
-    Townsend
+    Nathaniel Townsend
 
-    Eric Young
+    Eric
+    Young
 
 
     Art:
 
     Nathaniel Townsend
 
-    Synty Scifi
-    Pack
+    Synty Scifi Pack
+
+
+    Sounds:
+
+    Ovani
+    SFX
+
+    Retro SFX Pack
 
 
     Font:
 
-    Tesla by Dies'
+    Tesla by Dies
+
+
+
+    FONTS COURTESY
+    OF DAFONT.COM
+
+
+    SYNTY ASSETS USED UNDER LICENSE
+
+
+    OVANI SFX USED UNDER
+    LICENSE'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df658c998dbeeb740a3e7e565677d55c, type: 2}
   m_sharedMaterial: {fileID: 4114996275658979507, guid: df658c998dbeeb740a3e7e565677d55c,
