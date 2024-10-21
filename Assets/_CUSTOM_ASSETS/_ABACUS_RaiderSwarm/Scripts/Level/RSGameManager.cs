@@ -13,7 +13,7 @@ namespace RaiderSwarm.Manager
     {
         private const string BIG_LAZER_TEXT = "Big Lazer";
         public static RSGameManager Instance;
-        public int totalObjectives = 10; // Set this to the total number of objectives in your game
+        public int totalObjectives = 1; // Set this to the total number of objectives in your game
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI objectivesText;
         public TextMeshProUGUI gameOverText;
@@ -21,7 +21,8 @@ namespace RaiderSwarm.Manager
 
         public TextMeshProUGUI weaponText;
         public TextMeshProUGUI altFireText;
-
+        public bool GameStarted = false;
+        private bool isGameOver;
         private int completedObjectives = 0;
         [SerializeField] private int _countdown;
         [SerializeField] private int nextLevelSceneId = 1;
@@ -38,6 +39,22 @@ namespace RaiderSwarm.Manager
                 Instance = this;
             }
         }
+        private void OnEnable()
+        {
+            if (RSGameInput.Instance != null)
+            {
+                RSGameInput.Instance.OnRestartPressed += Instance_OnRestartPressed; ;
+            }
+        }
+
+        private void Instance_OnRestartPressed()
+        {
+            if (isGameOver)
+            {
+                StartCoroutine(WaitForNextRound(SceneManager.GetActiveScene().buildIndex, 0));
+            }
+        }
+
         void Start()
         {
             UpdateUI();
@@ -57,7 +74,8 @@ namespace RaiderSwarm.Manager
             if (completedObjectives >= totalObjectives && !victoryText.IsDestroyed())
             {
                 victoryText.gameObject.SetActive(true);
-                StartCoroutine(WaitForNextRound(nextLevelSceneId));
+                GameStarted = false;
+                StartCoroutine(WaitForNextRound(nextLevelSceneId, _countdown));
 
             }
             UpdateUI();
@@ -71,6 +89,10 @@ namespace RaiderSwarm.Manager
                 RSWeaponType.BIGLAZER => BIG_LAZER_TEXT,
                 _ => weaponType.ToString()
             };
+            weaponText.color = weaponType switch { 
+                RSWeaponType.BIGLAZER => Color.red, 
+                _ => Color.white 
+            };
         }
 
         public void UpdateAltWeapon(RSAlternateFireTypes altFireType)
@@ -79,6 +101,12 @@ namespace RaiderSwarm.Manager
             {
                 altFireText.text = altFireType.ToString().ToUpper();
             }
+            altFireText.color = altFireType switch
+            {
+                RSAlternateFireTypes.MISSILE => Color.red,
+                _ => Color.white
+            };
+
         }
 
         void UpdateUI()
@@ -103,13 +131,17 @@ namespace RaiderSwarm.Manager
 
         public void GameOver()
         {
-            gameOverText.gameObject.SetActive(true);
-            StartCoroutine(WaitForNextRound(SceneManager.GetActiveScene().buildIndex));
+            if (GameStarted)
+            {
+                gameOverText.gameObject.SetActive(true);
+                GameStarted = false;
+                isGameOver = true;
+            }
         }
 
-        IEnumerator WaitForNextRound(int sceneId)
+        IEnumerator WaitForNextRound(int sceneId, int countdown)
         {
-            for (int i = 0; i < _countdown; i++)
+            for (int i = 0; i < countdown; i++)
             {
                 yield return new WaitForSeconds(1f);
                 Debug.Log(".");
