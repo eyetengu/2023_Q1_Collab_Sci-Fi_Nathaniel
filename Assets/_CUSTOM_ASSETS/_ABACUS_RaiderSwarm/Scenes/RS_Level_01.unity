@@ -6067,6 +6067,11 @@ PrefabInstance:
       propertyPath: objectivesText
       value: 
       objectReference: {fileID: 1074828744}
+    - target: {fileID: 7000244074242259778, guid: 384709126ea3de14b8169ba4f750e089,
+        type: 3}
+      propertyPath: nextLevelSceneId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8184158546626661128, guid: 384709126ea3de14b8169ba4f750e089,
         type: 3}
       propertyPath: m_Name
