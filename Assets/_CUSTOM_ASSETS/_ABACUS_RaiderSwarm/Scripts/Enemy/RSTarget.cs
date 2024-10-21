@@ -8,7 +8,9 @@ using UnityEngine;
 public class RSTarget : MonoBehaviour, IRSEnemy
 {
     private RSActivator _activator;
+    private AudioSource _audioSource;
     private HealthComponent _healthComponent;
+    [SerializeField] private AudioClip[] _audioClips;
     [SerializeField] private bool ignorePlayer = false;
     public void TakeDamage(int damage)
     {
@@ -19,6 +21,8 @@ public class RSTarget : MonoBehaviour, IRSEnemy
     {
         _healthComponent = GetComponent<HealthComponent>();
         _activator = GetComponent<RSActivator>();
+        _audioSource = GetComponent<AudioSource>();
+
     }
 
     private void OnEnable()
@@ -45,6 +49,7 @@ public class RSTarget : MonoBehaviour, IRSEnemy
 
                 _activator.ActivateGameObject();
             }
+            _audioSource.Play();
             gameObject.SetActive(false);
         }
     }
@@ -54,7 +59,7 @@ public class RSTarget : MonoBehaviour, IRSEnemy
         if (other.gameObject == RSPlayer.Instance?.gameObject && !ignorePlayer)
         {
             RSPlayer.Instance.DestroyPlayer();
-            
+
 
         }
 
@@ -65,5 +70,19 @@ public class RSTarget : MonoBehaviour, IRSEnemy
 
             TakeDamage(iDamage.Damage);
         }
+    }
+
+    public void PlayAudioClip(int index)
+    {
+        if (index >= 0 && index < _audioClips.Length)
+        {
+            _audioSource.clip = _audioClips[index];
+            _audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Invalid audio clip index");
+        }
+
     }
 }

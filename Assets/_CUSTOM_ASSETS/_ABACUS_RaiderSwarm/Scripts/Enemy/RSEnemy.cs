@@ -10,18 +10,29 @@ namespace RaiderSwarm.Enemy
     public class RSEnemy : MonoBehaviour, IRSEnemy
     {
         private HealthComponent _healthComponent;
+        private AudioSource audioSource;
+        [SerializeField] private AudioClip[] audioClips;
+
         private Vector3 _startingPosition;
         private float _distanceFromSpawn = 300f;
 
         public void TakeDamage(int damage)
         {
+            PlayAudioClip(0);
+
             _healthComponent.Damage(damage);
         }
-
-        // Start is called before the first frame update
-        void Awake()
+        private void Awake()
         {
             _healthComponent = GetComponent<HealthComponent>();
+
+        }
+        // Start is called before the first frame update
+        void Start()
+        {
+            audioSource = GetComponent<AudioSource>();
+
+            _startingPosition = transform.position;
         }
 
         private void OnEnable()
@@ -33,10 +44,6 @@ namespace RaiderSwarm.Enemy
             _healthComponent.OnDeath -= _healthComponent_OnDeath;
         }
 
-        private void Start()
-        {
-            _startingPosition = transform.position;
-        }
         private void Update()
         {
             var currentPosition = transform.position;
@@ -48,6 +55,7 @@ namespace RaiderSwarm.Enemy
         }
         private void _healthComponent_OnDeath()
         {
+            PlayAudioClip(1);
             var itemDropComponent = GetComponent<RSPowerupDropper>();
             if (itemDropComponent != null)
             {
@@ -75,6 +83,20 @@ namespace RaiderSwarm.Enemy
 
                 TakeDamage(iDamage.Damage);
             }
+        }
+        public void PlayAudioClip(int index)
+        {
+            if (index >= 0 && index < audioClips.Length)
+            {
+                audioSource.clip = audioClips[index];
+                audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("Invalid audio clip index");
+            }
+
+
         }
     }
 }
